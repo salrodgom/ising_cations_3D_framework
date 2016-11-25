@@ -5,13 +5,18 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
+ integer,parameter          :: n_Ge = 24
+ integer,parameter          :: MC_steps = 100
  integer,parameter          :: n_configurations = 0
  character(len=80)          :: file_name,line
+ real,parameter             :: temperature = 100.0
  integer, parameter         :: NOPMAX=10000
  integer                    :: delta_1(n_atoms,n_atoms),k_max_1,k_max_2
  real                       :: ener_0 = -7745.86721305,epsilon_
  real           :: ener_1(n_atoms) = 0.0
+ real           :: deg_1(n_atoms) = 0.0
  real           :: ener_2(n_atoms,n_atoms) = 0.0
+ real           :: deg_2(n_atoms,n_atoms) = 0.0
  real           :: cell_0(1:6)
  integer                    :: delta_2(n_atoms,n_atoms,n_atoms,n_atoms)
  real,dimension(NOPMAX,3,3) :: mgroup1
@@ -71,7 +76,7 @@ program main
 ! {{{ 
  write(6,*)'One substitution:'
  delta_1(1:n_atoms,1:n_atoms) = 0
-!
+ deg_1(1:n_atoms) = 0.0
  k_max_1 = 0
  ener_1(1:n_atoms)  = 0.0
  open(unit=111,file='gulp-1-subs/OUTSOD',status='old',iostat=err_apertura)
@@ -83,17 +88,17 @@ program main
   IF( err_apertura /= 0 ) exit read_matrix_1
   read(line,*)k,deg,l
   delta_1(l,l)=1
+  deg_1(l) = real(deg)
   READ(113,*)epsilon_
   ener_1(l)=epsilon_ - ener_0
-  write(6,*)l,l,ener_1(l)
+  write(6,*)l,l,ener_1(l),deg_1(l)
   do j=2,deg
    READ (112,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_1
    read(line,*)k,m,i,n
    delta_1(l,i)=1
    delta_1(i,l)=1
-   ener_1(i) = ener_1(l)
-   write(6,*)l,i,ener_1(i)
+   write(6,*)l,i,ener_1(i),deg_1(i)
   end do
  end do read_matrix_1
 ! final 
@@ -103,7 +108,8 @@ program main
 ! }}}
  write(6,*)'Two substitutions:'
  delta_2(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms) = 0
-!
+ deg_2(1:n_atoms,1:n_atoms) = 0.0
+ deg_2 = 0.0
  k_max_2 = 0
  ener_2(1:n_atoms,1:n_atoms) = 0.0
  open(unit=121,file='gulp-2-subs/OUTSOD',status='old',iostat=err_apertura)
@@ -118,10 +124,12 @@ program main
   delta_2(i,j,j,i)=delta_2(i,j,i,j)
   delta_2(j,i,i,j)=delta_2(i,j,i,j)
   delta_2(j,i,j,i)=delta_2(i,j,i,j)
+  deg_2(i,j) = real(deg)
+  deg_2(j,i) = deg_2(i,j)
   READ(123,*)epsilon_
   ener_2(i,j)=epsilon_ - ener_0 -ener_1(i)-ener_1(j)
   ener_2(j,i)=ener_2(i,j)
-  write(6,*)i,j,i,j,ener_2(i,j)
+  write(6,*)i,j,i,j,ener_2(i,j),deg_2(i,j)
   do k=2,deg
    READ (122,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_2
@@ -134,7 +142,7 @@ program main
    delta_2(m,l,i,j)=delta_2(i,j,l,m)
    delta_2(l,m,j,i)=delta_2(i,j,l,m)
    delta_2(m,l,j,i)=delta_2(i,j,l,m)
-   write(6,*)i,j,l,m,ener_2(i,j)
+   write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m)
   end do
  end do read_matrix_2
 ! final 
@@ -142,7 +150,7 @@ program main
  close(122)
  close(123)
 ! {{{
-call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,30,delta_1,delta_2,&
-     ener_1,ener_2,cell_0,cryst_coor,0,label,100)
+call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,delta_1,delta_2,ener_0,&
+     ener_1,ener_2,deg_1,deg_2,cell_0,cryst_coor,0,label,MC_steps,temperature)
  stop
 end program main

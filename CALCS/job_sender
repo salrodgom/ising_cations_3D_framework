@@ -1,5 +1,5 @@
-gulp < c0001.gin > c0001.gout
-gulp < c0002.gin > c0002.gout
-gulp < c0003.gin > c0003.gout
-gulp < c0004.gin > c0004.gout
-gulp < c0005.gin > c0005.gout
+gulp < c00001.gin > c00001.gout
+gulp < c00002.gin > c00002.gout
+gulp < c00003.gin > c00003.gout
+gulp < c00004.gin > c00004.gout
+gulp < c00005.gin > c00005.gout

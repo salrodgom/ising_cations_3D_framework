@@ -1,11 +1,11 @@
 subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,delta_1,&
- delta_2,ener_1,ener_2,cell_0,cryst_coor,n_configurations,labels,MC_cycles)
+ delta_2,ener_0,ener_1,ener_2,deg_1,deg_2,cell_0,cryst_coor,n_configurations,labels,MC_cycles,T)
  implicit none
-!
  integer,intent(in) :: n_atoms,n_T
  integer,intent(in) :: delta_1(n_atoms,n_atoms),delta_2(n_atoms,n_atoms,n_atoms,n_atoms)
+ real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),ener_0
  integer,intent(in) :: n_configurations,n_Al,MC_cycles
- real,intent(in)    :: ener_1(n_atoms),ener_2(n_atoms,n_atoms)
+ real,intent(in)    :: ener_1(n_atoms),ener_2(n_atoms,n_atoms),T
  real,intent(in)    :: cell_0(6),cryst_coor(0:n_configurations,n_atoms,3)
  character(len=4),intent(inout) :: labels(0:n_configurations,n_atoms,2)
 !
@@ -33,20 +33,6 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,delta_1,&
  CHARACTER (LEN=80) :: line,string
  CHARACTER (LEN=4)  :: mol
  LOGICAL            :: FLAG      = .false.
-!
-! do i=1,n_T
-!  do j=i+1,n_T
-!   sGe(i,j)=1
-!   do k=1,n_T
-!    do l=k+1,n_T
-!     energy_matrix(i,j)=energy_matrix(i,j) + &
-!           sGe(i,j)*ener_2(k,l)*delta_2(i,j,k,l)
-!    end do
-!   end do
-!   write(6,*)i,j,energy_matrix(i,j)
-!  end do
-! end do
-!
 ! {{
  do i=1,n_atoms
   label(i)=labels(n_configurations,i,1)
@@ -109,18 +95,26 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,delta_1,&
  END DO
 ! {{ sustituimos los aluminios
 !    {{ el primer Al es aleatorio
- pivots(1)=INT(r4_uniform(1.0,n_atoms+1.0,SEED))
+ pivots(1)=INT(r4_uniform(1.0,n_T+1.0,SEED))
  DO WHILE ( label(pivots(1))/='Si' ) 
-  pivots(1)=INT(r4_uniform(1.0,n_atoms+1.0,SEED))
+  pivots(1)=INT(r4_uniform(1.0,n_T+1.0,SEED))
  ENDDO
- label(pivots(1))='Ge'
+ m = pivots(1)
+ label(m)='Ge'
+ write(6,*)m
  q=3.40
  WRITE(6,'(a)')'Repulsive substitution with cost-function:'
  WRITE(6,'(a,f5.2,a)')'cost = 1/(s - p0),  p0 =',q,' 10^-10 m, if s >= p0'
  WRITE(6,'(a,f14.3,a)')'cost = ',infinite,' if s <  p0'
  WRITE(6,'(a)')'     Crystalographic positions                  Cost     Label'
- WRITE(6,'(3(f14.6,1x),f20.10,1x,i3,1x,a2)')xcryst(1,pivots(1)),xcryst(2,pivots(1)),xcryst(3,pivots(1)),0.0,&
-       pivots(1),label( pivots(1) )
+ write(6,'(60a2)')( label(j), j=1,n_atoms )
+ r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2)
+ write(6,*)m,label(m),r
+
+ if(r==0.0) STOP 'energy 0???'
+
+ !WRITE(6,'(3(f14.6,1x),f20.10,1x,i3,1x,a2)')xcryst(1,pivots(1)),xcryst(2,pivots(1)),xcryst(3,pivots(1)),&
+ !      0.0,pivots(1),label( pivots(1) )
 ! }}
 ! {{ colocamos los siguienets Al
  walker_position = pivots(1)
@@ -128,10 +122,10 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,delta_1,&
  choose_Al: DO k=2,n_Al
   m = SEED
   r = infinite
-  jump: DO walker_position=1,n_atoms
+  jump: DO walker_position=1,n_T
      IF (label(walker_position)=='Si') THEN
        pot_dist=0.0
-       p=energy(n_atoms,n_T,label,ener_1,ener_2,delta_1,delta_2)
+       p=energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2)
        DO j=1,k-1
           walker_drunked = pivots(j)
           s = dist_matrix(walker_position,walker_drunked)
@@ -146,14 +140,16 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,delta_1,&
      END IF
   END DO jump
   IF (m==SEED) THEN
-     m=INT(r4_uniform(1.0,n_atoms+1.0,SEED))
+     m=INT(r4_uniform(1.0,n_T+1.0,SEED))
      DO WHILE ( label(m)/='Si' )
-       m=INT(r4_uniform(1.0,n_atoms+1.0,SEED))
+       m=INT(r4_uniform(1.0,n_T+1.0,SEED))
      ENDDO
   END IF
   pivots(k) = m
   label(pivots(k))='Ge'
-  WRITE(6,'(3(f14.6,1x),f30.15,1x,i3,1x,a2)')xcryst(1,m),xcryst(2,m),xcryst(3,m),pot_dist,m,label(m)
+  write(6,'(60a2)')( label(j), j=1,n_atoms )
+  r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2)
+  write(6,*)pivots(k),label(pivots(k)),r
  END DO choose_Al                       ! }}i
  q=infinite
  k=0
@@ -166,7 +162,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,delta_1,&
  DO WHILE ( k<=MC_cycles )
     ! Metropolis:
     call MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,q,&
-         ener_1,ener_2,delta_1,delta_2,cost)
+         ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2,cost,T)
     k=k+1
  END DO
 
@@ -232,105 +228,135 @@ end subroutine
   if (r >= p0.and.p2=='zerooo') repulsive_potential_Lowenstein = 0.00
  END FUNCTION repulsive_potential_Lowenstein
 !
+
  SUBROUTINE MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,exito,&
-  ener_1,ener_2,delta_1,delta_2,coste)
+  ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2,coste,temperature)
   IMPLICIT NONE
   INTEGER, intent(in) :: n_atoms,n_Al,SEED
   REAL,    intent(in) :: xcryst(0:3,1:n_atoms),dist_matrix(n_atoms,n_atoms)
   REAL,    intent(in) :: cell_0(1:6),rv(1:3,1:3)
   integer,intent(in)  :: n_T
-  real,intent(in)     :: ener_1(n_atoms),ener_2(n_atoms,n_atoms)
+  real,intent(in)     :: ener_1(n_atoms),ener_2(n_atoms,n_atoms),ener_0
+  real,intent(in)     :: deg_1(n_atoms),deg_2(n_atoms,n_atoms)
   integer,intent(in)  :: delta_1(n_atoms,n_atoms)
-  integer,intent(in)  :: delta_2(n_atoms,n_atoms,n_atoms,n_atoms)  
+  integer,intent(in)  :: delta_2(n_atoms,n_atoms,n_atoms,n_atoms)
   real                :: R4_UNIFORM,energy
-  CHARACTER (LEN=2)   :: label(1:n_atoms)
-  INTEGER             :: i,j,k
-  REAL                :: energia(1:2) = 0.0
+  CHARACTER (LEN=4)   :: label(1:n_atoms),cation_distribution(0:5,n_T)
+  INTEGER             :: i,j,k,l,m,iii,jjj
+  REAL                :: energia(0:2) = 0.0
   REAL                :: eta = 0.0
-  REAL                :: temperature = 10000.0
+  REAL,intent(in)     :: temperature
   real                :: k_B = 8.61734E-5
   REAL                :: delta = 0.0
   REAL,    PARAMETER  :: infinite = 9999999.999999
   REAL,    intent(out):: exito,coste
-!
   exito = 0.0
-  MC_step: DO k=0,n_atoms-1
-    IF(k==0)then
-      energia(1) = energy(n_atoms,n_T,label,ener_1,ener_2,delta_1,delta_2)
+  MC_step: DO k=0,n_T-1
+    if(k==0)then
+      energia(1) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2)
       eta = energia(1)
-    END IF
-   !energia(2) = infinite + 1.0
-   !DO WHILE ( energia(2) >= infinite )
-     i = INT(R4_UNIFORM(1.0,real(n_atoms)+1.0,SEED))
-     DO WHILE ( label(i) /= 'Si' )
-       i = INT(R4_UNIFORM(1.0,real(n_atoms)+1.0,SEED))
-     END DO
-     j = INT(R4_UNIFORM(1.0,real(n_atoms)+1.0,SEED))
-     DO WHILE ( label(j) /= 'Ge' )
-       j = INT(R4_UNIFORM(1.0,real(n_atoms)+1.0,SEED))
-     END DO
-! identity_change
-     label(i) = 'Ge'
-     label(j) = 'Si'
-     energia(2) = energy(n_atoms,n_T,label,ener_1,ener_2,delta_1,delta_2)
-   !END DO
+    end if
+    cation_distribution(0,1:n_T) = label(1:n_T)
+    m = INT(R4_UNIFORM(1.0,6.0,SEED))
+    do l=1,m
+     scan_repetitions: do while(1>0)
+      call identity_change_move(label,n_T,n_atoms,seed)
+      cation_distribution(l,1:n_T) = label(1:n_T)
+      jjj=0
+      do iii=1,n_T
+       if(cation_distribution(l,iii)=='Ge  ') jjj=jjj+1
+      end do
+      if(jjj==n_Al)  exit scan_repetitions
+     end do scan_repetitions
+    end do 
+    energia(2) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2)
     IF ( energia(2) > energia(1) ) THEN
        eta = R4_UNIFORM(0.0,1.0,SEED)
        IF ( eta > exp(-(energia(2)-energia(1))/(k_B*temperature)) ) THEN
-       !   ! se rechaza el movimento
-          label(i) = 'Si'
-          label(j) = 'Ge'
-       ELSE
+          do l=1,n_T
+           label(l) = cation_distribution(0,l)
+          end do
+          energia(0) = energia(1)
+       ELSE ! se aprueba aun siendo la energia mayor
           exito = exito + 1.0
+          energia(0) = energia(1)
           energia(1) = energia(2)
-          ! se aprueba aun siendo la energia mayor
        ENDIF
-    ELSE
+    ELSE ! si es menor, se aprueba
+       energia(0) = energia(1)
        energia(1) = energia(2)
        exito = exito + 1.0
     END IF
+    write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
   END DO MC_step
   exito   = exito/REAL(n_atoms*n_atoms)
   coste = energia(1)
   eta = coste - eta
 ! coste, ocurrencia, exito
-  write(6,*) coste,exito,eta
+  !write(6,*) coste,exito,eta
   RETURN
  END SUBROUTINE MonteCarlo
 !
- REAL FUNCTION energy(n,n_T,lab,ener_1,ener_2,delta_1,delta_2)
+ SUBROUTINE identity_change_move(label,n_T,n_atoms,seed)
+  IMPLICIT NONE
+  integer,intent(in)              :: n_atoms,n_T,seed
+  CHARACTER (LEN=4),intent(inout) :: label(1:n_atoms)
+  INTEGER             :: i,j
+  real                            :: R4_UNIFORM
+!
+  i = INT(R4_UNIFORM(1.0,real(n_T)+1.0,SEED))
+  DO WHILE ( label(i) /= 'Si' )
+    i = INT(R4_UNIFORM(1.0,real(n_T)+1.0,SEED))
+  END DO
+  j = INT(R4_UNIFORM(1.0,real(n_T)+1.0,SEED))
+  DO WHILE ( label(j) /= 'Ge' )
+    j = INT(R4_UNIFORM(1.0,real(n_T)+1.0,SEED))
+  END DO
+! identity_change
+  label(i) = 'Ge'
+  label(j) = 'Si'
+  RETURN
+ END SUBROUTINE identity_change_move
+!
+ REAL FUNCTION energy(n,n_T,lab,ener_0,ener_1,ener_2,deg_1,deg_2,delta_1,delta_2)
   IMPLICIT NONE
   INTEGER, intent(in) :: n,n_T
-  CHARACTER (LEN=2),intent(in)   :: lab(1:n)
+  CHARACTER (LEN=4),intent(in)   :: lab(1:n)
   INTEGER             :: i,j,k,l
-  real,intent(in)     :: ener_1(n),ener_2(n,n)
+  real,intent(in)     :: ener_0,ener_1(n),ener_2(n,n),deg_1(n),deg_2(n,n)
   integer,intent(in)  :: delta_1(n,n),delta_2(n,n,n,n)
-  integer             :: spin(n),ss,n_Al = 3
+  integer             :: spin(n),ss
   ss = 0
   spin(1:n) = 0
-  energy = 0.0
+  energy = ener_0
   do i = 1,n
-   if(lab(i)=='Ge') then
+   if(lab(i)=='Ge  ') then
     spin(i) = 1
     ss=ss+1
    end if
   end do
+  if(ss==0) STOP 'no hay Ge'
   do i =1,n
    do j=1,n
-    energy = energy + ener_1(j)*delta_1(j,i)*spin(i)
-    !if(spin(i)==1.and.delta_1(j,i)==1)write(6,*) i,j,ener_1(j), delta_1(j,i),energy,ss
+    if(deg_1(j)/=0.0.and.delta_1(j,i)*spin(i)==1)then
+     energy = energy + (ener_1(j))*delta_1(j,i)*spin(i)
+    end if
    end do
   end do
+  if(ss>=2)then
   do i =1, n
    do j =1+i,n
     do k=1,n
-     do l=k+1,n
-      energy = energy + ener_2(k,l)*delta_2(k,l,i,j)*spin(i)*spin(j)
-      !if(spin(i)==1.and.spin(j)==1)write(6,*) i,j,k,l, ener_2(j,i), delta_2(k,l,j,i),energy
+     do l=1+k,n
+      if(deg_2(k,l)/=0.0.and.delta_2(k,l,i,j)*spin(i)*spin(j)==1)then
+       energy = energy + (ener_2(k,l))*delta_2(k,l,i,j)*spin(i)*spin(j)
+      end if
      end do
     end do
    end do
   end do
+  end if
+  return
  END FUNCTION energy
 !
  SUBROUTINE cell(rv,vr,cell_0)
