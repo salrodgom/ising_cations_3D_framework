@@ -1,0 +1,14 @@
+REMARK   Materials Studio PDB file
+REMARK   Created:  Fri Nov 25 06:43:02 Hora estándar romance 2016
+ATOM      1 Ge   MOL O   2       2.001   4.370  15.751  1.00  0.00          Ge    
+ATOM      2 Ge   MOL O   2       4.227   5.153  13.708  1.00  0.00          Ge    
+ATOM      3  O1  MOL O   2       2.921   5.406  14.717  1.00  0.00           O    
+ATOM      4  O1  MOL O   2       1.744   4.845  17.647  1.00  0.00           O    
+ATOM      5  O1  MOL O   2       4.955   6.696  13.785  1.00  0.00           O    
+ATOM      6  O3  MOL O   2       0.536   4.684  14.785  1.00  0.00           O    
+ATOM      7  O3  MOL O   2       2.816   3.114  15.630  1.00  0.00           O    
+ATOM      8  O3  MOL O   2       5.397   4.008  14.366  1.00  0.00           O    
+ATOM      9  O3  MOL O   2       3.750   4.831  12.039  1.00  0.00           O    
+ATOM     10  F   MOL O   2       5.803   4.850  12.551  1.00  0.00           F    
+ATOM     11  F   MOL O   2       0.959   3.172  16.978  1.00  0.00           F    
+TER

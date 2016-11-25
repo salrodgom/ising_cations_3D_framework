@@ -1,0 +1,23 @@
+CRYST1   12.092   11.949   29.548  89.37  89.83 120.32 P1            0
+ATOM      1 Ge   MOL     2       2.001   4.370  15.751  1.00  0.00          Ge  
+ATOM      2 Ge   MOL     2       4.227   5.153  13.708  1.00  0.00          Ge  
+ATOM      3  O1  MOL     2       2.921   5.406  14.717  1.00  0.00           O  
+ATOM      4  O1  MOL     2       1.744   4.845  17.647  1.00  0.00           O  
+ATOM      5  O1  MOL     2       4.955   6.696  13.785  1.00  0.00           O  
+ATOM      6  O3  MOL     2       0.536   4.684  14.785  1.00  0.00           O  
+ATOM      7  O3  MOL     2       2.816   3.114  15.630  1.00  0.00           O  
+ATOM      8  O3  MOL     2       5.397   4.008  14.366  1.00  0.00           O  
+ATOM      9  O3  MOL     2       3.750   4.831  12.039  1.00  0.00           O  
+ATOM     10  F   MOL     2       5.803   4.850  12.551  1.00  0.00           F  
+ATOM     11  F   MOL     2       0.959   3.172  16.978  1.00  0.00           F  
+CONECT    1    4   11    3    6    7
+CONECT    2    5    3    8   10    9
+CONECT    3    2    1
+CONECT    4    1
+CONECT    5    2
+CONECT    6    1
+CONECT    7    1
+CONECT    8    2
+CONECT    9    2
+CONECT   10    2
+CONECT   11    1
