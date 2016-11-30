@@ -5,9 +5,9 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
- integer,parameter          :: n_Ge = 24
+ integer,parameter          :: n_Ge = 4
  integer,parameter          :: MC_steps = 1000
- integer,parameter          :: n_configurations = 0
+ integer,parameter          :: n_configurations = 4
  character(len=80)          :: file_name,line
  real,parameter             :: temperature = 5000.0
  integer, parameter         :: NOPMAX=10000
@@ -23,6 +23,7 @@ program main
  real                       :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
  real                       :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
  real                       :: cell_0(1:6)
+ logical                    :: MC_flag = .false.
  real,dimension(NOPMAX,3,3) :: mgroup1
  real,dimension(NOPMAX,3)   :: vgroup1
  real,dimension(0:n_configurations,n_atoms,3)             :: cryst_coor
@@ -39,11 +40,10 @@ program main
   READ (12,*) op1
  enddo
 !
- do ii=0,n_configurations
-  ! c0004.gin
-  !write(6,*) LEN(char(ii)) 
-  if(LEN(char(ii))==1) write (file_name, '( "gulp-1-subs/c000", I1, ".gin" )' ) ii
-  write(6,*)'Configuration',ii
+ do ii=1,n_configurations
+  !write(6,'(i4.4)') ii
+  write (file_name, '( "gulp-",i1,"-subs/c", I5.5, ".gin" )' )n_Ge,ii
+  write(6,*)'Configuration',ii, file_name
   write(6,*)'==============='
   open(unit=configuration_file,file=file_name,status='old',iostat=err_apertura)
   if(err_apertura/=0) stop "[ERROR] reading file // file_name // "
@@ -105,14 +105,14 @@ program main
   IF( err_apertura /= 0 ) exit read_matrix_1
   ener_1(k)=epsilon_-ener_0
   deg_1(k) =deg
-  write(6,*)k,k,ener_1(k),deg_1(k)
+  !write(6,*)k,k,ener_1(k),deg_1(k)
   do j=2,deg
    READ (112,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_1
    read(line,*)l,m,i,n
    ener_1(i)=ener_1(k)
    deg_1(i) =deg_1(k)
-   write(6,*)k,i,ener_1(i),deg_1(i)
+   !write(6,*)k,i,ener_1(i),deg_1(i)
   end do
  end do read_matrix_1
 ! final 
@@ -151,7 +151,7 @@ program main
   ener_2(j,i)= ener_2(i,j)
   deg_2(i,j) = deg
   deg_2(j,i) = deg_2(i,j)
-  write(6,*)i,j,i,j,ener_2(i,j),deg_2(i,j)
+  !write(6,*)i,j,i,j,ener_2(i,j),deg_2(i,j)
   do k=2,deg
    read(122,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_2
@@ -161,7 +161,7 @@ program main
    ener_2(m,l) = epsilon_
    deg_2(l,m) = deg
    deg_2(m,l) = deg
-   write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m),ii
+   !write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m),ii
   end do
  end do read_matrix_2
 !!!
@@ -204,7 +204,7 @@ program main
   deg_3(k,j,i) = deg
   deg_3(k,i,j) = deg
   deg_3(j,k,i) = deg
-  write(6,*)i,j,k,i,j,k,ener_3(i,j,k),deg_3(i,j,k)
+  !write(6,*)i,j,k,i,j,k,ener_3(i,j,k),deg_3(i,j,k)
   do k=2,deg
    READ (132,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_3
@@ -222,7 +222,7 @@ program main
    deg_3(n,m,l) = deg
    deg_3(m,n,l) = deg
    deg_3(n,l,m) = deg
-   write(6,*)i,j,k,l,m,n,ener_3(l,m,n),deg_3(l,m,n),ii
+   !write(6,*)i,j,k,l,m,n,ener_3(l,m,n),deg_3(l,m,n),ii
   end do
  end do read_matrix_3
 ! final 
@@ -230,8 +230,16 @@ program main
  close(122)
  close(123)
 ! {{{
-call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
-     ener_2,ener_3,deg_1,deg_2,deg_3,cell_0,cryst_coor,0,label,&
+ do ii=1,n_configurations
+  if(MC_flag)then
+  call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
+     ener_2,ener_3,deg_1,deg_2,deg_3,cell_0,cryst_coor,n_configurations,label,&
      MC_steps,temperature)
+  else
+  call geometrical_properties(n_atoms,n_T_atoms,n_Ge,cell_0,cryst_coor,n_configurations,&
+       label,deg_1,deg_2,deg_3,ener_0,ener_1,ener_2,ener_3,ii)
+  end if
+ end do
  stop
 end program main
+

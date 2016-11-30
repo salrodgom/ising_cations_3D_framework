@@ -1,11 +1,102 @@
-!call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
-!     ener_2,ener_3,deg_1,deg_2,deg_3,cell_0,cryst_coor,0,label,&
-!     MC_steps,temperature)
+subroutine geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
+                                  deg_1,deg_2,deg_3,ener_0,ener_1,ener_2,ener_3,ii)
+ implicit none
+ integer,intent(in) :: n_atoms,n_T,n_Al,ii
+ integer,intent(in) :: n_configurations
+ real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms)
+ real,intent(in)    :: ener_0, ener_1(n_atoms),ener_2(n_atoms,n_atoms)
+ real,intent(in)    :: ener_3(n_atoms,n_atoms,n_atoms)
+ character(len=4),intent(inout) :: labels(0:n_configurations,n_atoms,2)
+ character(len=4)   :: lab(n_atoms)
+ real,intent(in)    :: cryst_coor(0:n_configurations,n_atoms,3),cell_0(6)
+ real               :: rv(3,3),vr(3,3),p,q,r,s,pot_dist
+ real               :: dist_matrix(n_atoms,n_atoms)
+ REAL               :: atom(3),ouratom(3),energy,ener
+ real               :: x(3,n_atoms)
+ integer            :: i,j,k,m
+ REAL,    PARAMETER :: infinite = 9999999.999999
+ call cell(rv,vr,cell_0)
+ do i=1,n_atoms
+  lab(i) = labels(ii,i,1)
+  do j=1,3
+    x(j,i) = cryst_coor(ii,i,j)
+  end do
+ end do
+ ener = energy(n_atoms,n_T,lab,ener_0,ener_1,ener_2,ener_3,deg_1,deg_2,deg_3)
+ call make_dist_matrix(n_atoms,cell_0,rv,vr,x,dist_matrix)
+ WRITE(6,'(a)')'=============================================='
+ WRITE(6,'(a,i3,a)')'geometrical properties of ',n_Al,' Ge:'
+ write(6,*)'Configuration:',ii
+ q=0.0
+ r=0.0
+ m=0
+ do i=1,n_atoms
+   if(labels(ii,i,1)=='Ge  ')then
+    do j=1,n_atoms
+     if(i/=j)then
+      if(labels(ii,j,1)=='Ge  ')then
+       s = dist_matrix(i,j)
+       m=m+1
+       r=r+s
+       q=q+s*s
+      end if
+     endif
+    end do
+   end if
+ end do
+ WRITE(6,*)'D_ave:',r/real(m),sqrt(q/real(m)-(r*r)/real(m*m))
+ pot_dist=r/real(m)
+ q=0.0
+ r=0.0
+ m=0
+ do i=1,n_atoms
+   if(labels(ii,i,1)=='Ge  ')then
+    p=infinite
+    do j=1,n_atoms
+     if(i/=j)then
+      if(labels(ii,j,1)=='Ge  ')then
+       s=dist_matrix(i,j)
+       if( s <= p ) p=s
+      end if
+     endif
+    end do
+    m=m+1
+    r=r+p
+    q=q+p*p
+   endif
+ end do
+ WRITE(6,*)'D_min:',r/real(m),sqrt(q/real(m)-(r*r)/real(m*m))
+ write(6,*)'energia:', ener
+ return
+end subroutine geometrical_properties
+
+subroutine make_dist_matrix(n,cell_0,rv,vr,x,dist_matrix)
+ implicit none
+ integer,intent(in) :: n
+ real,intent(in)    :: cell_0(6),rv(3,3),vr(3,3),x(3,n)
+ real,intent(out)   :: dist_matrix(n,n)
+ integer            :: i,j,k
+ real               :: r1(3),r2(3),s
+ DO i=1,n
+    dist_matrix(i,i)=0.0
+    DO j=i+1,n
+       forall ( k=1:3 )
+        r1(k)=x(k,i)
+        r2(k)=x(k,j)
+       end forall
+       call make_distances(cell_0,r1,r2,rv,s)
+       dist_matrix(i,j)=s
+       dist_matrix(j,i)=dist_matrix(i,j)
+    END DO
+ END DO
+ return
+end subroutine make_dist_matrix
+
 subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
       ener_2,ener_3,deg_1,deg_2,deg_3,cell_0,cryst_coor,n_configurations,&
-      labels,MC_cycles,T)
+      labels,MC_cycles,T,ii)
  implicit none
- integer,intent(in) :: n_atoms,n_T
+ integer,intent(in) :: n_atoms,n_T,ii
  real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms)
  real,intent(in)    :: ener_0, ener_1(n_atoms),ener_2(n_atoms,n_atoms)
  real,intent(in)    :: ener_3(n_atoms,n_atoms,n_atoms)
@@ -40,9 +131,9 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  LOGICAL            :: FLAG      = .false.
 ! {{
  do i=1,n_atoms
-  label(i)=labels(n_configurations,i,1)
+  label(i)=labels(ii,i,1)
   do j=1,3
-  xcryst(j,i) = cryst_coor(0,i,j)
+  xcryst(j,i) = cryst_coor(ii,i,j)
   enddo
  enddo
 !
@@ -85,18 +176,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
     WRITE(6,'(1000(I1))')(int(xcryst(0,k)),k=1,n_atoms)
  END IF make_graph
 ! make dist_matrix
- DO i=1,n_atoms
-    dist_matrix(i,i)=0.0
-    DO j=i+1,n_atoms
-       forall ( k=1:3 )
-        ouratom(k)=xcryst(k,i)
-        atom(k)   =xcryst(k,j)
-       end forall
-       call make_distances(cell_0,ouratom,atom,rv,s)
-       dist_matrix(i,j)=s
-       dist_matrix(j,i)=dist_matrix(i,j)
-    END DO
- END DO
+ call make_dist_matrix(n_atoms,cell_0,rv,vr,xcryst,dist_matrix)
 ! {{ sustituimos los aluminios
 !    {{ el primer Al es aleatorio
  pivots(1)=INT(r4_uniform(1.0,n_T+1.0,SEED))
@@ -171,51 +251,10 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  do i=1,n_atoms
   labels(n_configurations,i,1)=label(i)
  enddo
-
  call write_gin(cell_0,xcryst,n_atoms,labels)
- WRITE(6,'(a)')'=============================================='
- WRITE(6,'(a,i3,a)')'geometrical properties of ',n_Al,' Ge:'
- q=0.0
- r=0.0
- m=0
- do i=1,n_atoms
-   if(label(i)=='Ge')then
-    do j=1,n_atoms
-     if(i/=j)then
-      if(label(j)=='Ge')then
-       s = dist_matrix(i,j)
-       m=m+1
-       r=r+s
-       q=q+s*s
-      end if
-     endif
-    end do
-   end if
- end do
- WRITE(6,*)'distancia media y dispersion'
- WRITE(6,*)r/real(m),sqrt(q/real(m)-(r*r)/real(m*m))
- pot_dist=r/real(m)
- q=0.0
- r=0.0
- m=0
- do i=1,n_atoms
-   if(label(i)=='Ge')then
-    p=infinite
-    do j=1,n_atoms
-     if(i/=j)then
-      if(label(j)=='Ge')then
-       s=dist_matrix(i,j)
-       if( s <= p ) p=s
-      end if
-     endif
-    end do
-    m=m+1
-    r=r+p
-    q=q+p*p
-   endif
- end do
- WRITE(6,*)'distancia minima media y dispersion'
- WRITE(6,*)r/real(m),sqrt(q/real(m)-(r*r)/real(m*m))
+ !call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels)
+ call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
+                             deg_1,deg_2,deg_3,ener_0,ener_1,ener_2,ener_3,ii)
  WRITE(6,*)'STOP',pot_dist,r/real(m),cost
 end subroutine
 !

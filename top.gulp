@@ -1,0 +1,13 @@
+# 
+# Keywords:
+# 
+opti conv qok
+stepmx opt     0.01
+maxcyc opt     5000
+# 
+# Options:
+# 
+title
+ hexagonal zeolite STW: 4 substitutions Ge/Si
+end
+cell
