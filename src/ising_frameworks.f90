@@ -5,20 +5,28 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
- integer,parameter          :: n_Ge = 24
- integer,parameter          :: MC_steps = 100
+ integer,parameter          :: n_Ge = 4
+ integer,parameter          :: MC_steps = 1000
  integer,parameter          :: n_configurations = 0
  character(len=80)          :: file_name,line
  real,parameter             :: temperature = 100.0
  integer, parameter         :: NOPMAX=10000
- integer                    :: delta_1(n_atoms,n_atoms),k_max_1,k_max_2
+ integer                    :: k_max_1,k_max_2,k_max_3
  real                       :: ener_0 = -7745.86721305,epsilon_
+ !
+ !real,allocatable :: ener_1(:),deg_1(:)
+ !real,allocatable :: ener_2(:,:),deg_2(:,:)
+ !real,allocatable :: ener_3(:,:,:),deg_3(:,:,:)
  real           :: ener_1(n_atoms) = 0.0
  real           :: deg_1(n_atoms) = 0.0
  real           :: ener_2(n_atoms,n_atoms) = 0.0
  real           :: deg_2(n_atoms,n_atoms) = 0.0
+ real           :: ener_3(n_atoms,n_atoms,n_atoms) = 0.0
+ real           :: deg_3(n_atoms,n_atoms,n_atoms) = 0.0
  real           :: cell_0(1:6)
- integer                    :: delta_2(n_atoms,n_atoms,n_atoms,n_atoms)
+ !integer                    :: delta_1(n_atoms,n_atoms)
+ !integer                    :: delta_2(n_atoms,n_atoms,n_atoms,n_atoms)
+ !integer                    :: delta_3(n_atoms,n_atoms,n_atoms,n_atoms,n_atoms,n_atoms)
  real,dimension(NOPMAX,3,3) :: mgroup1
  real,dimension(NOPMAX,3)   :: vgroup1
  real,dimension(0:n_configurations,n_atoms,3)             :: cryst_coor
@@ -75,30 +83,40 @@ program main
  write(6,*)'Read relation between unique and dependent configurations'
 ! {{{ 
  write(6,*)'One substitution:'
- delta_1(1:n_atoms,1:n_atoms) = 0
- deg_1(1:n_atoms) = 0.0
  k_max_1 = 0
- ener_1(1:n_atoms)  = 0.0
  open(unit=111,file='gulp-1-subs/OUTSOD',status='old',iostat=err_apertura)
  open(unit=112,file='gulp-1-subs/OUTSOD_modified',status='old',iostat=err_apertura)
  open(unit=113,file='gulp-1-subs/ENERGIES',status='old',iostat=err_apertura)
  if(err_apertura/=0) stop "[ERROR] reading file with matrix 1"
+ read(111,'(a)',iostat=err_apertura) line
+ if( err_apertura /=0 ) stop
+ read(line,*) k !<-N.configuraciones unicas
+!
+ read(112,'(a)',iostat=err_apertura) line
+ if( err_apertura /=0 ) stop
+ read(line,*) k_max_1 !<-N.configuraciones totales
+ !allocate( ener_1(1:k_max_1) )
+ !allocate( deg_1(1:k_max_1))
+ ener_1(1:n_atoms)  = 0.0
+ deg_1(1:n_atoms)   = 0.0
+ if( err_apertura /=0 ) stop
+!
  read_matrix_1: do
-  READ(111,'(A)',IOSTAT=err_apertura) line
+  read(111,'(a)',iostat=err_apertura) line
   IF( err_apertura /= 0 ) exit read_matrix_1
-  read(line,*)k,deg,l
-  delta_1(l,l)=1
-  deg_1(l) = real(deg)
-  READ(113,*)epsilon_
-  ener_1(l)=epsilon_ - ener_0
-  write(6,*)l,l,ener_1(l),deg_1(l)
+  read(line,*)i,deg,k
+  read(113,*,iostat=err_apertura) epsilon_
+  IF( err_apertura /= 0 ) exit read_matrix_1
+  ener_1(k)=epsilon_-ener_0
+  deg_1(k) =deg
+  write(6,*)k,k,ener_1(k),deg_1(k)
   do j=2,deg
    READ (112,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_1
-   read(line,*)k,m,i,n
-   delta_1(l,i)=1
-   delta_1(i,l)=1
-   write(6,*)l,i,ener_1(i),deg_1(i)
+   read(line,*)l,m,i,n
+   ener_1(i)=ener_1(k)
+   deg_1(i) =deg_1(k)
+   write(6,*)k,i,ener_1(i),deg_1(i)
   end do
  end do read_matrix_1
 ! final 
@@ -107,50 +125,117 @@ program main
  close(113)
 ! }}}
  write(6,*)'Two substitutions:'
- delta_2(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms) = 0
- deg_2(1:n_atoms,1:n_atoms) = 0.0
- deg_2 = 0.0
  k_max_2 = 0
- ener_2(1:n_atoms,1:n_atoms) = 0.0
  open(unit=121,file='gulp-2-subs/OUTSOD',status='old',iostat=err_apertura)
  open(unit=122,file='gulp-2-subs/OUTSOD_modified',status='old',iostat=err_apertura)
  open(unit=123,file='gulp-2-subs/ENERGIES',status='old',iostat=err_apertura)
  if(err_apertura/=0) stop "[ERROR] reading file with matrix 1"
+
+ read(121,'(a)',iostat=err_apertura) line
+ if( err_apertura /=0 ) stop
+ read(line,*) k !<-N.configuraciones unicas
+ read(122,'(a)',iostat=err_apertura) line
+ if( err_apertura /=0 ) stop
+ read(line,*) k_max_2 !<-N.configuraciones totales
+ !allocate( ener_2(1:k_max_2,1:k_max_2))
+ !allocate( deg_2(1:k_max_2,1:k_max_2))
+ ener_2(1:n_atoms,1:n_atoms)  = 0.0
+ deg_2(1:n_atoms,1:n_atoms)   = 0.0
+ if( err_apertura /=0 ) stop
+ ii=0
  read_matrix_2: do
-  READ(121,'(A)',IOSTAT=err_apertura) line
+  read(121,'(A)',IOSTAT=err_apertura) line
   IF( err_apertura /= 0 ) exit read_matrix_2
   read(line,*)k,deg,i,j
-  delta_2(i,j,i,j)=1
-  delta_2(i,j,j,i)=delta_2(i,j,i,j)
-  delta_2(j,i,i,j)=delta_2(i,j,i,j)
-  delta_2(j,i,j,i)=delta_2(i,j,i,j)
-  deg_2(i,j) = real(deg)
+  READ(123,*,IOSTAT=err_apertura) epsilon_
+  IF( err_apertura /= 0 ) exit read_matrix_2
+  ii=ii+1
+  epsilon_ =   epsilon_-ener_0-ener_1(i)-ener_1(j)
+  ener_2(i,j)= epsilon_
+  ener_2(j,i)= ener_2(i,j)
+  deg_2(i,j) = deg
   deg_2(j,i) = deg_2(i,j)
-  READ(123,*)epsilon_
-  ener_2(i,j)=epsilon_ - ener_0 -ener_1(i)-ener_1(j)
-  ener_2(j,i)=ener_2(i,j)
   write(6,*)i,j,i,j,ener_2(i,j),deg_2(i,j)
   do k=2,deg
-   READ (122,'(A)',IOSTAT=err_apertura) line
+   read(122,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_2
+   ii=ii+1
    read(line,*)jj,kk,l,m,n
-   delta_2(i,j,l,m)=1
-   delta_2(j,i,l,m)=delta_2(i,j,l,m)
-   delta_2(i,j,m,l)=delta_2(i,j,l,m)
-   delta_2(j,i,m,l)=delta_2(i,j,l,m)
-   delta_2(l,m,i,j)=delta_2(i,j,l,m)
-   delta_2(m,l,i,j)=delta_2(i,j,l,m)
-   delta_2(l,m,j,i)=delta_2(i,j,l,m)
-   delta_2(m,l,j,i)=delta_2(i,j,l,m)
-   write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m)
+   ener_2(l,m) = epsilon_
+   ener_2(m,l) = epsilon_
+   deg_2(l,m) = deg
+   deg_2(m,l) = deg
+   write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m),ii
   end do
  end do read_matrix_2
+!!!
+ write(6,*)'3 substitutions:'
+ k_max_3 = 0
+ open(unit=131,file='gulp-3-subs/OUTSOD',status='old',iostat=err_apertura)
+ open(unit=132,file='gulp-3-subs/OUTSOD_modified',status='old',iostat=err_apertura)
+ open(unit=133,file='gulp-3-subs/ENERGIES',status='old',iostat=err_apertura)
+ if(err_apertura/=0) stop "[ERROR] reading file with matrix 1"
+
+ read(131,'(a)',iostat=err_apertura) line
+ if( err_apertura /=0 ) stop
+ read(line,*) k !<-N.configuraciones unicas
+ read(132,'(a)',iostat=err_apertura) line
+ if( err_apertura /=0 ) stop
+ read(line,*) k_max_3 !<-N.configuraciones totales
+ !allocate( ener_3(1:k_max_3,1:k_max_3,1:k_max_3))
+ !allocate( deg_3 (1:k_max_3,1:k_max_3,1:k_max_3))
+ ener_3(1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
+ deg_3 (1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
+ if( err_apertura /=0 ) stop 
+ ii=0
+ read_matrix_3: do
+  read(131,'(A)',IOSTAT=err_apertura) line
+  IF( err_apertura /= 0 ) exit read_matrix_3
+  read(line,*)k,deg,i,j,k
+  READ(133,*,IOSTAT=err_apertura)epsilon_
+  IF( err_apertura /= 0 ) exit read_matrix_3
+  ii=ii+1
+  epsilon_ = epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_2(i,j)-ener_2(j,k)-ener_2(i,k)
+  ener_3(i,j,k) = epsilon_
+  ener_3(j,i,k) = epsilon_
+  ener_3(i,k,j) = epsilon_
+  ener_3(k,j,i) = epsilon_
+  ener_3(k,i,j) = epsilon_
+  ener_3(j,k,i) = epsilon_
+  deg_3(i,j,k) = deg
+  deg_3(j,i,k) = deg
+  deg_3(i,k,j) = deg
+  deg_3(k,j,i) = deg
+  deg_3(k,i,j) = deg
+  deg_3(j,k,i) = deg
+  write(6,*)i,j,k,i,j,k,ener_3(i,j,k),deg_3(i,j,k)
+  do k=2,deg
+   READ (132,'(A)',IOSTAT=err_apertura) line
+   IF( err_apertura /= 0 ) exit read_matrix_3
+   ii=ii+1
+   read(line,*)jj,kk,l,m,n,ii
+   ener_3(l,m,n) = epsilon_
+   ener_3(m,l,n) = epsilon_
+   ener_3(l,n,m) = epsilon_
+   ener_3(n,m,l) = epsilon_
+   ener_3(m,n,l) = epsilon_
+   ener_3(n,l,m) = epsilon_
+   deg_3(l,m,n) = deg
+   deg_3(m,l,n) = deg
+   deg_3(l,n,m) = deg
+   deg_3(n,m,l) = deg
+   deg_3(m,n,l) = deg
+   deg_3(n,l,m) = deg
+   write(6,*)i,j,k,l,m,n,ener_3(l,m,n),deg_3(l,m,n),ii
+  end do
+ end do read_matrix_3
 ! final 
  close(121)
  close(122)
  close(123)
 ! {{{
-call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,delta_1,delta_2,ener_0,&
-     ener_1,ener_2,deg_1,deg_2,cell_0,cryst_coor,0,label,MC_steps,temperature)
+call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
+     ener_2,ener_3,deg_1,deg_2,deg_3,cell_0,cryst_coor,0,label,&
+     MC_steps,temperature)
  stop
 end program main

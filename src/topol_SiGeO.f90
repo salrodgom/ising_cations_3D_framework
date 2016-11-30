@@ -15,7 +15,7 @@ program topol
     IF( IERR /= 0 ) EXIT do1
     IF(line(1:4)=='cell') EXIT do1
   ENDDO do1
-  READ(5,'(6f11.6)')(cell_0(k), k=1,6 )
+  READ(5,*)(cell_0(k), k=1,6 )
   CALL cell(rv,vr,cell_0)
   READ(5,'(A)',IOSTAT=IERR) line ! frac
   DO
