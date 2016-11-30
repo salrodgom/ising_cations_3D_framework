@@ -55,7 +55,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  make_graph: IF( FLAG.EQV..true. ) THEN
     pairs: DO i=1,n_atoms
       DO j=i,n_atoms
-      adj(i,j)=0.0
+      adj(i,j)=0
       adj_CHAR(i,j)=' '
       if(labels(0,i,2)=='shel') cycle pairs
       if(labels(0,j,2)=='shel') cycle pairs
@@ -66,7 +66,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
        END FORALL
        call make_distances(cell_0,ouratom,atom,rv,r)
        IF(r>=r1.AND.r<r2)THEN
-         adj(i,j)=1.0
+         adj(i,j)=1
          adj_CHAR(I,J)='@'
        ENDIF
       ENDIF

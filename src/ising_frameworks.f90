@@ -14,19 +14,15 @@ program main
  integer                    :: k_max_1,k_max_2,k_max_3
  real                       :: ener_0 = -7745.86721305,epsilon_
  !
- !real,allocatable :: ener_1(:),deg_1(:)
- !real,allocatable :: ener_2(:,:),deg_2(:,:)
- !real,allocatable :: ener_3(:,:,:),deg_3(:,:,:)
- real           :: ener_1(n_atoms) = 0.0
- real           :: deg_1(n_atoms) = 0.0
- real           :: ener_2(n_atoms,n_atoms) = 0.0
- real           :: deg_2(n_atoms,n_atoms) = 0.0
- real           :: ener_3(n_atoms,n_atoms,n_atoms) = 0.0
- real           :: deg_3(n_atoms,n_atoms,n_atoms) = 0.0
- real           :: cell_0(1:6)
- !integer                    :: delta_1(n_atoms,n_atoms)
- !integer                    :: delta_2(n_atoms,n_atoms,n_atoms,n_atoms)
- !integer                    :: delta_3(n_atoms,n_atoms,n_atoms,n_atoms,n_atoms,n_atoms)
+ real                       :: ener_1(n_atoms) = 0.0
+ real                       :: deg_1(n_atoms) = 0.0
+ real                       :: ener_2(n_atoms,n_atoms) = 0.0
+ real                       :: deg_2(n_atoms,n_atoms) = 0.0
+ real                       :: ener_3(n_atoms,n_atoms,n_atoms) = 0.0
+ real                       :: deg_3(n_atoms,n_atoms,n_atoms) = 0.0
+ real                       :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
+ real                       :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
+ real                       :: cell_0(1:6)
  real,dimension(NOPMAX,3,3) :: mgroup1
  real,dimension(NOPMAX,3)   :: vgroup1
  real,dimension(0:n_configurations,n_atoms,3)             :: cryst_coor
