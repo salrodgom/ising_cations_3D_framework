@@ -5,11 +5,11 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
- integer,parameter          :: n_Ge = 4
+ integer,parameter          :: n_Ge = 24
  integer,parameter          :: MC_steps = 1000
  integer,parameter          :: n_configurations = 0
  character(len=80)          :: file_name,line
- real,parameter             :: temperature = 100.0
+ real,parameter             :: temperature = 5000.0
  integer, parameter         :: NOPMAX=10000
  integer                    :: k_max_1,k_max_2,k_max_3
  real                       :: ener_0 = -7745.86721305,epsilon_
