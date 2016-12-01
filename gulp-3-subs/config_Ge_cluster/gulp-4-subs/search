@@ -1,0 +1,8 @@
+#!/bin/bash
+ls uniq_*.gin > list
+while read line ; do
+ conf=$(grep name $line | awk '{print $2}')
+ echo $conf
+ id=$(ls ${conf}.gout | wc -l)
+ if [ $id == 0 ] ; then echo $conf ; fi
+done < list

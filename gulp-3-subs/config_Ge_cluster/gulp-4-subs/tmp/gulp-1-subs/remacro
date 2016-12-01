@@ -1,0 +1,16 @@
+#!/bin/bash
+ls *.gin.gin | while read line ; do
+ echo $line
+ echo ===========
+ gin=${line}
+ gout="$(echo $line | sed "s/\.gin//g").gout"
+ gres="out.res"
+ #mv out.gin $gin
+ sed -i "s/stepmx opt     0.003000/stepmx opt     0.1/g" $gin
+ mpirun --np 16 gulp < $gin > $gout
+ sed "s/opti conv qok/opti conp qok/g" $gres > $gin
+ mpirun --np 16 gulp < $gin > $gout
+ mv out.cif ${line}.cif 
+ mv $gres ${gin}.res
+done
+exit 0

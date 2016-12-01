@@ -1,0 +1,25 @@
+#!/bin/bash
+gfortran -O2 topol_SiGeO.f90 -o topol_SiGeO
+ls c*.gin > list
+while read line ; do
+ gin=$line
+ ./topol_SiGeO < $gin
+ ls out*.gin > list_inner
+ while read line_1 ; do
+  mv ${line_1} ${line}.${line_1}
+ done < list_inner
+ rm list_inner out*.gin
+done < list
+# c2777.gin.out00008.gin
+rm *.gin.out00000.gin
+ls c*.gin.*.gin > list
+while read line_1 ; do
+ while read line_2 ; do
+  x=$(diff $line_1 $line_2 | wc -l)
+  if [ $(echo "$x == 0" | bc -l) == 1 ] ; then
+   echo "$line_1 $line_2 $x" 
+  fi
+ done < list
+done < list
+rm  list
+./identificar_soluciones_fake.sct

@@ -1,0 +1,15 @@
+#!/bin/bash
+mkdir repetidas
+ls *.gin.*.gin > list_total
+while read line_1 ; do
+ conf=$line_1
+ repetition=0
+ while read line_2 ; do
+  x1=$(echo $line_2 | awk '{print $1}')
+  x2=$(echo $line_2 | awk '{print $2}')
+  if [ "$conf" == "${x1}" ] ; then let repetition++ ; fi
+  if [ "$conf" == "${x2}" ] ; then let repetition++ ; fi 
+ done < lista_de_soluciones_iguales
+ echo $conf $repetition 
+done < list_total
+

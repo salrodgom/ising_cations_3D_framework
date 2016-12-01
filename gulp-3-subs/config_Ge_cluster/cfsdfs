@@ -1,0 +1,8 @@
+#!/bin/bash
+cd repetidas
+ ls *.gin > ../list
+cd ..
+cd uniq
+while read line ; do
+ find . -iname $line
+done < ../list

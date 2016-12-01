@@ -1,0 +1,32 @@
+#!/bin/bash
+export GULPPATH=$HOME/GULP-4.2.0/Src
+#gfortran topol_SiGeO.f90 -o topol_SiGeO
+for i in $(seq -f "%04g" 5 -1 1) ; do
+ file=c$i.gin
+ echo ===========
+ #./topol_SiGeO < $file
+ gin=$file
+ gout="$(echo $file | sed "s/\.gin//g").gout"
+ gres="c$i.res"
+ sed -i "s/opti conp qok/opti conp qok rfo/g"    $gin
+ sed -i "s/dump every      1 out/dump every      1 c$i/g" $gin
+ sed -i "s/output cif out/output cif c$i/g" $gin
+ tail -n10 $gin
+ #mv out.gin $gin
+ #sed -i 's/maxcyc opt     5000/maxcyc opt 1000/g' $gin
+ #mpirun --np 16 $GULPPATH/gulp < $gin > $gout
+ #sed "s/opti conv qok/opti conp qok/g" $gres > $gin
+ #sed -i 's/maxcyc opt     5000/maxcyc opt 1000/g' $gin
+ #mpirun --np 16 $GULPPATH/gulp < $gin > $gout
+ #sed -i "/stepmx opt     0.01/d" $gres > $gin
+ #sed -i 's/maxcyc opt     5000/maxcyc opt 1000/g' $gin
+ #mpirun --np 16 $GULPPATH/gulp < $gin > $gout
+ #mv $gres $gin
+ #sed -i 's/maxcyc opt     5000/maxcyc opt 1000/g' $gin
+ $GULPPATH/gulp < $gin > $gout &
+ #mv out.cif ${file}.cif
+ #mv $gres ${file}.res
+ #sleep 0.1
+ #rm gulptmp_*
+done
+exit 0

@@ -1,6 +1,6 @@
 program topol
  implicit none
- integer                      :: i,j,k,l,m,ii,ierr = 0
+ integer                      :: i,j,k,l,m,ii,jj,ierr = 0
  integer                      :: n_atoms = 0
  real,allocatable             :: xcryst(:,:),xcarte(:,:),dist(:,:)
  real                         :: r1(3),r2(3),cell_0(6),rv(3,3),vr(3,3),r
@@ -110,24 +110,37 @@ program topol
   WRITE(6,'(1000(I1))')(int(xcryst(k,0)),k=1,n_atoms) ! }}
   write(6,'(a)')'========================================'
   ii= 0
-  call write_gin(cell_0,xcryst,n_atoms,label,ii)
   if (flag_variations) then
    do i=1,n_atoms
     if(label(i,1)=="Ge  ")then
-     write(6,*)label(i,1),label(i,2),i
-     do j=i+1,n_atoms
-      if(adj(i,j)==1.and.(label(j,1)=="O1  ".or.&
-       label(j,1)=="O2  ".or.label(j,1)=="O3  ")) then
-       write(6,*)label(j,1),label(j,2),j
-       do l=j+1,n_atoms
-        write(6,*) adj(l,j), xcryst(l,0)
-        if(adj(j,l)==1)then
-          write(6,*)label(l,1),label(l,2),k
-          !label(k,1) = "Ge  "
-          !ii = ii + 1
-          !write(6,*)'Variacion encontrada!'
-          !call write_gin(cell_0,xcryst,n_atoms,label,ii)
-          !label(k,1) = "Si  "
+     do j=1,n_atoms
+      if(i/=j.and.adj(i,j)==1.and.(label(j,1)=="O1  ".or.&
+       label(j,1)=="O2  ".or.label(j,1)=="O3  ".or.&
+       label(j,1)=="O   ").and.label(j,2)=="core")then
+       do l=1,n_atoms
+        if(j/=l.and.i/=l.and.adj(j,l)==1.and.label(l,1)=="Si  ")then
+         ii = ii + 1
+         write(6,*)'Variacion!: ',ii,label(i,1),label(j,1),label(l,1)
+         label(l,1) = "Ge  "
+         call write_gin(cell_0,xcryst,n_atoms,label,ii)
+         label(l,1) = "Si  "
+         do m=1,n_atoms
+          if(m/=i.and.m/=j.and.m/=l.and.adj(l,m)==1.and.(label(m,1)=="O1  ".or.&
+                   label(m,1)=="O2  ".or.label(m,1)=="O3  ".or.&
+                   label(m,1)=="O   ").and.label(m,2)=="core")then
+           do k=1,n_atoms
+            if(m/=k.and.k/=j.and.k/=l.and.k/=i.and.&
+               adj(m,k)==1.and.label(k,1)=="Si  ")then
+             ii = ii + 1
+             write(6,*)'Variacion!: ',ii,label(i,1),label(j,1),label(l,1),&
+             label(m,1),label(k,1)
+             label(k,1) = "Ge  "
+             call write_gin(cell_0,xcryst,n_atoms,label,ii)
+             label(k,1) = "Si  "
+            end if
+           end do
+          end if
+         end do
         end if
        end do
       end if
@@ -135,6 +148,7 @@ program topol
     end if
    end do
   end if
+  deallocate(label)
   STOP ':P'
   CONTAINS
   SUBROUTINE make_distances(cell_0,r2,r1,rv,dist)
@@ -334,8 +348,9 @@ program topol
  SUBROUTINE write_gin(cell_0,xcryst,n_atoms,label,iii)
   ! Catlow potential
   IMPLICIT NONE
+  integer                      :: ii,jj
   INTEGER,          intent(in) :: n_atoms,iii
-  CHARACTER (LEN=4),intent(in) :: label(1:n_atoms,2)
+  CHARACTER (LEN=4),intent(in) :: label(1:n_atoms,1:2)
   REAL,             intent(in) :: xcryst(1:n_atoms,0:3),cell_0(1:6)
   character(len=80)            :: file_name
   write (file_name, '( "out", I5.5, ".gin" )' )iii
@@ -343,10 +358,10 @@ program topol
   WRITE(999,'(A)')'opti conv qok'
   write(999,'(a)')'stepmx 0.003'
   WRITE(999,'(A)')'cell'
-  WRITE(999,'(6f10.5)') (cell_0(j) , j=1,6)
+  WRITE(999,'(6f10.5)') (cell_0(jj) , jj=1,6)
   WRITE(999,'(A)')'fractional'
-  do i=1,n_atoms
-   WRITE(999,'(a,1x,a,1x,3f10.5)')label(i,1),label(i,2),xcryst(i,1),xcryst(i,2),xcryst(i,3)
+  do ii=1,n_atoms
+   WRITE(999,'(a,1x,a,1x,3f10.5)')label(ii,1),label(ii,2),xcryst(ii,1),xcryst(ii,2),xcryst(ii,3)
   enddo
   write(999,'(a)')'species'
   write(999,'(a)')'Si    core  4.00000'

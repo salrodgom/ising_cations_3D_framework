@@ -1,0 +1,13 @@
+#!/bin/bash
+conf_uniq=0
+ls *.gin > list
+while read line ; do
+ conf_uniq=$(( conf_uniq + 1 ))
+ conf=$(echo $line | sed 's/\.gin//g')
+ #mv ${conf}.res ${conf}.gin
+ sed -i '/name /d' ${conf}.gin
+ cp ${conf}.gin  uniq_$(echo $conf_uniq | awk '{ printf("%02d\n", $1) }').gin
+ sed -i "s/opti conp qok rfo/opti conp qok rfo\nname ${conf}/g" uniq_$(echo $conf_uniq | awk '{ printf("%02d\n", $1) }').gin
+ echo $conf
+done < list
+

@@ -1,0 +1,29 @@
+#!/bin/bash
+mkdir repetidas
+while read line ; do
+ x1=$(echo $line | awk '{print $1}')
+ x2=$(echo $line | awk '{print $2}')
+ if [ "$x1" != "$x2" ] ; then
+  echo $x1 $x2
+  uniq_1=$(find uniq/ -iname $x1 | wc -l)
+  repe_1=$(find repetidas/ -iname $x1 | wc -l)
+  uniq_2=$(find uniq/ -iname $x2 | wc -l)
+  repe_2=$(find repetidas/ -iname $x2 | wc -l)
+  echo $uniq_1 $repe_1 $uniq_2 $repe_2
+  if [ "$uniq_1" == "0" ] && [ "$uniq_2" == "0" ] && [ "$repe_1" == "0"  ] && [ "$repe_2" == "0"  ] ; then
+   cp $x1 uniq
+   cp $x2 repetidas
+  elif [ "$uniq_1" == "0" ] && [ "$repe_2" == "0" ]; then
+   cp $x1 uniq
+   cp $x2 repetidas
+  elif [ "$uniq_1" == "0" ] && [ "$repe_1" == "1" ] ; then
+   cp $x2 repetidas
+  elif [ "$uniq_1" == "0" ] && [ "$repe_2" == "1" ] ; then
+   cp $x1 repetidas
+  elif [ "$uniq_1" == "0" ] && [ "$uniq_2" == "1" ] ; then
+   mv uniq/$x2  repetidas/$x2
+   cp $x1 repetidas
+  fi
+ fi
+done < lista_de_soluciones_iguales 
+

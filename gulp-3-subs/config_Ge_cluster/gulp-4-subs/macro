@@ -1,0 +1,26 @@
+#!/bin/bash
+gfortran topol_SiGeO.f90 -o topol_SiGeO
+#ls *.gin > list
+while read line ; do
+ echo $line
+ echo ===========
+ #./topol_SiGeO < $line
+ #mv out.gin $gin
+ conf=$(echo $line | sed "s/\.gin//g")
+ gin=${conf}.gin
+ gout=${conf}.gout
+ gres=${conf}.res
+ sed -i "s/output cif out/output cif ${conf}/g" $gin
+ sed -i "s/dump every 1     out/dump every 1 ${conf}/g" $gin
+ mpirun --np 16 gulp < $gin > $gout
+ sed "s/opti conv qok/opti conp qok/g" $gres > $gin
+ mpirun --np 16 gulp < $gin > $gout
+ sed -i "/stepmx opt     0.01/d" $gres > $gin
+ mpirun --np 16 gulp < $gin > $gout
+ mv $gres $gin
+ sed -i "s/opti conp qok/opti conp qok rfo/g" $gin
+ sed -i "/stepmx opt     0.100000/d" $gin
+ sed -i "/maxcyc opt     5000/d" $gin
+ gulp < $gin > $gout
+done < list
+exit 0
