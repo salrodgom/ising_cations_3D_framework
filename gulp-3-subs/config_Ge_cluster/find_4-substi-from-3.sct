@@ -22,4 +22,3 @@ while read line_1 ; do
  done < list
 done < list
 rm  list
-./identificar_soluciones_fake.sct
