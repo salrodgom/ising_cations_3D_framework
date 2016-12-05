@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -f dictionary_c2u.txt ] ; then rm dictionary_c2u.txt ; fi
+touch dictionary_c2u.txt
+ls c*.gin.*.gin > list_all
+conf_id=0
+while read line ; do
+ let conf_id++
+ # echo 1 | awk '{ printf("%02d\n", $1) }'
+ conf_id_char=$(echo ${conf_id} | awk '{printf("%04d\n",$1)}')
+ conf=u${conf_id_char}.gin
+ cp $line $conf
+ echo $line $conf >> dictionary_c2u.txt
+done < list_all
+exit 0

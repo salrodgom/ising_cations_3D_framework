@@ -1,0 +1,9 @@
+#!/bin/bash
+make all > dist
+grep 'Configuration:'  dist > conf
+grep 'D_min:' dist > d_min
+grep 'D_ave:' dist > d_ave
+grep 'energia:' dist > ener
+paste conf d_ave d_min ener | awk '{print $2,$4,$5,$7,$8,$10}' > distancias_Ge_energias.txt
+sort -nrk2 distancias_Ge_energias.txt |tail -n30 > Ge_pegados
+rm conf d_ave d_min ener dist

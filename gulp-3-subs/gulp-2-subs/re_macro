@@ -1,0 +1,32 @@
+#!/bin/bash
+function gulp_go {
+ n=$(ps aux | grep gulp | sed '/grep/d' | wc -l)
+ np=16
+ while [ $(echo "$n >= $np" | bc -l) == 1 ] ; do
+  sleep 10
+  n=$(ps aux | grep gulp | sed '/grep/d' | wc -l)
+ done
+ $GULPPATH/gulp < $gin > $gout &
+}
+export GULPPATH=$HOME/GULP-4.2.0/Src
+rm *.gout *.cif *.gin.gin
+#gfortran topol_SiGeO.f90 -o topol_SiGeO
+for i in $(seq -f "%04g" 165 -1 1) ; do
+ file=c$i.gin
+ echo ===========
+ #./topol_SiGeO < $file
+ gin=$file
+ gout="$(echo $file | sed "s/\.gin//g").gout"
+ gres="c$i.res"
+ if [ -f $gin.gin.res ] ; then
+  mv $gin.gin.res $gin
+  sed -i "s/opti conp qok/opti conp qok rfo/g"    $gin
+  sed -i "s/dump every      1 out/dump every      1 c$i/g" $gin
+  sed -i "s/output cif out/output cif c$i/g" $gin
+ else
+  mv $gres $gin 
+ fi
+ tail -n10 $gin
+ gulp_go
+done
+exit 0

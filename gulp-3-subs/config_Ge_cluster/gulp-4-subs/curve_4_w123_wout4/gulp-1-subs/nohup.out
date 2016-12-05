@@ -1,0 +1,59 @@
+===========
+Si    core O1    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+three       regular  
+Si    core O2    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+cutp     16.00000    1.00000
+stepmx opt     0.100000
+maxcyc opt     5000
+dump every      1 c0005.res                                                     
+output cif c0005.cif                                                     
+===========
+Si    core O1    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+three       regular  
+Si    core O2    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+cutp     16.00000    1.00000
+stepmx opt     0.100000
+maxcyc opt     5000
+dump every      1 c0004.res                                                     
+output cif c0004.cif                                                     
+===========
+Si    core O1    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+three       regular  
+Si    core O2    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+cutp     16.00000    1.00000
+stepmx opt     0.100000
+maxcyc opt     5000
+dump every      1 c0003.res                                                     
+output cif c0003.cif                                                     
+===========
+Si    core O1    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+three       regular  
+Si    core O2    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+cutp     16.00000    1.00000
+stepmx opt     0.100000
+maxcyc opt     5000
+dump every      1 c0002.res                                                     
+output cif c0002.cif                                                     
+===========
+Si    core O1    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+three       regular  
+Si    core O2    shel O2    shel 1.2614      109.47000 &
+  0.000  1.900  0.000  1.900  0.000  3.500
+cutp     16.00000    1.00000
+stepmx opt     0.100000
+maxcyc opt     5000
+dump every      1 c0001.res                                                     
+output cif c0001.cif                                                     
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
