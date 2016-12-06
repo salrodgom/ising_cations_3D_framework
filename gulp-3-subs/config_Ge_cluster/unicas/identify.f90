@@ -10,8 +10,8 @@ program main
  integer,parameter          :: n_configurations = 904
  character(len=80)          :: file_name(n_configurations),line
  integer                    :: k_max_1,k_max_2,k_max_3,k_max_4
- character(len=64)   :: word_confg(n_configurations)
- character(len=64)   :: word_confg_sod,tmp_sod2,tmp_sod,make_word
+ character(len=60)          :: word_confg(n_configurations)
+ character(len=60)          :: word_confg_sod,tmp_sod2,tmp_sod,make_word
  integer                    :: unicas(n_configurations),repetidas(n_configurations,n_configurations)
  !
  real                       :: cell_0(1:6)
@@ -43,20 +43,15 @@ program main
      if(line(1:7)=='species') exit reading_file
       read(line,*)(label(ii,i,j),j=1,2),(cryst_coor(ii,i,j),j=1,3)
       if(label(ii,i,1)(1:4)=="Ge  ")then
-        word_confg(ii)(i:i)="1"
+        word_confg(ii)(i:i)="#"
         nn=nn+1
       else
-        word_confg(ii)(i:i)="0"
+        word_confg(ii)(i:i)="."
       end if
     end do
     if(nn/=n_Ge)write(6,*)'Diferente número de Ge'
-    do i=61,64
-     word_confg(ii)(i:i)="0"
-    end do
-    read(word_confg(ii)(1:64),'(b64.64)') scr(ii)
    end if
   end do reading_file
-  write(6,'(a60,1x,a20)')word_confg(ii),file_name(ii)
   close(configuration_file)
  end do init_search
  ii=1
@@ -65,7 +60,6 @@ program main
   if(ii>=n_configurations) exit check_fake
   inquire(file=file_name(ii),exist=flag)
   open(unit=configuration_file,file=file_name(ii),status='old',iostat=err_apertura)
-  !write(6,*)file_name(ii),flag,err_apertura
   if(flag.eqv..false..or.err_apertura==6) then
    ii=ii+1
    close(configuration_file)
@@ -84,15 +78,11 @@ program main
    read(111,'(A)',iostat=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_3
    read(line,*)kk,ll,i,j,k,l
-   word_confg_sod=make_word(64,i,j,k,l)
-   !read(word_confg_sod(1:64),'(b64.64)') scratch1
-   !scratch2=scr(ii)
+   word_confg_sod=make_word(60,i,j,k,l)
    if(word_confg_sod==word_confg(ii))then
-   !flag=compare_two_strings(n_atoms,word_confg_sod,tmp_sod2,ijk)
-   !if( flag .or. ijk==0 ) then
     if(kk<=9999) write (line, '( "c", I4.4, ".gin" )' ) kk
     if(kk> 9999) write (line, '( "c", I5.5, ".gin" )' ) kk
-    write(6,'(i9,1x,i9,1x,a64,1x,a64,1x,a15,1x,a15)')ii,kk,word_confg(ii),word_confg_sod,file_name(ii),line
+    write(*,'(i9,1x,i9,1x,a60,1x,a60,1x,a15,1x,a15)')ii,kk,word_confg(ii),word_confg_sod,file_name(ii),line
     ii=ii+1
     nop1=0
     cycle check_fake
@@ -101,15 +91,12 @@ program main
     do k=2,ll
      read (112,*,iostat=err_apertura) ei,ej,m,n,mm,nn,ek
      IF( err_apertura /= 0 ) exit read_matrix_3
-     word_confg_sod=make_word(64,m,n,mm,nn)
-     !read(word_confg_sod(1:64),'(b64.64)') scratch1
-     if(scratch1==scratch2)then
-     !flag= compare_two_strings(n_atoms,word_confg_sod,tmp_sod2,ijk)
-     !if(flag .or. ijk==0) then
+     word_confg_sod=make_word(60,m,n,mm,nn)
+     if(word_confg_sod==word_confg(ii))then
       if(kk<=9999) write (line, '( "c", I4.4, ".gin" )' ) kk
       if(kk> 9999) write (line, '( "c", I5.5, ".gin" )' ) kk
-      write(6,'(i9,1x,i9,1x,a64,1x,a64,1x,a20,1x,a20)')ii,kk,word_confg(ii),tmp_sod,file_name(ii),line
-      write(6,'(9x,1x,9x,1x,64x,1x,a64)')word_confg_sod
+      write(*,'(i9,1x,i9,1x,a60,1x,a60,1x,a15,1x,a15)')ii,kk,word_confg(ii),tmp_sod,file_name(ii),line
+      write(*,'(9x,1x,9x,1x,60x,1x,a60)')word_confg_sod
       ii=ii+1
       nop1=0
       cycle check_fake
@@ -119,11 +106,9 @@ program main
   end do read_matrix_3
   close(111)
   close(112)
-  !write(6,'(i9,1x,9x,1x,a64,1x,a64,1x,a20)')ii,word_confg(ii),'No encontrado',file_name(ii)
-  !ii=ii+1
   nop1=nop1+1
   if(nop1>=10) then
-   write(6,'(i9,1x,9x,1x,a64,1x,a64,1x,a20)')ii,word_confg(ii),'No encontrado',file_name(ii)
+   write(*,'(i9,1x,9x,1x,a60,1x,a60,1x,a15)')ii,word_confg(ii),'No encontrado',file_name(ii)
    ii=ii+1
    nop1=0
   end if
@@ -182,11 +167,11 @@ character(len=*) function make_word(n,i,j,k,l)
  integer,intent(in)             :: n,i,j,k,l
  integer                        :: ijk
  do ijk=1,n
-  make_word(ijk:ijk)="0"
+  make_word(ijk:ijk)="."
  end do
- make_word(i:i)="1"
- make_word(j:j)="1"
- make_word(k:k)="1"
- make_word(l:l)="1"
+ make_word(i:i)="#"
+ make_word(j:j)="#"
+ make_word(k:k)="#"
+ make_word(l:l)="#"
  return
 end function make_word

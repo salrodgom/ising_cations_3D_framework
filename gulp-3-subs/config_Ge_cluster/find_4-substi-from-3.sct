@@ -1,5 +1,5 @@
 #!/bin/bash
-gfortran -O2 topol_SiGeO.f90 -o topol_SiGeO
+gfortran -O2 topol_SiGeO_identificar_4from3.f90 -o topol_SiGeO
 ls c*.gin > list
 while read line ; do
  gin=$line
