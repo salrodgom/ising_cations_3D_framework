@@ -5,8 +5,8 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
- integer,parameter          :: n_Ge = 50
- integer,parameter          :: MC_steps = 100
+ integer,parameter          :: n_Ge = 60
+ integer,parameter          :: MC_steps = 0
  integer,parameter          :: n_configurations = 0
  character(len=120)          :: file_name,line
  real,parameter             :: temperature = 5000.0
