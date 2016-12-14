@@ -5,7 +5,7 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
- integer,parameter          :: n_Ge = 4
+ integer,parameter          :: n_Ge = 50
  integer,parameter          :: MC_steps = 100
  integer,parameter          :: n_configurations = 0
  character(len=120)          :: file_name,line
@@ -15,13 +15,14 @@ program main
  real                       :: ener_0 = -7745.86721305,epsilon_,energy_123
  !
  real                       :: ener_1(n_atoms) = 0.0
- real                       :: deg_1(n_atoms) = 0.0
+ !real                       :: deg_1(n_atoms) = 0.0
  real                       :: ener_2(n_atoms,n_atoms) = 0.0
- real                       :: deg_2(n_atoms,n_atoms) = 0.0
+ !real                       :: deg_2(n_atoms,n_atoms) = 0.0
  real                       :: ener_3(n_atoms,n_atoms,n_atoms) = 0.0
- real                       :: deg_3(n_atoms,n_atoms,n_atoms) = 0.0
+ !real                       :: deg_3(n_atoms,n_atoms,n_atoms) = 0.0
  real                       :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
- real                       :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
+ !real                       :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
+ real                       :: minener_4(1:4)
  real                       :: cell_0(1:6)
  logical                    :: MC_flag = .true.,no_presente=.true.
  real,dimension(NOPMAX,3,3) :: mgroup1
@@ -40,9 +41,10 @@ program main
   READ (12,*) op1
  enddo
 !
- do ii=1,n_configurations
+ do ii=0,n_configurations
   !write(6,'(i4.4)') ii
-  write (file_name, '( "gulp-",i1,"-subs/c", I5.5, ".gin" )' )n_Ge,ii
+  write (file_name, '( "gulp-",i1,"-subs/c", I4.4, ".gin" )' )1,0
+  !gulp-1-subs/c0000.gin
   write(6,*)'Configuration',ii, file_name
   write(6,*)'==============='
   open(unit=configuration_file,file=file_name,status='old',iostat=err_apertura)
@@ -92,7 +94,7 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_1 !<-N.configuraciones totales
  ener_1(1:n_atoms)  = 0.0
- deg_1(1:n_atoms)   = 0.0
+ !deg_1(1:n_atoms)   = 0.0
  if( err_apertura /=0 ) stop
 !
  read_matrix_1: do
@@ -102,15 +104,15 @@ program main
   read(113,*,iostat=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_1
   ener_1(k)=epsilon_-ener_0
-  deg_1(k) =deg
-  write(6,*)k,k,ener_1(k),deg_1(k)
+  !deg_1(k) =deg
+  !write(6,*)k,k,ener_1(k),deg_1(k)
   do j=2,deg
    READ (112,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_1
    read(line,*)l,m,i,n
    ener_1(i)=ener_1(k)
-   deg_1(i) =deg_1(k)
-   write(6,*)k,i,ener_1(i),deg_1(i)
+   !deg_1(i) =deg_1(k)
+   !write(6,*)k,i,ener_1(i),deg_1(i)
   end do
  end do read_matrix_1
  close(111)
@@ -131,7 +133,7 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_2 !<-N.configuraciones totales
  ener_2(1:n_atoms,1:n_atoms)  = 0.0
- deg_2(1:n_atoms,1:n_atoms)   = 0.0
+ !deg_2(1:n_atoms,1:n_atoms)   = 0.0
  if( err_apertura /=0 ) stop
  ii=0
  read_matrix_2: do
@@ -144,9 +146,9 @@ program main
   epsilon_ =   epsilon_-ener_0-ener_1(i)-ener_1(j)
   ener_2(i,j)= epsilon_
   ener_2(j,i)= ener_2(i,j)
-  deg_2(i,j) = deg
-  deg_2(j,i) = deg_2(i,j)
-  write(6,*)i,j,i,j,ener_2(i,j),deg_2(i,j)
+  !deg_2(i,j) = deg
+  !deg_2(j,i) = deg_2(i,j)
+  !write(6,*)i,j,i,j,ener_2(i,j),deg_2(i,j)
   do k=2,deg
    read(122,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_2
@@ -154,9 +156,9 @@ program main
    read(line,*)jj,kk,l,m,n
    ener_2(l,m) = epsilon_
    ener_2(m,l) = epsilon_
-   deg_2(l,m) = deg
-   deg_2(m,l) = deg
-   write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m),ii
+   !deg_2(l,m) = deg
+   !deg_2(m,l) = deg
+   !write(6,*)i,j,l,m,ener_2(l,m),deg_2(l,m),ii
   end do
  end do read_matrix_2
 !!!
@@ -173,7 +175,7 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_3 !<-N.configuraciones totales
  ener_3(1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
- deg_3 (1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
+ !deg_3 (1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
  if( err_apertura /=0 ) stop 
  read_matrix_3: do
   read(131,'(A)',IOSTAT=err_apertura) line
@@ -188,12 +190,12 @@ program main
   ener_3(k,j,i) = epsilon_
   ener_3(k,i,j) = epsilon_
   ener_3(j,k,i) = epsilon_
-  deg_3(i,j,k) = deg
-  deg_3(j,i,k) = deg
-  deg_3(i,k,j) = deg
-  deg_3(k,j,i) = deg
-  deg_3(k,i,j) = deg
-  deg_3(j,k,i) = deg
+  !deg_3(i,j,k) = deg
+  !deg_3(j,i,k) = deg
+  !deg_3(i,k,j) = deg
+  !deg_3(k,j,i) = deg
+  !deg_3(k,i,j) = deg
+  !deg_3(j,k,i) = deg
   !write(6,*)i,j,k,i,j,k,ener_3(i,j,k),deg_3(i,j,k)
   do k=2,deg
    READ (132,'(A)',IOSTAT=err_apertura) line
@@ -205,12 +207,12 @@ program main
    ener_3(n,m,l) = epsilon_
    ener_3(m,n,l) = epsilon_
    ener_3(n,l,m) = epsilon_
-   deg_3(l,m,n) = deg
-   deg_3(m,l,n) = deg
-   deg_3(l,n,m) = deg
-   deg_3(n,m,l) = deg
-   deg_3(m,n,l) = deg
-   deg_3(n,l,m) = deg
+   !deg_3(l,m,n) = deg
+   !deg_3(m,l,n) = deg
+   !deg_3(l,n,m) = deg
+   !deg_3(n,m,l) = deg
+   !deg_3(m,n,l) = deg
+   !deg_3(n,l,m) = deg
    !write(6,*)i,j,k,l,m,n,ener_3(l,m,n),deg_3(l,m,n),ii
   end do
  end do read_matrix_3
@@ -230,7 +232,7 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_4 !<-N.configuraciones totales
  ener_4(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
- deg_4(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
+ !deg_4(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
  if( err_apertura /=0 ) stop
  read_matrix_4: do
   read(141,'(A)',IOSTAT=err_apertura) line
@@ -244,6 +246,8 @@ program main
     no_presente=.true.
     exit check_energy_4
    end if
+   ! jj  = 
+   ! ijk = 
    if(jj==ijk)then
     no_presente = .false.
     epsilon_ = epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_1(l)-ener_2(i,j)-ener_2(j,k)-&
@@ -253,20 +257,19 @@ program main
      ener_3(i,l,k)-ener_3(i,k,l)-ener_3(l,i,k)-ener_3(l,k,i)-ener_3(l,k,i)-ener_3(k,i,l)-&
      ener_3(k,l,i)-ener_3(l,j,k)-ener_3(l,k,j)-ener_3(j,l,k)-ener_3(j,k,l)-ener_3(k,l,j)-&
      ener_3(j,l,k)
+    rewind(143)
+    write(6,*)'four Ge detection',i,j,k,l,epsilon_,ijk
     exit check_energy_4
    end if
   end do check_energy_4 
   if(no_presente)then
-   label(0,i,1)='Ge  '
-   label(0,j,1)='Ge  '
-   label(0,k,1)='Ge  '
-   label(0,l,1)='Ge  '
-   epsilon_=energy_123(n_atoms,n_T_atoms,label(0,1:1:n_T_atoms,1),ener_0,ener_1,&
-    ener_2,ener_3,deg_1,deg_2,deg_3)
-   label(0,i,1)='Ge  '
-   label(0,j,1)='Ge  '
-   label(0,k,1)='Ge  '
-   label(0,l,1)='Ge  '
+   !minener_4(1) = ener_1(i) + ener_3(j,k,l)
+   !minener_4(2) = ener_1(j) + ener_3(i,k,l)
+   !minener_4(3) = ener_1(k) + ener_3(i,j,l)
+   !minener_4(4) = ener_1(l) + ener_3(i,j,k)
+   !epsilon_ = minval( minener_4 )
+   epsilon_ = 0.0
+   !write(6,*)'four Ge NO detection',i,j,k,l,epsilon_
   end if
   ener_4(i,j,k,l) = epsilon_
   ener_4(i,j,l,k) = epsilon_
@@ -292,31 +295,31 @@ program main
   ener_4(l,j,k,i) = epsilon_
   ener_4(l,k,i,j) = epsilon_
   ener_4(l,k,j,i) = epsilon_
-  deg_4(i,j,k,l) = deg
-  deg_4(i,j,l,k) = deg
-  deg_4(i,k,l,j) = deg
-  deg_4(i,k,j,l) = deg
-  deg_4(i,l,j,k) = deg
-  deg_4(i,l,k,j) = deg
-  deg_4(j,i,k,l) = deg
-  deg_4(j,i,l,k) = deg
-  deg_4(j,k,i,l) = deg
-  deg_4(j,k,l,i) = deg
-  deg_4(j,l,k,i) = deg
-  deg_4(j,l,i,k) = deg
-  deg_4(k,i,j,l) = deg
-  deg_4(k,i,l,j) = deg
-  deg_4(k,j,i,l) = deg
-  deg_4(k,j,l,i) = deg
-  deg_4(k,l,i,j) = deg
-  deg_4(k,l,j,i) = deg
-  deg_4(l,i,j,k) = deg
-  deg_4(l,i,k,j) = deg
-  deg_4(l,j,i,k) = deg
-  deg_4(l,j,k,i) = deg
-  deg_4(l,k,i,j) = deg
-  deg_4(l,k,j,i) = deg
-  !write(6,*)i,j,k,l,i,j,k,l,ener_4(i,j,k,l),deg_4(i,j,k,l)
+  !deg_4(i,j,k,l) = deg
+  !deg_4(i,j,l,k) = deg
+  !deg_4(i,k,l,j) = deg
+  !deg_4(i,k,j,l) = deg
+  !deg_4(i,l,j,k) = deg
+  !deg_4(i,l,k,j) = deg
+  !deg_4(j,i,k,l) = deg
+  !deg_4(j,i,l,k) = deg
+  !deg_4(j,k,i,l) = deg
+  !deg_4(j,k,l,i) = deg
+  !deg_4(j,l,k,i) = deg
+  !deg_4(j,l,i,k) = deg
+  !deg_4(k,i,j,l) = deg
+  !deg_4(k,i,l,j) = deg
+  !deg_4(k,j,i,l) = deg
+  !deg_4(k,j,l,i) = deg
+  !deg_4(k,l,i,j) = deg
+  !deg_4(k,l,j,i) = deg
+  !deg_4(l,i,j,k) = deg
+  !deg_4(l,i,k,j) = deg
+  !deg_4(l,j,i,k) = deg
+  !deg_4(l,j,k,i) = deg
+  !deg_4(l,k,i,j) = deg
+  !deg_4(l,k,j,i) = deg
+  !!write(6,*)i,j,k,l,i,j,k,l,ener_4(i,j,k,l),deg_4(i,j,k,l),no_presente
   ll=l
   do kk=2,deg
    READ (142,'(A)',IOSTAT=err_apertura) line
@@ -346,80 +349,54 @@ program main
     ener_4(o,m,n,l) = epsilon_
     ener_4(o,n,l,m) = epsilon_
     ener_4(o,n,m,l) = epsilon_
-    deg_4(l,m,n,o) = deg
-    deg_4(l,m,o,n) = deg
-    deg_4(l,n,o,m) = deg
-    deg_4(l,n,m,o) = deg
-    deg_4(l,o,m,n) = deg
-    deg_4(l,o,n,m) = deg
-    deg_4(m,l,n,o) = deg
-    deg_4(m,l,o,n) = deg
-    deg_4(m,n,l,o) = deg
-    deg_4(m,n,o,l) = deg
-    deg_4(m,o,n,l) = deg
-    deg_4(m,o,l,n) = deg
-    deg_4(n,l,m,o) = deg
-    deg_4(n,l,o,m) = deg
-    deg_4(n,m,l,o) = deg
-    deg_4(n,m,o,l) = deg
-    deg_4(n,o,l,m) = deg
-    deg_4(n,o,m,l) = deg
-    deg_4(o,l,m,n) = deg
-    deg_4(o,l,n,m) = deg
-    deg_4(o,m,l,n) = deg
-    deg_4(o,m,n,l) = deg
-    deg_4(o,n,l,m) = deg
-    deg_4(o,n,m,l) = deg
-    !write(6,*)i,j,k,ll,l,m,n,o,ener_4(l,m,n,o),deg_4(l,m,n,o)
+    !deg_4(l,m,n,o) = deg
+    !deg_4(l,m,o,n) = deg
+    !deg_4(l,n,o,m) = deg
+    !deg_4(l,n,m,o) = deg
+    !deg_4(l,o,m,n) = deg
+    !deg_4(l,o,n,m) = deg
+    !deg_4(m,l,n,o) = deg
+    !deg_4(m,l,o,n) = deg
+    !deg_4(m,n,l,o) = deg
+    !deg_4(m,n,o,l) = deg
+    !deg_4(m,o,n,l) = deg
+    !deg_4(m,o,l,n) = deg
+    !deg_4(n,l,m,o) = deg
+    !deg_4(n,l,o,m) = deg
+    !deg_4(n,m,l,o) = deg
+    !deg_4(n,m,o,l) = deg
+    !deg_4(n,o,l,m) = deg
+    !deg_4(n,o,m,l) = deg
+    !deg_4(o,l,m,n) = deg
+    !deg_4(o,l,n,m) = deg
+    !deg_4(o,m,l,n) = deg
+    !deg_4(o,m,n,l) = deg
+    !deg_4(o,n,l,m) = deg
+    !deg_4(o,n,m,l) = deg
+    !!write(6,*)i,j,k,ll,l,m,n,o,ener_4(l,m,n,o),deg_4(l,m,n,o),no_presente
   end do
+  !if (no_presente.eqv..false.) stop
  end do read_matrix_4
 ! final 
  close(141)
  close(142)
  close(143)
-
 ! {{{
  if(MC_flag)then
+    write(6,*)'Colocamos Ge'
+    !call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
+    ! ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,cell_0,cryst_coor,&
+    ! n_configurations,label,MC_steps,temperature)
     call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
-     ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,cell_0,cryst_coor,&
-     n_configurations,label,MC_steps,temperature)
+     ener_2,ener_3,ener_4,cell_0,cryst_coor,&
+     n_configurations,label,MC_steps,temperature,0)
  else
   do ii=1,n_configurations
+   !call geometrical_properties(n_atoms,n_T_atoms,n_Ge,cell_0,cryst_coor,n_configurations,&
+   !    label,deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
    call geometrical_properties(n_atoms,n_T_atoms,n_Ge,cell_0,cryst_coor,n_configurations,&
-       label,deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
+       label,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
   end do
  end if
  stop
 end program main
-
-real FUNCTION energy_123(n,n_T,lab,ener_0,ener_1,ener_2,ener_3,deg_1,deg_2,deg_3)
-  implicit none
-  integer, intent(in) :: n,n_T
-  character (LEN=4),intent(in)   :: lab(1:n)
-  integer             :: i,j,k,l
-  real,intent(in)     :: ener_0,ener_1(n),ener_2(n,n),ener_3(n,n,n)
-  real,intent(in)     :: deg_1(n),deg_2(n,n),deg_3(n,n,n)
-  integer             :: spin(n),ss
-  ss = 0
-  spin(1:n) = 0
-  energy_123 = ener_0
-!
-  get_spin: do i=1,n
-   if(lab(i)=='Ge  ') then
-    spin(i) = 1
-    ss=ss+1
-   end if
-  end do get_spin
-  if ( ss==0 ) stop 'no hay Ge, bro'
-!
-  do1subs: do i=1,n
-   energy_123 = energy_123 + ener_1(i)*spin(i)
-   do2subs: do j=i+1,n
-    energy_123 = energy_123 + ener_2(i,j)*spin(i)*spin(j)
-    do3subs: do k=j+1,n
-     energy_123 = energy_123 + ener_3(i,j,k)*spin(i)*spin(j)*spin(k)
-    end do do3subs
-   end do do2subs
-  end do do1subs
-  return
-END FUNCTION energy_123

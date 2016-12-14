@@ -1,9 +1,10 @@
 subroutine geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
-                                  deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
+                                  !deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
+                                  ener_0,ener_1,ener_2,ener_3,ener_4,ii)
  implicit none
  integer,intent(in) :: n_atoms,n_T,n_Al,ii
  integer,intent(in) :: n_configurations
- real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms),deg_4(n_atoms)
+! real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms),deg_4(n_atoms)
  real,intent(in)    :: ener_0, ener_1(n_atoms),ener_2(n_atoms,n_atoms)
  real,intent(in)    :: ener_3(n_atoms,n_atoms,n_atoms)
  real,intent(in)    :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms)
@@ -23,7 +24,7 @@ subroutine geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configura
     x(j,i) = cryst_coor(ii,i,j)
   end do
  end do
- ener = energy(n_atoms,n_T,lab,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+ ener = energy(n_atoms,n_T,lab,ener_0,ener_1,ener_2,ener_3,ener_4) !,deg_1,deg_2,deg_3,deg_4)
  call make_dist_matrix(n_atoms,cell_0,rv,vr,x,dist_matrix)
  WRITE(6,'(a)')'=============================================='
  WRITE(6,'(a,i3,a)')'geometrical properties of ',n_Al,' Ge:'
@@ -94,11 +95,12 @@ subroutine make_dist_matrix(n,cell_0,rv,vr,x,dist_matrix)
 end subroutine make_dist_matrix
 
 subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
-      ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,cell_0,cryst_coor,n_configurations,&
+      !ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,cell_0,cryst_coor,n_configurations,&
+      ener_2,ener_3,ener_4,cell_0,cryst_coor,n_configurations,&
       labels,MC_cycles,T,ii)
  implicit none
  integer,intent(in) :: n_atoms,n_T,ii
- real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms),deg_4(n_atoms)
+ !real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms),deg_4(n_atoms)
  real,intent(in)    :: ener_0, ener_1(n_atoms),ener_2(n_atoms,n_atoms)
  real,intent(in)    :: ener_3(n_atoms,n_atoms,n_atoms)
  real,intent(in)    :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms)
@@ -131,6 +133,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  CHARACTER (LEN=80) :: line,string
  CHARACTER (LEN=4)  :: mol
  LOGICAL            :: FLAG      = .false.
+ write(6,*)'inside subroutne'
 ! {{
  do i=1,n_atoms
   label(i)=labels(ii,i,1)
@@ -194,7 +197,8 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  WRITE(6,'(a,f14.3,a)')'cost = ',infinite,' if s <  p0'
  WRITE(6,'(a)')'     Crystalographic positions                  Cost     Label'
  write(6,'(60a2)')( label(j), j=1,n_atoms )
- r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+ r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)
+ !,deg_1,deg_2,deg_3,deg_4)
  write(6,*)m,label(m),r
  if(r==0.0) STOP 'energy 0???'
  !WRITE(6,'(3(f14.6,1x),f20.10,1x,i3,1x,a2)')xcryst(1,pivots(1)),xcryst(2,pivots(1)),xcryst(3,pivots(1)),&
@@ -209,7 +213,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
   jump: DO walker_position=1,n_T
      IF (label(walker_position)=='Si') THEN
        pot_dist=0.0
-       p=energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+       p=energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4) !,deg_1,deg_2,deg_3,deg_4)
        DO j=1,k-1
           walker_drunked = pivots(j)
           s = dist_matrix(walker_position,walker_drunked)
@@ -232,7 +236,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
   pivots(k) = m
   label(pivots(k))='Ge'
   write(6,'(60a2)')( label(j), j=1,n_atoms )
-  r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+  r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4) !,deg_1,deg_2,deg_3,deg_4)
   write(6,*)pivots(k),label(pivots(k)),r
  END DO choose_Al                       ! }}i
  q=infinite
@@ -246,7 +250,8 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  DO WHILE ( k<=MC_cycles )
     ! Metropolis:
     call MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,q,&
-         ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,cost,T)
+         ener_0,ener_1,ener_2,ener_3,ener_4,cost,T)
+         !,deg_1,deg_2,deg_3,deg_4,cost,T)
     k=k+1
  END DO
 
@@ -256,7 +261,8 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  call write_gin(cell_0,xcryst,n_atoms,labels)
  !call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels)
  call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
-                             deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
+                             !deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
+                             ener_0,ener_1,ener_2,ener_3,ener_4,ii)
  WRITE(6,*)'STOP',pot_dist,r/real(m),cost
 end subroutine
 !
@@ -273,7 +279,8 @@ end subroutine
 !
 
  SUBROUTINE MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,exito,&
-  ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,coste,temperature)
+  ener_0,ener_1,ener_2,ener_3,ener_4,coste,temperature)
+  !,deg_1,deg_2,deg_3,deg_4,coste,temperature)
   IMPLICIT NONE
   INTEGER, intent(in) :: n_atoms,n_Al,SEED
   REAL,    intent(in) :: xcryst(0:3,1:n_atoms),dist_matrix(n_atoms,n_atoms)
@@ -282,8 +289,8 @@ end subroutine
   real,intent(in)     :: ener_1(n_atoms),ener_2(n_atoms,n_atoms),ener_0
   real,intent(in)     :: ener_3(n_atoms,n_atoms,n_atoms)
   real,intent(in)     :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms)
-  real,intent(in)     :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms,n_atoms,n_atoms)
-  real,intent(in)     :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms)
+  !real,intent(in)     :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms,n_atoms,n_atoms)
+  !real,intent(in)     :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms)
   real                :: R4_UNIFORM,energy
   integer,parameter   :: max_ident_numer=10
   CHARACTER (LEN=4)   :: label(1:n_atoms),cation_distribution(0:max_ident_numer,n_T)
@@ -298,7 +305,7 @@ end subroutine
   exito = 0.0
   MC_step: DO k=0,n_T-1
     if(k==0)then
-      energia(1) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+      energia(1) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)!,deg_1,deg_2,deg_3,deg_4)
       eta = energia(1)
     end if
     cation_distribution(0,1:n_T) = label(1:n_T)
@@ -314,7 +321,7 @@ end subroutine
       if(jjj==n_Al)  exit scan_repetitions
      end do scan_repetitions
     end do 
-    energia(2) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+    energia(2) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)!,deg_1,deg_2,deg_3,deg_4)
     IF ( energia(2) > energia(1) ) THEN
        eta = R4_UNIFORM(0.0,1.0,SEED)
        IF ( eta > exp(-(energia(2)-energia(1))/(k_B*temperature)) ) THEN
@@ -332,8 +339,9 @@ end subroutine
        energia(1) = energia(2)
        exito = exito + 1.0
     END IF
-    write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
+    !write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
   END DO MC_step
+  write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
   exito   = exito/REAL(n_atoms*n_atoms)
   coste = energia(1)
   eta = coste - eta
@@ -363,13 +371,13 @@ end subroutine
   RETURN
  END SUBROUTINE identity_change_move
 !
- REAL FUNCTION energy(n,n_T,lab,ener_0,ener_1,ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4)
+ REAL FUNCTION energy(n,n_T,lab,ener_0,ener_1,ener_2,ener_3,ener_4)!,deg_1,deg_2,deg_3,deg_4)
   IMPLICIT NONE
   INTEGER, intent(in) :: n,n_T
   CHARACTER (LEN=4),intent(in)   :: lab(1:n)
   INTEGER             :: i,j,k,l
   real,intent(in)     :: ener_0,ener_1(n),ener_2(n,n),ener_3(n,n,n),ener_4(n,n,n,n)
-  real,intent(in)     :: deg_1(n),deg_2(n,n),deg_3(n,n,n),deg_4(n,n,n,n)
+  !real,intent(in)     :: deg_1(n),deg_2(n,n),deg_3(n,n,n),deg_4(n,n,n,n)
   integer             :: spin(n),ss
   ss = 0
   spin(1:n) = 0
