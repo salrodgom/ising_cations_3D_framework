@@ -244,6 +244,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  WRITE(6,'(a,f10.5)')'Si > Ge, Ge > Si. STOP when occurrence < ',solera
  WRITE(6,'(a)')'=============================================='
  WRITE(6,'(a,5x,a,5x,a)')'Cost_function','Occurrence %','Scan-Cost'
+ if(n_Al<n_T)then
  !DO WHILE ( q >= solera .and. k<=MC_cycles )
  DO WHILE ( k<=MC_cycles )
     ! Metropolis:
@@ -252,7 +253,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
          !,deg_1,deg_2,deg_3,deg_4,cost,T)
     k=k+1
  END DO
-
+ end if
  do i=1,n_atoms
   labels(n_configurations,i,1)=label(i)
  enddo

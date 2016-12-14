@@ -9,7 +9,7 @@ done
 }
 make install
 if [ ! -d CALCS ] ; then mkdir CALCS ; fi
-for molar_fraction in $(seq 1 60) ; do
+for molar_fraction in $(seq 1 59) ; do
  for repetition in $(seq 1 4) ; do
   echo ${molar_fraction}.${repetition}
   echo "${molar_fraction}" > input

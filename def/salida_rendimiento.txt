@@ -5117,3 +5117,26 @@ Try 'mv --help' for more information.
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
+./rendimiento.sh: line 2: 23100 Terminated              ./ising_frameworks < input > ${molar_fraction}.${repetition}.output
+++ grep filename: 60.2.output
+++ awk '{print $2}'
++ name=
++ cat src/oxygen.gin
++ mv CALCS/.
+mv: missing destination file operand after ‘CALCS/.’
+Try 'mv --help' for more information.
++ mv 60.2.output 60.2.gin CALCS
++ for repetition in '$(seq 1 4)'
++ echo 60.3
+60.3
++ echo 60
++ go
+++ ps aux
+++ grep ising
+++ wc -l
+++ sed /grep/d
++ ni=0
+++ echo '0 >= 4'
+++ bc -l
++ '[' 0 == 1 ']'
++ ./ising_frameworks
