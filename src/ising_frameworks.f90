@@ -30,17 +30,6 @@ program main
  real,dimension(0:n_configurations,n_atoms,3)             :: cryst_coor
  character(len=4),dimension(0:n_configurations,n_atoms,2) :: label
 !
- open(12,file="SGO")
- read(12,*)
- read(12,*)op1
- do while(op1>0)
-  do i=1,3
-    read (12,*)(mgroup1(op1,i,j),j=1,3),vgroup1(op1,i)
-  enddo
-  nop1=op1
-  READ (12,*) op1
- enddo
-!
  do ii=0,n_configurations
   !write(6,'(i4.4)') ii
   write (file_name, '( "gulp-",i1,"-subs/c", I4.4, ".gin" )' )1,0
