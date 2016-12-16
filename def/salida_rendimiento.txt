@@ -1,10 +1,10 @@
 + make install
-gfortran -pedantic -O2 -march=native -fbounds-check farthrest_nodes_subtitutions.f90 -c
-gfortran -pedantic -O2 -march=native -fbounds-check ising_frameworks.f90 -c
-gfortran -pedantic -O2 -march=native -fbounds-check ising_frameworks.o farthrest_nodes_subtitutions.o -o ising_frameworks
+gfortran -pedantic -O2 -march=native farthrest_nodes_subtitutions.f90 -c
+gfortran -pedantic -O2 -march=native ising_frameworks.f90 -c
+gfortran -pedantic -O2 -march=native ising_frameworks.o farthrest_nodes_subtitutions.o -o ising_frameworks
 + '[' '!' -d CALCS ']'
-++ seq 1 60
-+ for molar_fraction in '$(seq 1 60)'
+++ seq 1 59
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 1.1
@@ -12,20 +12,20 @@ gfortran -pedantic -O2 -march=native -fbounds-check ising_frameworks.o farthrest
 + echo 1
 + go
 ++ ps aux
-++ wc -l
 ++ grep ising
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 1.1.output
 ++ awk '{print $2}'
-+ name=c000001158715517.gin
-+ cat c000001158715517.gin src/oxygen.gin
-+ mv c000001158715517.gin CALCS/.
++ name=c1894175722.gin
++ cat c1894175722.gin src/oxygen.gin
++ rm c1894175722.gin
 + mv 1.1.output 1.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 1.2
@@ -41,12 +41,12 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG 
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 1.2.output
 ++ awk '{print $2}'
-+ name=c000001134419803.gin
-+ cat c000001134419803.gin src/oxygen.gin
-+ mv c000001134419803.gin CALCS/.
++ name=c1045074112.gin
++ cat c1045074112.gin src/oxygen.gin
++ rm c1045074112.gin
 + mv 1.2.output 1.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 1.3
@@ -57,17 +57,17 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG 
 ++ grep ising
 ++ sed /grep/d
 ++ wc -l
-+ ni=0
-++ echo '0 >= 4'
++ ni=1
+++ echo '1 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 1.3.output
 ++ awk '{print $2}'
-+ name=c000001264636572.gin
-+ cat c000001264636572.gin src/oxygen.gin
-+ mv c000001264636572.gin CALCS/.
++ name=c1052927391.gin
++ cat c1052927391.gin src/oxygen.gin
++ rm c1052927391.gin
 + mv 1.3.output 1.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 1.4
@@ -78,19 +78,19 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG 
 ++ grep ising
 ++ sed /grep/d
 ++ wc -l
-+ ni=0
-++ echo '0 >= 4'
++ ni=1
+++ echo '1 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
-++ awk '{print $2}'
 ++ grep filename: 1.4.output
-+ name=c000000801147703.gin
-+ cat c000000801147703.gin src/oxygen.gin
-+ mv c000000801147703.gin CALCS/.
+++ awk '{print $2}'
++ name=c1231747533.gin
++ cat c1231747533.gin src/oxygen.gin
++ rm c1231747533.gin
 + mv 1.4.output 1.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 2.1
@@ -106,12 +106,12 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG 
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
-++ awk '{print $2}'
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 2.1.output
-+ name=c000001004858855.gin
-+ cat c000001004858855.gin src/oxygen.gin
-+ mv c000001004858855.gin CALCS/.
+++ awk '{print $2}'
++ name=c1307091582.gin
++ cat c1307091582.gin src/oxygen.gin
++ rm c1307091582.gin
 + mv 2.1.output 2.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 2.2
@@ -119,8 +119,8 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + echo 2
 + go
 ++ ps aux
-++ sed /grep/d
 ++ grep ising
+++ sed /grep/d
 ++ wc -l
 + ni=0
 ++ echo '0 >= 4'
@@ -130,9 +130,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 2.2.output
 ++ awk '{print $2}'
-+ name=c000001106796408.gin
-+ cat c000001106796408.gin src/oxygen.gin
-+ mv c000001106796408.gin CALCS/.
++ name=c1391834120.gin
++ cat c1391834120.gin src/oxygen.gin
++ rm c1391834120.gin
 + mv 2.2.output 2.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 2.3
@@ -151,9 +151,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 2.3.output
 ++ awk '{print $2}'
-+ name=c000001189381190.gin
-+ cat c000001189381190.gin src/oxygen.gin
-+ mv c000001189381190.gin CALCS/.
++ name=c0929565330.gin
++ cat c0929565330.gin src/oxygen.gin
++ rm c0929565330.gin
 + mv 2.3.output 2.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 2.4
@@ -169,14 +169,14 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 2.4.output
 ++ awk '{print $2}'
-+ name=c000001031783923.gin
-+ cat c000001031783923.gin src/oxygen.gin
-+ mv c000001031783923.gin CALCS/.
++ name=c1534682568.gin
++ cat c1534682568.gin src/oxygen.gin
++ rm c1534682568.gin
 + mv 2.4.output 2.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 3.1
@@ -195,9 +195,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 3.1.output
 ++ awk '{print $2}'
-+ name=c000000995422329.gin
-+ cat c000000995422329.gin src/oxygen.gin
-+ mv c000000995422329.gin CALCS/.
++ name=c1348971424.gin
++ cat c1348971424.gin src/oxygen.gin
++ rm c1348971424.gin
 + mv 3.1.output 3.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 3.2
@@ -216,30 +216,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 3.2.output
 ++ awk '{print $2}'
-+ name=c000000896605995.gin
-+ cat c000000896605995.gin src/oxygen.gin
-+ mv c000000896605995.gin CALCS/.
++ name=c0336665713.gin
++ cat c0336665713.gin src/oxygen.gin
++ rm c0336665713.gin
 + mv 3.2.output 3.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 3.3
 3.3
 + echo 3
 + go
-++ grep ising
-++ wc -l
 ++ ps aux
+++ grep ising
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 3.3.output
 ++ awk '{print $2}'
-+ name=c000001136284033.gin
-+ cat c000001136284033.gin src/oxygen.gin
-+ mv c000001136284033.gin CALCS/.
++ name=c0076254827.gin
++ cat c0076254827.gin src/oxygen.gin
++ rm c0076254827.gin
 + mv 3.3.output 3.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 3.4
@@ -248,21 +248,21 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
-++ bc -l
 ++ echo '0 >= 4'
+++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
-++ awk '{print $2}'
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 3.4.output
-+ name=c000001121661669.gin
-+ cat c000001121661669.gin src/oxygen.gin
-+ mv c000001121661669.gin CALCS/.
+++ awk '{print $2}'
++ name=c1273158539.gin
++ cat c1273158539.gin src/oxygen.gin
++ rm c1273158539.gin
 + mv 3.4.output 3.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 4.1
@@ -281,9 +281,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 4.1.output
 ++ awk '{print $2}'
-+ name=c000000864367568.gin
-+ cat c000000864367568.gin src/oxygen.gin
-+ mv c000000864367568.gin CALCS/.
++ name=c1674441483.gin
++ cat c1674441483.gin src/oxygen.gin
++ rm c1674441483.gin
 + mv 4.1.output 4.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 4.2
@@ -302,9 +302,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 4.2.output
 ++ awk '{print $2}'
-+ name=c000000894887503.gin
-+ cat c000000894887503.gin src/oxygen.gin
-+ mv c000000894887503.gin CALCS/.
++ name=c1181037295.gin
++ cat c1181037295.gin src/oxygen.gin
++ rm c1181037295.gin
 + mv 4.2.output 4.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 4.3
@@ -320,12 +320,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 4.3.output
 ++ awk '{print $2}'
-+ name=c000001131917970.gin
-+ cat c000001131917970.gin src/oxygen.gin
-+ mv c000001131917970.gin CALCS/.
++ name=c0984861896.gin
++ cat c0984861896.gin src/oxygen.gin
++ rm c0984861896.gin
 + mv 4.3.output 4.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 4.4
@@ -334,21 +334,21 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
-++ awk '{print $2}'
 ++ grep filename: 4.4.output
-+ name=c000001104494965.gin
-+ cat c000001104494965.gin src/oxygen.gin
-+ mv c000001104494965.gin CALCS/.
+++ awk '{print $2}'
++ name=c0611031658.gin
++ cat c0611031658.gin src/oxygen.gin
++ rm c0611031658.gin
 + mv 4.4.output 4.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 5.1
@@ -360,16 +360,16 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ sed /grep/d
 ++ wc -l
 + ni=0
-++ bc -l
 ++ echo '0 >= 4'
+++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 5.1.output
 ++ awk '{print $2}'
-+ name=c000001138336508.gin
-+ cat c000001138336508.gin src/oxygen.gin
-+ mv c000001138336508.gin CALCS/.
++ name=c2056468352.gin
++ cat c2056468352.gin src/oxygen.gin
++ rm c2056468352.gin
 + mv 5.1.output 5.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 5.2
@@ -388,9 +388,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 5.2.output
 ++ awk '{print $2}'
-+ name=c000001345915785.gin
-+ cat c000001345915785.gin src/oxygen.gin
-+ mv c000001345915785.gin CALCS/.
++ name=c1913952287.gin
++ cat c1913952287.gin src/oxygen.gin
++ rm c1913952287.gin
 + mv 5.2.output 5.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 5.3
@@ -409,9 +409,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 5.3.output
 ++ awk '{print $2}'
-+ name=c000001294488541.gin
-+ cat c000001294488541.gin src/oxygen.gin
-+ mv c000001294488541.gin CALCS/.
++ name=c0113977448.gin
++ cat c0113977448.gin src/oxygen.gin
++ rm c0113977448.gin
 + mv 5.3.output 5.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 5.4
@@ -420,21 +420,21 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
-+ ni=0
-++ echo '0 >= 4'
+++ wc -l
++ ni=1
+++ echo '1 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 5.4.output
 ++ awk '{print $2}'
-+ name=c000001247986022.gin
-+ cat c000001247986022.gin src/oxygen.gin
-+ mv c000001247986022.gin CALCS/.
++ name=c0425842764.gin
++ cat c0425842764.gin src/oxygen.gin
++ rm c0425842764.gin
 + mv 5.4.output 5.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 6.1
@@ -453,9 +453,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 6.1.output
 ++ awk '{print $2}'
-+ name=c000001174133367.gin
-+ cat c000001174133367.gin src/oxygen.gin
-+ mv c000001174133367.gin CALCS/.
++ name=c0382648959.gin
++ cat c0382648959.gin src/oxygen.gin
++ rm c0382648959.gin
 + mv 6.1.output 6.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 6.2
@@ -474,9 +474,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 6.2.output
 ++ awk '{print $2}'
-+ name=c000001368796627.gin
-+ cat c000001368796627.gin src/oxygen.gin
-+ mv c000001368796627.gin CALCS/.
++ name=c0080950063.gin
++ cat c0080950063.gin src/oxygen.gin
++ rm c0080950063.gin
 + mv 6.2.output 6.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 6.3
@@ -495,9 +495,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 6.3.output
 ++ awk '{print $2}'
-+ name=c000001119797439.gin
-+ cat c000001119797439.gin src/oxygen.gin
-+ mv c000001119797439.gin CALCS/.
++ name=c1143251336.gin
++ cat c1143251336.gin src/oxygen.gin
++ rm c1143251336.gin
 + mv 6.3.output 6.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 6.4
@@ -513,14 +513,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 6.4.output
 ++ awk '{print $2}'
-+ name=c000001074035754.gin
-+ cat c000001074035754.gin src/oxygen.gin
-+ mv c000001074035754.gin CALCS/.
++ name=c2057973286.gin
++ cat c2057973286.gin src/oxygen.gin
++ rm c2057973286.gin
 + mv 6.4.output 6.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 7.1
@@ -536,12 +536,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 7.1.output
 ++ awk '{print $2}'
-+ name=c000001170483848.gin
-+ cat c000001170483848.gin src/oxygen.gin
-+ mv c000001170483848.gin CALCS/.
++ name=c1067401467.gin
++ cat c1067401467.gin src/oxygen.gin
++ rm c1067401467.gin
 + mv 7.1.output 7.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 7.2
@@ -560,9 +560,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 7.2.output
 ++ awk '{print $2}'
-+ name=c000001199983618.gin
-+ cat c000001199983618.gin src/oxygen.gin
-+ mv c000001199983618.gin CALCS/.
++ name=c0393878769.gin
++ cat c0393878769.gin src/oxygen.gin
++ rm c0393878769.gin
 + mv 7.2.output 7.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 7.3
@@ -578,12 +578,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 7.3.output
 ++ awk '{print $2}'
-+ name=c000001188616066.gin
-+ cat c000001188616066.gin src/oxygen.gin
-+ mv c000001188616066.gin CALCS/.
++ name=c0176663433.gin
++ cat c0176663433.gin src/oxygen.gin
++ rm c0176663433.gin
 + mv 7.3.output 7.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 7.4
@@ -602,11 +602,11 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 7.4.output
 ++ awk '{print $2}'
-+ name=c000000909977442.gin
-+ cat c000000909977442.gin src/oxygen.gin
-+ mv c000000909977442.gin CALCS/.
++ name=c0828880424.gin
++ cat c0828880424.gin src/oxygen.gin
++ rm c0828880424.gin
 + mv 7.4.output 7.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 8.1
@@ -622,12 +622,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 8.1.output
 ++ awk '{print $2}'
-+ name=c000001113597508.gin
-+ cat c000001113597508.gin src/oxygen.gin
-+ mv c000001113597508.gin CALCS/.
++ name=c1317708560.gin
++ cat c1317708560.gin src/oxygen.gin
++ rm c1317708560.gin
 + mv 8.1.output 8.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 8.2
@@ -643,12 +643,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 8.2.output
 ++ awk '{print $2}'
-+ name=c000001150238432.gin
-+ cat c000001150238432.gin src/oxygen.gin
-+ mv c000001150238432.gin CALCS/.
++ name=c1898802824.gin
++ cat c1898802824.gin src/oxygen.gin
++ rm c1898802824.gin
 + mv 8.2.output 8.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 8.3
@@ -667,9 +667,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 8.3.output
 ++ awk '{print $2}'
-+ name=c000001150620994.gin
-+ cat c000001150620994.gin src/oxygen.gin
-+ mv c000001150620994.gin CALCS/.
++ name=c2043370367.gin
++ cat c2043370367.gin src/oxygen.gin
++ rm c2043370367.gin
 + mv 8.3.output 8.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 8.4
@@ -685,14 +685,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 8.4.output
 ++ awk '{print $2}'
-+ name=c000001308357926.gin
-+ cat c000001308357926.gin src/oxygen.gin
-+ mv c000001308357926.gin CALCS/.
++ name=c1964627619.gin
++ cat c1964627619.gin src/oxygen.gin
++ rm c1964627619.gin
 + mv 8.4.output 8.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 9.1
@@ -711,9 +711,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 9.1.output
 ++ awk '{print $2}'
-+ name=c000001452480515.gin
-+ cat c000001452480515.gin src/oxygen.gin
-+ mv c000001452480515.gin CALCS/.
++ name=c1991533004.gin
++ cat c1991533004.gin src/oxygen.gin
++ rm c1991533004.gin
 + mv 9.1.output 9.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 9.2
@@ -732,9 +732,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 9.2.output
 ++ awk '{print $2}'
-+ name=c000001364084437.gin
-+ cat c000001364084437.gin src/oxygen.gin
-+ mv c000001364084437.gin CALCS/.
++ name=c1846490650.gin
++ cat c1846490650.gin src/oxygen.gin
++ rm c1846490650.gin
 + mv 9.2.output 9.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 9.3
@@ -753,9 +753,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 9.3.output
 ++ awk '{print $2}'
-+ name=c000001377723070.gin
-+ cat c000001377723070.gin src/oxygen.gin
-+ mv c000001377723070.gin CALCS/.
++ name=c0048256257.gin
++ cat c0048256257.gin src/oxygen.gin
++ rm c0048256257.gin
 + mv 9.3.output 9.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 9.4
@@ -771,14 +771,14 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 9.4.output
 ++ awk '{print $2}'
-+ name=c000001093686074.gin
-+ cat c000001093686074.gin src/oxygen.gin
-+ mv c000001093686074.gin CALCS/.
++ name=c1526442926.gin
++ cat c1526442926.gin src/oxygen.gin
++ rm c1526442926.gin
 + mv 9.4.output 9.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 10.1
@@ -787,8 +787,8 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
@@ -797,9 +797,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 10.1.output
 ++ awk '{print $2}'
-+ name=c000001289994957.gin
-+ cat c000001289994957.gin src/oxygen.gin
-+ mv c000001289994957.gin CALCS/.
++ name=c0487244912.gin
++ cat c0487244912.gin src/oxygen.gin
++ rm c0487244912.gin
 + mv 10.1.output 10.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 10.2
@@ -815,12 +815,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 10.2.output
 ++ awk '{print $2}'
-+ name=c000001339175409.gin
-+ cat c000001339175409.gin src/oxygen.gin
-+ mv c000001339175409.gin CALCS/.
++ name=c0361332184.gin
++ cat c0361332184.gin src/oxygen.gin
++ rm c0361332184.gin
 + mv 10.2.output 10.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 10.3
@@ -839,9 +839,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 10.3.output
 ++ awk '{print $2}'
-+ name=c000001220684465.gin
-+ cat c000001220684465.gin src/oxygen.gin
-+ mv c000001220684465.gin CALCS/.
++ name=c2049527030.gin
++ cat c2049527030.gin src/oxygen.gin
++ rm c2049527030.gin
 + mv 10.3.output 10.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 10.4
@@ -860,11 +860,11 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 10.4.output
 ++ awk '{print $2}'
-+ name=c000001043722281.gin
-+ cat c000001043722281.gin src/oxygen.gin
-+ mv c000001043722281.gin CALCS/.
++ name=c1517455498.gin
++ cat c1517455498.gin src/oxygen.gin
++ rm c1517455498.gin
 + mv 10.4.output 10.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 11.1
@@ -873,8 +873,8 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
@@ -883,9 +883,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 11.1.output
 ++ awk '{print $2}'
-+ name=c000001123714144.gin
-+ cat c000001123714144.gin src/oxygen.gin
-+ mv c000001123714144.gin CALCS/.
++ name=c0292502637.gin
++ cat c0292502637.gin src/oxygen.gin
++ rm c0292502637.gin
 + mv 11.1.output 11.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 11.2
@@ -901,12 +901,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 11.2.output
 ++ awk '{print $2}'
-+ name=c000001061447647.gin
-+ cat c000001061447647.gin src/oxygen.gin
-+ mv c000001061447647.gin CALCS/.
++ name=c1117193002.gin
++ cat c1117193002.gin src/oxygen.gin
++ rm c1117193002.gin
 + mv 11.2.output 11.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 11.3
@@ -925,9 +925,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 11.3.output
 ++ awk '{print $2}'
-+ name=c000001067277161.gin
-+ cat c000001067277161.gin src/oxygen.gin
-+ mv c000001067277161.gin CALCS/.
++ name=c2040471046.gin
++ cat c2040471046.gin src/oxygen.gin
++ rm c2040471046.gin
 + mv 11.3.output 11.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 11.4
@@ -946,11 +946,11 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 11.4.output
 ++ awk '{print $2}'
-+ name=c000001310950846.gin
-+ cat c000001310950846.gin src/oxygen.gin
-+ mv c000001310950846.gin CALCS/.
++ name=c1321613650.gin
++ cat c1321613650.gin src/oxygen.gin
++ rm c1321613650.gin
 + mv 11.4.output 11.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 12.1
@@ -969,9 +969,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 12.1.output
 ++ awk '{print $2}'
-+ name=c000001192338453.gin
-+ cat c000001192338453.gin src/oxygen.gin
-+ mv c000001192338453.gin CALCS/.
++ name=c0598230586.gin
++ cat c0598230586.gin src/oxygen.gin
++ rm c0598230586.gin
 + mv 12.1.output 12.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 12.2
@@ -990,9 +990,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 12.2.output
 ++ awk '{print $2}'
-+ name=c000000935734495.gin
-+ cat c000000935734495.gin src/oxygen.gin
-+ mv c000000935734495.gin CALCS/.
++ name=c0744413289.gin
++ cat c0744413289.gin src/oxygen.gin
++ rm c0744413289.gin
 + mv 12.2.output 12.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 12.3
@@ -1011,9 +1011,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 12.3.output
 ++ awk '{print $2}'
-+ name=c000000745206547.gin
-+ cat c000000745206547.gin src/oxygen.gin
-+ mv c000000745206547.gin CALCS/.
++ name=c0862670526.gin
++ cat c0862670526.gin src/oxygen.gin
++ rm c0862670526.gin
 + mv 12.3.output 12.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 12.4
@@ -1032,11 +1032,11 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 12.4.output
 ++ awk '{print $2}'
-+ name=c000001009708599.gin
-+ cat c000001009708599.gin src/oxygen.gin
-+ mv c000001009708599.gin CALCS/.
++ name=c1475308453.gin
++ cat c1475308453.gin src/oxygen.gin
++ rm c1475308453.gin
 + mv 12.4.output 12.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 13.1
@@ -1052,12 +1052,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 13.1.output
 ++ awk '{print $2}'
-+ name=c000001195676167.gin
-+ cat c000001195676167.gin src/oxygen.gin
-+ mv c000001195676167.gin CALCS/.
++ name=c0378049447.gin
++ cat c0378049447.gin src/oxygen.gin
++ rm c0378049447.gin
 + mv 13.1.output 13.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 13.2
@@ -1076,9 +1076,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 13.2.output
 ++ awk '{print $2}'
-+ name=c000001016230367.gin
-+ cat c000001016230367.gin src/oxygen.gin
-+ mv c000001016230367.gin CALCS/.
++ name=c1267392802.gin
++ cat c1267392802.gin src/oxygen.gin
++ rm c1267392802.gin
 + mv 13.2.output 13.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 13.3
@@ -1097,9 +1097,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 13.3.output
 ++ awk '{print $2}'
-+ name=c000001049622552.gin
-+ cat c000001049622552.gin src/oxygen.gin
-+ mv c000001049622552.gin CALCS/.
++ name=c0066012933.gin
++ cat c0066012933.gin src/oxygen.gin
++ rm c0066012933.gin
 + mv 13.3.output 13.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 13.4
@@ -1115,14 +1115,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 13.4.output
 ++ awk '{print $2}'
-+ name=c000001013127366.gin
-+ cat c000001013127366.gin src/oxygen.gin
-+ mv c000001013127366.gin CALCS/.
++ name=c2073412009.gin
++ cat c2073412009.gin src/oxygen.gin
++ rm c2073412009.gin
 + mv 13.4.output 13.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 14.1
@@ -1141,9 +1141,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 14.1.output
 ++ awk '{print $2}'
-+ name=c000000897356861.gin
-+ cat c000000897356861.gin src/oxygen.gin
-+ mv c000000897356861.gin CALCS/.
++ name=c0648660252.gin
++ cat c0648660252.gin src/oxygen.gin
++ rm c0648660252.gin
 + mv 14.1.output 14.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 14.2
@@ -1159,12 +1159,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 14.2.output
 ++ awk '{print $2}'
-+ name=c000000906052553.gin
-+ cat c000000906052553.gin src/oxygen.gin
-+ mv c000000906052553.gin CALCS/.
++ name=c1748531474.gin
++ cat c1748531474.gin src/oxygen.gin
++ rm c1748531474.gin
 + mv 14.2.output 14.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 14.3
@@ -1180,12 +1180,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 14.3.output
 ++ awk '{print $2}'
-+ name=c000000984514168.gin
-+ cat c000000984514168.gin src/oxygen.gin
-+ mv c000000984514168.gin CALCS/.
++ name=c0161148890.gin
++ cat c0161148890.gin src/oxygen.gin
++ rm c0161148890.gin
 + mv 14.3.output 14.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 14.4
@@ -1194,21 +1194,21 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
-++ bc -l
 ++ echo '0 >= 4'
+++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 14.4.output
 ++ awk '{print $2}'
-+ name=c000000979595515.gin
-+ cat c000000979595515.gin src/oxygen.gin
-+ mv c000000979595515.gin CALCS/.
++ name=c1063354317.gin
++ cat c1063354317.gin src/oxygen.gin
++ rm c1063354317.gin
 + mv 14.4.output 14.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 15.1
@@ -1227,9 +1227,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 15.1.output
 ++ awk '{print $2}'
-+ name=c000000888618663.gin
-+ cat c000000888618663.gin src/oxygen.gin
-+ mv c000000888618663.gin CALCS/.
++ name=c0675058415.gin
++ cat c0675058415.gin src/oxygen.gin
++ rm c0675058415.gin
 + mv 15.1.output 15.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 15.2
@@ -1245,12 +1245,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 15.2.output
 ++ awk '{print $2}'
-+ name=c000001060947598.gin
-+ cat c000001060947598.gin src/oxygen.gin
-+ mv c000001060947598.gin CALCS/.
++ name=c0847196785.gin
++ cat c0847196785.gin src/oxygen.gin
++ rm c0847196785.gin
 + mv 15.2.output 15.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 15.3
@@ -1269,9 +1269,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 15.3.output
 ++ awk '{print $2}'
-+ name=c000001145092988.gin
-+ cat c000001145092988.gin src/oxygen.gin
-+ mv c000001145092988.gin CALCS/.
++ name=c1524229325.gin
++ cat c1524229325.gin src/oxygen.gin
++ rm c1524229325.gin
 + mv 15.3.output 15.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 15.4
@@ -1287,14 +1287,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 15.4.output
 ++ awk '{print $2}'
-+ name=c000001062763248.gin
-+ cat c000001062763248.gin src/oxygen.gin
-+ mv c000001062763248.gin CALCS/.
++ name=c1077097563.gin
++ cat c1077097563.gin src/oxygen.gin
++ rm c1077097563.gin
 + mv 15.4.output 15.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 16.1
@@ -1303,8 +1303,8 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
@@ -1313,9 +1313,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 16.1.output
 ++ awk '{print $2}'
-+ name=c000000889335207.gin
-+ cat c000000889335207.gin src/oxygen.gin
-+ mv c000000889335207.gin CALCS/.
++ name=c1484668762.gin
++ cat c1484668762.gin src/oxygen.gin
++ rm c1484668762.gin
 + mv 16.1.output 16.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 16.2
@@ -1331,12 +1331,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 16.2.output
 ++ awk '{print $2}'
-+ name=c000001017693818.gin
-+ cat c000001017693818.gin src/oxygen.gin
-+ mv c000001017693818.gin CALCS/.
++ name=c0884440741.gin
++ cat c0884440741.gin src/oxygen.gin
++ rm c0884440741.gin
 + mv 16.2.output 16.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 16.3
@@ -1352,12 +1352,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 16.3.output
 ++ awk '{print $2}'
-+ name=c000001053879312.gin
-+ cat c000001053879312.gin src/oxygen.gin
-+ mv c000001053879312.gin CALCS/.
++ name=c0730350276.gin
++ cat c0730350276.gin src/oxygen.gin
++ rm c0730350276.gin
 + mv 16.3.output 16.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 16.4
@@ -1376,11 +1376,11 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 16.4.output
 ++ awk '{print $2}'
-+ name=c000000981939466.gin
-+ cat c000000981939466.gin src/oxygen.gin
-+ mv c000000981939466.gin CALCS/.
++ name=c0156879814.gin
++ cat c0156879814.gin src/oxygen.gin
++ rm c0156879814.gin
 + mv 16.4.output 16.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 17.1
@@ -1399,9 +1399,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 17.1.output
 ++ awk '{print $2}'
-+ name=c000000904528378.gin
-+ cat c000000904528378.gin src/oxygen.gin
-+ mv c000000904528378.gin CALCS/.
++ name=c1673016897.gin
++ cat c1673016897.gin src/oxygen.gin
++ rm c1673016897.gin
 + mv 17.1.output 17.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 17.2
@@ -1417,12 +1417,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 17.2.output
 ++ awk '{print $2}'
-+ name=c000000870777921.gin
-+ cat c000000870777921.gin src/oxygen.gin
-+ mv c000000870777921.gin CALCS/.
++ name=c0267712053.gin
++ cat c0267712053.gin src/oxygen.gin
++ rm c0267712053.gin
 + mv 17.2.output 17.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 17.3
@@ -1438,12 +1438,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 17.3.output
 ++ awk '{print $2}'
-+ name=c000001122977270.gin
-+ cat c000001122977270.gin src/oxygen.gin
-+ mv c000001122977270.gin CALCS/.
++ name=c1289725571.gin
++ cat c1289725571.gin src/oxygen.gin
++ rm c1289725571.gin
 + mv 17.3.output 17.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 17.4
@@ -1462,11 +1462,11 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 17.4.output
 ++ awk '{print $2}'
-+ name=c000001048863501.gin
-+ cat c000001048863501.gin src/oxygen.gin
-+ mv c000001048863501.gin CALCS/.
++ name=c0788106983.gin
++ cat c0788106983.gin src/oxygen.gin
++ rm c0788106983.gin
 + mv 17.4.output 17.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 18.1
@@ -1485,9 +1485,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 18.1.output
 ++ awk '{print $2}'
-+ name=c000000992590474.gin
-+ cat c000000992590474.gin src/oxygen.gin
-+ mv c000000992590474.gin CALCS/.
++ name=c1601091053.gin
++ cat c1601091053.gin src/oxygen.gin
++ rm c1601091053.gin
 + mv 18.1.output 18.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 18.2
@@ -1506,9 +1506,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 18.2.output
 ++ awk '{print $2}'
-+ name=c000001002312403.gin
-+ cat c000001002312403.gin src/oxygen.gin
-+ mv c000001002312403.gin CALCS/.
++ name=c0967754908.gin
++ cat c0967754908.gin src/oxygen.gin
++ rm c0967754908.gin
 + mv 18.2.output 18.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 18.3
@@ -1524,12 +1524,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 18.3.output
 ++ awk '{print $2}'
-+ name=c000001158828781.gin
-+ cat c000001158828781.gin src/oxygen.gin
-+ mv c000001158828781.gin CALCS/.
++ name=c1161929758.gin
++ cat c1161929758.gin src/oxygen.gin
++ rm c1161929758.gin
 + mv 18.3.output 18.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 18.4
@@ -1548,11 +1548,11 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 18.4.output
 ++ awk '{print $2}'
-+ name=c000001120566523.gin
-+ cat c000001120566523.gin src/oxygen.gin
-+ mv c000001120566523.gin CALCS/.
++ name=c1014668575.gin
++ cat c1014668575.gin src/oxygen.gin
++ rm c1014668575.gin
 + mv 18.4.output 18.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 19.1
@@ -1571,9 +1571,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 19.1.output
 ++ awk '{print $2}'
-+ name=c000000818852740.gin
-+ cat c000000818852740.gin src/oxygen.gin
-+ mv c000000818852740.gin CALCS/.
++ name=c0204502445.gin
++ cat c0204502445.gin src/oxygen.gin
++ rm c0204502445.gin
 + mv 19.1.output 19.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 19.2
@@ -1589,12 +1589,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 19.2.output
 ++ awk '{print $2}'
-+ name=c000001010242971.gin
-+ cat c000001010242971.gin src/oxygen.gin
-+ mv c000001010242971.gin CALCS/.
++ name=c1702833183.gin
++ cat c1702833183.gin src/oxygen.gin
++ rm c1702833183.gin
 + mv 19.2.output 19.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 19.3
@@ -1613,9 +1613,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 19.3.output
 ++ awk '{print $2}'
-+ name=c000000977925603.gin
-+ cat c000000977925603.gin src/oxygen.gin
-+ mv c000000977925603.gin CALCS/.
++ name=c1354734616.gin
++ cat c1354734616.gin src/oxygen.gin
++ rm c1354734616.gin
 + mv 19.3.output 19.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 19.4
@@ -1624,21 +1624,21 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 19.4.output
 ++ awk '{print $2}'
-+ name=c000000886614767.gin
-+ cat c000000886614767.gin src/oxygen.gin
-+ mv c000000886614767.gin CALCS/.
++ name=c1505185711.gin
++ cat c1505185711.gin src/oxygen.gin
++ rm c1505185711.gin
 + mv 19.4.output 19.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 20.1
@@ -1647,19 +1647,19 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 20.1.output
 ++ awk '{print $2}'
-+ name=c000001020608575.gin
-+ cat c000001020608575.gin src/oxygen.gin
-+ mv c000001020608575.gin CALCS/.
++ name=c1528301579.gin
++ cat c1528301579.gin src/oxygen.gin
++ rm c1528301579.gin
 + mv 20.1.output 20.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 20.2
@@ -1678,9 +1678,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 20.2.output
 ++ awk '{print $2}'
-+ name=c000000929297740.gin
-+ cat c000000929297740.gin src/oxygen.gin
-+ mv c000000929297740.gin CALCS/.
++ name=c1256994405.gin
++ cat c1256994405.gin src/oxygen.gin
++ rm c1256994405.gin
 + mv 20.2.output 20.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 20.3
@@ -1699,9 +1699,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 20.3.output
 ++ awk '{print $2}'
-+ name=c000000955475901.gin
-+ cat c000000955475901.gin src/oxygen.gin
-+ mv c000000955475901.gin CALCS/.
++ name=c0753757338.gin
++ cat c0753757338.gin src/oxygen.gin
++ rm c0753757338.gin
 + mv 20.3.output 20.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 20.4
@@ -1720,11 +1720,11 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 20.4.output
 ++ awk '{print $2}'
-+ name=c000001239658635.gin
-+ cat c000001239658635.gin src/oxygen.gin
-+ mv c000001239658635.gin CALCS/.
++ name=c1242375725.gin
++ cat c1242375725.gin src/oxygen.gin
++ rm c1242375725.gin
 + mv 20.4.output 20.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 21.1
@@ -1733,19 +1733,19 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 21.1.output
 ++ awk '{print $2}'
-+ name=c000001404536723.gin
-+ cat c000001404536723.gin src/oxygen.gin
-+ mv c000001404536723.gin CALCS/.
++ name=c0179929796.gin
++ cat c0179929796.gin src/oxygen.gin
++ rm c0179929796.gin
 + mv 21.1.output 21.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 21.2
@@ -1761,12 +1761,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 21.2.output
 ++ awk '{print $2}'
-+ name=c000001380915046.gin
-+ cat c000001380915046.gin src/oxygen.gin
-+ mv c000001380915046.gin CALCS/.
++ name=c1186963245.gin
++ cat c1186963245.gin src/oxygen.gin
++ rm c1186963245.gin
 + mv 21.2.output 21.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 21.3
@@ -1785,9 +1785,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 21.3.output
 ++ awk '{print $2}'
-+ name=c000001149374038.gin
-+ cat c000001149374038.gin src/oxygen.gin
-+ mv c000001149374038.gin CALCS/.
++ name=c2147331391.gin
++ cat c2147331391.gin src/oxygen.gin
++ rm c2147331391.gin
 + mv 21.3.output 21.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 21.4
@@ -1803,14 +1803,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 21.4.output
 ++ awk '{print $2}'
-+ name=c000001130434190.gin
-+ cat c000001130434190.gin src/oxygen.gin
-+ mv c000001130434190.gin CALCS/.
++ name=c0165280914.gin
++ cat c0165280914.gin src/oxygen.gin
++ rm c0165280914.gin
 + mv 21.4.output 21.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 22.1
@@ -1829,9 +1829,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 22.1.output
 ++ awk '{print $2}'
-+ name=c000001206005337.gin
-+ cat c000001206005337.gin src/oxygen.gin
-+ mv c000001206005337.gin CALCS/.
++ name=c0566606634.gin
++ cat c0566606634.gin src/oxygen.gin
++ rm c0566606634.gin
 + mv 22.1.output 22.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 22.2
@@ -1840,8 +1840,8 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
@@ -1850,9 +1850,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 22.2.output
 ++ awk '{print $2}'
-+ name=c000001209278366.gin
-+ cat c000001209278366.gin src/oxygen.gin
-+ mv c000001209278366.gin CALCS/.
++ name=c0631474519.gin
++ cat c0631474519.gin src/oxygen.gin
++ rm c0631474519.gin
 + mv 22.2.output 22.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 22.3
@@ -1861,19 +1861,19 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 22.3.output
 ++ awk '{print $2}'
-+ name=c000001259363607.gin
-+ cat c000001259363607.gin src/oxygen.gin
-+ mv c000001259363607.gin CALCS/.
++ name=c0276297225.gin
++ cat c0276297225.gin src/oxygen.gin
++ rm c0276297225.gin
 + mv 22.3.output 22.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 22.4
@@ -1889,14 +1889,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 22.4.output
 ++ awk '{print $2}'
-+ name=c000001294498574.gin
-+ cat c000001294498574.gin src/oxygen.gin
-+ mv c000001294498574.gin CALCS/.
++ name=c0656940497.gin
++ cat c0656940497.gin src/oxygen.gin
++ rm c0656940497.gin
 + mv 22.4.output 22.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 23.1
@@ -1915,9 +1915,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 23.1.output
 ++ awk '{print $2}'
-+ name=c000001342507050.gin
-+ cat c000001342507050.gin src/oxygen.gin
-+ mv c000001342507050.gin CALCS/.
++ name=c1114620550.gin
++ cat c1114620550.gin src/oxygen.gin
++ rm c1114620550.gin
 + mv 23.1.output 23.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 23.2
@@ -1936,9 +1936,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 23.2.output
 ++ awk '{print $2}'
-+ name=c000001451446093.gin
-+ cat c000001451446093.gin src/oxygen.gin
-+ mv c000001451446093.gin CALCS/.
++ name=c1262157484.gin
++ cat c1262157484.gin src/oxygen.gin
++ rm c1262157484.gin
 + mv 23.2.output 23.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 23.3
@@ -1957,9 +1957,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 23.3.output
 ++ awk '{print $2}'
-+ name=c000001153387901.gin
-+ cat c000001153387901.gin src/oxygen.gin
-+ mv c000001153387901.gin CALCS/.
++ name=c2048253455.gin
++ cat c2048253455.gin src/oxygen.gin
++ rm c2048253455.gin
 + mv 23.3.output 23.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 23.4
@@ -1975,14 +1975,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 23.4.output
 ++ awk '{print $2}'
-+ name=c000001304627354.gin
-+ cat c000001304627354.gin src/oxygen.gin
-+ mv c000001304627354.gin CALCS/.
++ name=c1959331318.gin
++ cat c1959331318.gin src/oxygen.gin
++ rm c1959331318.gin
 + mv 23.4.output 23.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 24.1
@@ -1998,12 +1998,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 24.1.output
 ++ awk '{print $2}'
-+ name=c000001121550253.gin
-+ cat c000001121550253.gin src/oxygen.gin
-+ mv c000001121550253.gin CALCS/.
++ name=c0530153527.gin
++ cat c0530153527.gin src/oxygen.gin
++ rm c0530153527.gin
 + mv 24.1.output 24.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 24.2
@@ -2019,12 +2019,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 24.2.output
 ++ awk '{print $2}'
-+ name=c000001373130216.gin
-+ cat c000001373130216.gin src/oxygen.gin
-+ mv c000001373130216.gin CALCS/.
++ name=c0270482043.gin
++ cat c0270482043.gin src/oxygen.gin
++ rm c0270482043.gin
 + mv 24.2.output 24.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 24.3
@@ -2043,9 +2043,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 24.3.output
 ++ awk '{print $2}'
-+ name=c000001228291083.gin
-+ cat c000001228291083.gin src/oxygen.gin
-+ mv c000001228291083.gin CALCS/.
++ name=c0351882492.gin
++ cat c0351882492.gin src/oxygen.gin
++ rm c0351882492.gin
 + mv 24.3.output 24.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 24.4
@@ -2054,21 +2054,21 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 24.4.output
 ++ awk '{print $2}'
-+ name=c000001176007630.gin
-+ cat c000001176007630.gin src/oxygen.gin
-+ mv c000001176007630.gin CALCS/.
++ name=c1754738531.gin
++ cat c1754738531.gin src/oxygen.gin
++ rm c1754738531.gin
 + mv 24.4.output 24.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 25.1
@@ -2087,9 +2087,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 25.1.output
 ++ awk '{print $2}'
-+ name=c000001326767363.gin
-+ cat c000001326767363.gin src/oxygen.gin
-+ mv c000001326767363.gin CALCS/.
++ name=c1319082643.gin
++ cat c1319082643.gin src/oxygen.gin
++ rm c1319082643.gin
 + mv 25.1.output 25.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 25.2
@@ -2108,9 +2108,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 25.2.output
 ++ awk '{print $2}'
-+ name=c000001280574537.gin
-+ cat c000001280574537.gin src/oxygen.gin
-+ mv c000001280574537.gin CALCS/.
++ name=c0248142304.gin
++ cat c0248142304.gin src/oxygen.gin
++ rm c0248142304.gin
 + mv 25.2.output 25.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 25.3
@@ -2129,9 +2129,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 25.3.output
 ++ awk '{print $2}'
-+ name=c000001351202742.gin
-+ cat c000001351202742.gin src/oxygen.gin
-+ mv c000001351202742.gin CALCS/.
++ name=c0272890993.gin
++ cat c0272890993.gin src/oxygen.gin
++ rm c0272890993.gin
 + mv 25.3.output 25.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 25.4
@@ -2147,14 +2147,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 25.4.output
 ++ awk '{print $2}'
-+ name=c000001301785466.gin
-+ cat c000001301785466.gin src/oxygen.gin
-+ mv c000001301785466.gin CALCS/.
++ name=c1171215060.gin
++ cat c1171215060.gin src/oxygen.gin
++ rm c1171215060.gin
 + mv 25.4.output 25.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 26.1
@@ -2170,12 +2170,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 26.1.output
 ++ awk '{print $2}'
-+ name=c000001412181887.gin
-+ cat c000001412181887.gin src/oxygen.gin
-+ mv c000001412181887.gin CALCS/.
++ name=c0173102889.gin
++ cat c0173102889.gin src/oxygen.gin
++ rm c0173102889.gin
 + mv 26.1.output 26.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 26.2
@@ -2191,12 +2191,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 26.2.output
 ++ awk '{print $2}'
-+ name=c000001341268279.gin
-+ cat c000001341268279.gin src/oxygen.gin
-+ mv c000001341268279.gin CALCS/.
++ name=c0337422100.gin
++ cat c0337422100.gin src/oxygen.gin
++ rm c0337422100.gin
 + mv 26.2.output 26.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 26.3
@@ -2205,19 +2205,19 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 26.3.output
 ++ awk '{print $2}'
-+ name=c000001100746175.gin
-+ cat c000001100746175.gin src/oxygen.gin
-+ mv c000001100746175.gin CALCS/.
++ name=c1599874583.gin
++ cat c1599874583.gin src/oxygen.gin
++ rm c1599874583.gin
 + mv 26.3.output 26.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 26.4
@@ -2233,14 +2233,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 26.4.output
 ++ awk '{print $2}'
-+ name=c000001189980246.gin
-+ cat c000001189980246.gin src/oxygen.gin
-+ mv c000001189980246.gin CALCS/.
++ name=c1626465905.gin
++ cat c1626465905.gin src/oxygen.gin
++ rm c1626465905.gin
 + mv 26.4.output 26.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 27.1
@@ -2256,12 +2256,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 27.1.output
 ++ awk '{print $2}'
-+ name=c000001178898097.gin
-+ cat c000001178898097.gin src/oxygen.gin
-+ mv c000001178898097.gin CALCS/.
++ name=c0430762373.gin
++ cat c0430762373.gin src/oxygen.gin
++ rm c0430762373.gin
 + mv 27.1.output 27.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 27.2
@@ -2280,9 +2280,9 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 27.2.output
 ++ awk '{print $2}'
-+ name=c000001278880334.gin
-+ cat c000001278880334.gin src/oxygen.gin
-+ mv c000001278880334.gin CALCS/.
++ name=c1050409829.gin
++ cat c1050409829.gin src/oxygen.gin
++ rm c1050409829.gin
 + mv 27.2.output 27.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 27.3
@@ -2298,12 +2298,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 27.3.output
 ++ awk '{print $2}'
-+ name=c000001366323044.gin
-+ cat c000001366323044.gin src/oxygen.gin
-+ mv c000001366323044.gin CALCS/.
++ name=c0330509489.gin
++ cat c0330509489.gin src/oxygen.gin
++ rm c0330509489.gin
 + mv 27.3.output 27.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 27.4
@@ -2319,14 +2319,14 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 27.4.output
 ++ awk '{print $2}'
-+ name=c000000729519398.gin
-+ cat c000000729519398.gin src/oxygen.gin
-+ mv c000000729519398.gin CALCS/.
++ name=c1665970694.gin
++ cat c1665970694.gin src/oxygen.gin
++ rm c1665970694.gin
 + mv 27.4.output 27.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 28.1
@@ -2342,12 +2342,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 28.1.output
 ++ awk '{print $2}'
-+ name=c000000967436438.gin
-+ cat c000000967436438.gin src/oxygen.gin
-+ mv c000000967436438.gin CALCS/.
++ name=c1474070226.gin
++ cat c1474070226.gin src/oxygen.gin
++ rm c1474070226.gin
 + mv 28.1.output 28.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 28.2
@@ -2366,9 +2366,9 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG 
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 28.2.output
 ++ awk '{print $2}'
-+ name=c000000774710277.gin
-+ cat c000000774710277.gin src/oxygen.gin
-+ mv c000000774710277.gin CALCS/.
++ name=c0834908425.gin
++ cat c0834908425.gin src/oxygen.gin
++ rm c0834908425.gin
 + mv 28.2.output 28.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 28.3
@@ -2384,12 +2384,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 28.3.output
 ++ awk '{print $2}'
-+ name=c000000747026158.gin
-+ cat c000000747026158.gin src/oxygen.gin
-+ mv c000000747026158.gin CALCS/.
++ name=c2095321117.gin
++ cat c2095321117.gin src/oxygen.gin
++ rm c2095321117.gin
 + mv 28.3.output 28.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 28.4
@@ -2405,14 +2405,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 28.4.output
 ++ awk '{print $2}'
-+ name=c000000979593403.gin
-+ cat c000000979593403.gin src/oxygen.gin
-+ mv c000000979593403.gin CALCS/.
++ name=c1129826998.gin
++ cat c1129826998.gin src/oxygen.gin
++ rm c1129826998.gin
 + mv 28.4.output 28.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 29.1
@@ -2428,12 +2428,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 29.1.output
 ++ awk '{print $2}'
-+ name=c000000828760801.gin
-+ cat c000000828760801.gin src/oxygen.gin
-+ mv c000000828760801.gin CALCS/.
++ name=c0796809369.gin
++ cat c0796809369.gin src/oxygen.gin
++ rm c0796809369.gin
 + mv 29.1.output 29.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 29.2
@@ -2442,19 +2442,19 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 29.2.output
 ++ awk '{print $2}'
-+ name=c000000909754611.gin
-+ cat c000000909754611.gin src/oxygen.gin
-+ mv c000000909754611.gin CALCS/.
++ name=c1565386657.gin
++ cat c1565386657.gin src/oxygen.gin
++ rm c1565386657.gin
 + mv 29.2.output 29.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 29.3
@@ -2470,12 +2470,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 29.3.output
 ++ awk '{print $2}'
-+ name=c000000796467723.gin
-+ cat c000000796467723.gin src/oxygen.gin
-+ mv c000000796467723.gin CALCS/.
++ name=c1980826138.gin
++ cat c1980826138.gin src/oxygen.gin
++ rm c1980826138.gin
 + mv 29.3.output 29.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 29.4
@@ -2491,14 +2491,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 29.4.output
 ++ awk '{print $2}'
-+ name=c000000855989490.gin
-+ cat c000000855989490.gin src/oxygen.gin
-+ mv c000000855989490.gin CALCS/.
++ name=c1840291075.gin
++ cat c1840291075.gin src/oxygen.gin
++ rm c1840291075.gin
 + mv 29.4.output 29.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 30.1
@@ -2514,12 +2514,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 30.1.output
 ++ awk '{print $2}'
-+ name=c000000947251746.gin
-+ cat c000000947251746.gin src/oxygen.gin
-+ mv c000000947251746.gin CALCS/.
++ name=c1935912999.gin
++ cat c1935912999.gin src/oxygen.gin
++ rm c1935912999.gin
 + mv 30.1.output 30.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 30.2
@@ -2538,9 +2538,9 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 30.2.output
 ++ awk '{print $2}'
-+ name=c000000757033490.gin
-+ cat c000000757033490.gin src/oxygen.gin
-+ mv c000000757033490.gin CALCS/.
++ name=c1633529464.gin
++ cat c1633529464.gin src/oxygen.gin
++ rm c1633529464.gin
 + mv 30.2.output 30.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 30.3
@@ -2556,12 +2556,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 30.3.output
 ++ awk '{print $2}'
-+ name=c000001095886135.gin
-+ cat c000001095886135.gin src/oxygen.gin
-+ mv c000001095886135.gin CALCS/.
++ name=c0836368983.gin
++ cat c0836368983.gin src/oxygen.gin
++ rm c0836368983.gin
 + mv 30.3.output 30.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 30.4
@@ -2577,14 +2577,14 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 30.4.output
 ++ awk '{print $2}'
-+ name=c000000817174642.gin
-+ cat c000000817174642.gin src/oxygen.gin
-+ mv c000000817174642.gin CALCS/.
++ name=c0237148548.gin
++ cat c0237148548.gin src/oxygen.gin
++ rm c0237148548.gin
 + mv 30.4.output 30.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 31.1
@@ -2600,12 +2600,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 31.1.output
 ++ awk '{print $2}'
-+ name=c000000906791275.gin
-+ cat c000000906791275.gin src/oxygen.gin
-+ mv c000000906791275.gin CALCS/.
++ name=c1279243457.gin
++ cat c1279243457.gin src/oxygen.gin
++ rm c1279243457.gin
 + mv 31.1.output 31.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 31.2
@@ -2621,12 +2621,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 31.2.output
 ++ awk '{print $2}'
-+ name=c000001062232836.gin
-+ cat c000001062232836.gin src/oxygen.gin
-+ mv c000001062232836.gin CALCS/.
++ name=c2143878229.gin
++ cat c2143878229.gin src/oxygen.gin
++ rm c2143878229.gin
 + mv 31.2.output 31.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 31.3
@@ -2642,12 +2642,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 31.3.output
 ++ awk '{print $2}'
-+ name=c000000994804791.gin
-+ cat c000000994804791.gin src/oxygen.gin
-+ mv c000000994804791.gin CALCS/.
++ name=c1602163891.gin
++ cat c1602163891.gin src/oxygen.gin
++ rm c1602163891.gin
 + mv 31.3.output 31.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 31.4
@@ -2663,14 +2663,14 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 31.4.output
 ++ awk '{print $2}'
-+ name=c000000977632015.gin
-+ cat c000000977632015.gin src/oxygen.gin
-+ mv c000000977632015.gin CALCS/.
++ name=c0939652858.gin
++ cat c0939652858.gin src/oxygen.gin
++ rm c0939652858.gin
 + mv 31.4.output 31.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 32.1
@@ -2679,19 +2679,19 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 32.1.output
 ++ awk '{print $2}'
-+ name=c000000998436093.gin
-+ cat c000000998436093.gin src/oxygen.gin
-+ mv c000000998436093.gin CALCS/.
++ name=c1748617587.gin
++ cat c1748617587.gin src/oxygen.gin
++ rm c1748617587.gin
 + mv 32.1.output 32.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 32.2
@@ -2707,12 +2707,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 32.2.output
 ++ awk '{print $2}'
-+ name=c000000773058581.gin
-+ cat c000000773058581.gin src/oxygen.gin
-+ mv c000000773058581.gin CALCS/.
++ name=c0948395882.gin
++ cat c0948395882.gin src/oxygen.gin
++ rm c0948395882.gin
 + mv 32.2.output 32.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 32.3
@@ -2728,12 +2728,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 32.3.output
 ++ awk '{print $2}'
-+ name=c000001032757356.gin
-+ cat c000001032757356.gin src/oxygen.gin
-+ mv c000001032757356.gin CALCS/.
++ name=c1486092446.gin
++ cat c1486092446.gin src/oxygen.gin
++ rm c1486092446.gin
 + mv 32.3.output 32.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 32.4
@@ -2749,14 +2749,14 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 32.4.output
 ++ awk '{print $2}'
-+ name=c000001040305362.gin
-+ cat c000001040305362.gin src/oxygen.gin
-+ mv c000001040305362.gin CALCS/.
++ name=c0131134576.gin
++ cat c0131134576.gin src/oxygen.gin
++ rm c0131134576.gin
 + mv 32.4.output 32.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 33.1
@@ -2772,12 +2772,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 33.1.output
 ++ awk '{print $2}'
-+ name=c000000834942515.gin
-+ cat c000000834942515.gin src/oxygen.gin
-+ mv c000000834942515.gin CALCS/.
++ name=c1202386986.gin
++ cat c1202386986.gin src/oxygen.gin
++ rm c1202386986.gin
 + mv 33.1.output 33.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 33.2
@@ -2793,12 +2793,12 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 33.2.output
 ++ awk '{print $2}'
-+ name=c000000959621246.gin
-+ cat c000000959621246.gin src/oxygen.gin
-+ mv c000000959621246.gin CALCS/.
++ name=c1033302083.gin
++ cat c1033302083.gin src/oxygen.gin
++ rm c1033302083.gin
 + mv 33.2.output 33.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 33.3
@@ -2814,12 +2814,12 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 33.3.output
 ++ awk '{print $2}'
-+ name=c000001089698349.gin
-+ cat c000001089698349.gin src/oxygen.gin
-+ mv c000001089698349.gin CALCS/.
++ name=c1149366371.gin
++ cat c1149366371.gin src/oxygen.gin
++ rm c1149366371.gin
 + mv 33.3.output 33.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 33.4
@@ -2835,14 +2835,14 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
 ++ grep filename: 33.4.output
 ++ awk '{print $2}'
-+ name=c000001076084004.gin
-+ cat c000001076084004.gin src/oxygen.gin
-+ mv c000001076084004.gin CALCS/.
++ name=c1865861267.gin
++ cat c1865861267.gin src/oxygen.gin
++ rm c1865861267.gin
 + mv 33.4.output 33.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 34.1
@@ -2851,19 +2851,30 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F8386644407
+#1  0x7F8386644A1E
+#2  0x7F8385B610DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11819 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 34.1.output
 ++ awk '{print $2}'
-+ name=c000000829568432.gin
-+ cat c000000829568432.gin src/oxygen.gin
-+ mv c000000829568432.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 34.1.output 34.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 34.2
@@ -2879,12 +2890,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F12A1F8A407
+#1  0x7F12A1F8AA1E
+#2  0x7F12A14A70DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11835 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 34.2.output
 ++ awk '{print $2}'
-+ name=c000000925609675.gin
-+ cat c000000925609675.gin src/oxygen.gin
-+ mv c000000925609675.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 34.2.output 34.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 34.3
@@ -2900,12 +2922,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F134F183407
+#1  0x7F134F183A1E
+#2  0x7F134E6A00DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11851 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 34.3.output
 ++ awk '{print $2}'
-+ name=c000000787316601.gin
-+ cat c000000787316601.gin src/oxygen.gin
-+ mv c000000787316601.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 34.3.output 34.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 34.4
@@ -2921,14 +2954,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F89F994D407
+#1  0x7F89F994DA1E
+#2  0x7F89F8E6A0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11867 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 34.4.output
 ++ awk '{print $2}'
-+ name=c000000779792884.gin
-+ cat c000000779792884.gin src/oxygen.gin
-+ mv c000000779792884.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 34.4.output 34.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 35.1
@@ -2937,19 +2981,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F37248E3407
+#1  0x7F37248E3A1E
+#2  0x7F3723E000DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11884 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 35.1.output
 ++ awk '{print $2}'
-+ name=c000001037317737.gin
-+ cat c000001037317737.gin src/oxygen.gin
-+ mv c000001037317737.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 35.1.output 35.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 35.2
@@ -2965,12 +3020,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F60E0B11407
+#1  0x7F60E0B11A1E
+#2  0x7F60E002E0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11900 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 35.2.output
 ++ awk '{print $2}'
-+ name=c000000787626293.gin
-+ cat c000000787626293.gin src/oxygen.gin
-+ mv c000000787626293.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 35.2.output 35.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 35.3
@@ -2979,19 +3045,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F9F75B7C407
+#1  0x7F9F75B7CA1E
+#2  0x7F9F750990DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11916 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 35.3.output
 ++ awk '{print $2}'
-+ name=c000001095072432.gin
-+ cat c000001095072432.gin src/oxygen.gin
-+ mv c000001095072432.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 35.3.output 35.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 35.4
@@ -3007,14 +3084,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F25F7791407
+#1  0x7F25F7791A1E
+#2  0x7F25F6CAE0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11932 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 35.4.output
 ++ awk '{print $2}'
-+ name=c000000803414560.gin
-+ cat c000000803414560.gin src/oxygen.gin
-+ mv c000000803414560.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 35.4.output 35.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 36.1
@@ -3030,12 +3118,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F1D6DA8B407
+#1  0x7F1D6DA8BA1E
+#2  0x7F1D6CFA80DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11949 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 36.1.output
 ++ awk '{print $2}'
-+ name=c000001308244399.gin
-+ cat c000001308244399.gin src/oxygen.gin
-+ mv c000001308244399.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 36.1.output 36.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 36.2
@@ -3044,19 +3143,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ sed /grep/d
 ++ wc -l
+++ sed /grep/d
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FC04ED71407
+#1  0x7FC04ED71A1E
+#2  0x7FC04E28E0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11965 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 36.2.output
 ++ awk '{print $2}'
-+ name=c000001125525570.gin
-+ cat c000001125525570.gin src/oxygen.gin
-+ mv c000001125525570.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 36.2.output 36.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 36.3
@@ -3072,12 +3182,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F5C3F695407
+#1  0x7F5C3F695A1E
+#2  0x7F5C3EBB20DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11981 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 36.3.output
 ++ awk '{print $2}'
-+ name=c000001138805931.gin
-+ cat c000001138805931.gin src/oxygen.gin
-+ mv c000001138805931.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 36.3.output 36.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 36.4
@@ -3093,14 +3214,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FFBB3085407
+#1  0x7FFBB3085A1E
+#2  0x7FFBB25A20DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 11997 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 36.4.output
 ++ awk '{print $2}'
-+ name=c000001197562574.gin
-+ cat c000001197562574.gin src/oxygen.gin
-+ mv c000001197562574.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 36.4.output 36.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 37.1
@@ -3116,12 +3248,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F39D6667407
+#1  0x7F39D6667A1E
+#2  0x7F39D5B840DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12014 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 37.1.output
 ++ awk '{print $2}'
-+ name=c000001431204637.gin
-+ cat c000001431204637.gin src/oxygen.gin
-+ mv c000001431204637.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 37.1.output 37.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 37.2
@@ -3137,12 +3280,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F0EEAD9E407
+#1  0x7F0EEAD9EA1E
+#2  0x7F0EEA2BB0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12030 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 37.2.output
 ++ awk '{print $2}'
-+ name=c000001353817839.gin
-+ cat c000001353817839.gin src/oxygen.gin
-+ mv c000001353817839.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 37.2.output 37.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 37.3
@@ -3158,12 +3312,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F75D75C1407
+#1  0x7F75D75C1A1E
+#2  0x7F75D6ADE0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12046 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 37.3.output
 ++ awk '{print $2}'
-+ name=c000001262124442.gin
-+ cat c000001262124442.gin src/oxygen.gin
-+ mv c000001262124442.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 37.3.output 37.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 37.4
@@ -3172,21 +3337,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FE4ABA5D407
+#1  0x7FE4ABA5DA1E
+#2  0x7FE4AAF7A0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12062 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 37.4.output
 ++ awk '{print $2}'
-+ name=c000001256628910.gin
-+ cat c000001256628910.gin src/oxygen.gin
-+ mv c000001256628910.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 37.4.output 37.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 38.1
@@ -3202,12 +3378,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F27A4631407
+#1  0x7F27A4631A1E
+#2  0x7F27A3B4E0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12079 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 38.1.output
 ++ awk '{print $2}'
-+ name=c000001228349695.gin
-+ cat c000001228349695.gin src/oxygen.gin
-+ mv c000001228349695.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 38.1.output 38.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 38.2
@@ -3223,12 +3410,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F304C1A6407
+#1  0x7F304C1A6A1E
+#2  0x7F304B6C30DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12095 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 38.2.output
 ++ awk '{print $2}'
-+ name=c000001291763877.gin
-+ cat c000001291763877.gin src/oxygen.gin
-+ mv c000001291763877.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 38.2.output 38.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 38.3
@@ -3244,12 +3442,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FE673A72407
+#1  0x7FE673A72A1E
+#2  0x7FE672F8F0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12111 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 38.3.output
 ++ awk '{print $2}'
-+ name=c000001241508609.gin
-+ cat c000001241508609.gin src/oxygen.gin
-+ mv c000001241508609.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 38.3.output 38.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 38.4
@@ -3258,21 +3467,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F7E6D227407
+#1  0x7F7E6D227A1E
+#2  0x7F7E6C7440DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12128 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 38.4.output
 ++ awk '{print $2}'
-+ name=c000001250823686.gin
-+ cat c000001250823686.gin src/oxygen.gin
-+ mv c000001250823686.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 38.4.output 38.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 39.1
@@ -3288,12 +3508,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FF411389407
+#1  0x7FF411389A1E
+#2  0x7FF4108A60DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12145 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 39.1.output
 ++ awk '{print $2}'
-+ name=c000001473717582.gin
-+ cat c000001473717582.gin src/oxygen.gin
-+ mv c000001473717582.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 39.1.output 39.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 39.2
@@ -3309,12 +3540,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F1302F25407
+#1  0x7F1302F25A1E
+#2  0x7F13024420DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12161 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 39.2.output
 ++ awk '{print $2}'
-+ name=c000001487331926.gin
-+ cat c000001487331926.gin src/oxygen.gin
-+ mv c000001487331926.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 39.2.output 39.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 39.3
@@ -3323,19 +3565,30 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F7E42056407
+#1  0x7F7E42056A1E
+#2  0x7F7E415730DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12177 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 39.3.output
 ++ awk '{print $2}'
-+ name=c000001200975269.gin
-+ cat c000001200975269.gin src/oxygen.gin
-+ mv c000001200975269.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 39.3.output 39.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 39.4
@@ -3351,14 +3604,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F6C5F67A407
+#1  0x7F6C5F67AA1E
+#2  0x7F6C5EB970DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12193 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 39.4.output
 ++ awk '{print $2}'
-+ name=c000001177329303.gin
-+ cat c000001177329303.gin src/oxygen.gin
-+ mv c000001177329303.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 39.4.output 39.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 40.1
@@ -3374,12 +3638,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F1AE28C9407
+#1  0x7F1AE28C9A1E
+#2  0x7F1AE1DE60DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12210 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 40.1.output
 ++ awk '{print $2}'
-+ name=c000001240051230.gin
-+ cat c000001240051230.gin src/oxygen.gin
-+ mv c000001240051230.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 40.1.output 40.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 40.2
@@ -3395,12 +3670,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F10F1359407
+#1  0x7F10F1359A1E
+#2  0x7F10F08760DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12226 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 40.2.output
 ++ awk '{print $2}'
-+ name=c000001184519037.gin
-+ cat c000001184519037.gin src/oxygen.gin
-+ mv c000001184519037.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 40.2.output 40.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 40.3
@@ -3409,19 +3695,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FA85EA63407
+#1  0x7FA85EA63A1E
+#2  0x7FA85DF800DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12242 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 40.3.output
 ++ awk '{print $2}'
-+ name=c000001403805921.gin
-+ cat c000001403805921.gin src/oxygen.gin
-+ mv c000001403805921.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 40.3.output 40.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 40.4
@@ -3430,21 +3727,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FDA6D741407
+#1  0x7FDA6D741A1E
+#2  0x7FDA6CC5E0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12259 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 40.4.output
 ++ awk '{print $2}'
-+ name=c000001491582613.gin
-+ cat c000001491582613.gin src/oxygen.gin
-+ mv c000001491582613.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 40.4.output 40.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 41.1
@@ -3460,12 +3768,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F40B184D407
+#1  0x7F40B184DA1E
+#2  0x7F40B0D6A0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12276 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 41.1.output
 ++ awk '{print $2}'
-+ name=c000001257843392.gin
-+ cat c000001257843392.gin src/oxygen.gin
-+ mv c000001257843392.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 41.1.output 41.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 41.2
@@ -3481,12 +3800,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FE2B7D83407
+#1  0x7FE2B7D83A1E
+#2  0x7FE2B72A00DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12292 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 41.2.output
 ++ awk '{print $2}'
-+ name=c000001224882349.gin
-+ cat c000001224882349.gin src/oxygen.gin
-+ mv c000001224882349.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 41.2.output 41.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 41.3
@@ -3502,12 +3832,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F8D2E868407
+#1  0x7F8D2E868A1E
+#2  0x7F8D2DD850DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12308 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 41.3.output
 ++ awk '{print $2}'
-+ name=c000001401176567.gin
-+ cat c000001401176567.gin src/oxygen.gin
-+ mv c000001401176567.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 41.3.output 41.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 41.4
@@ -3523,14 +3864,25 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FB274435407
+#1  0x7FB274435A1E
+#2  0x7FB2739520DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12324 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 41.4.output
 ++ awk '{print $2}'
-+ name=c000001351376730.gin
-+ cat c000001351376730.gin src/oxygen.gin
-+ mv c000001351376730.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 41.4.output 41.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 42.1
@@ -3546,12 +3898,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FCD55C8B407
+#1  0x7FCD55C8BA1E
+#2  0x7FCD551A80DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12341 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 42.1.output
 ++ awk '{print $2}'
-+ name=c000001321640136.gin
-+ cat c000001321640136.gin src/oxygen.gin
-+ mv c000001321640136.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 42.1.output 42.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 42.2
@@ -3560,19 +3923,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FF00EB16407
+#1  0x7FF00EB16A1E
+#2  0x7FF00E0330DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12357 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 42.2.output
 ++ awk '{print $2}'
-+ name=c000001477488549.gin
-+ cat c000001477488549.gin src/oxygen.gin
-+ mv c000001477488549.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 42.2.output 42.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 42.3
@@ -3588,12 +3962,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F6BB467E407
+#1  0x7F6BB467EA1E
+#2  0x7F6BB3B9B0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12373 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 42.3.output
 ++ awk '{print $2}'
-+ name=c000001248552605.gin
-+ cat c000001248552605.gin src/oxygen.gin
-+ mv c000001248552605.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 42.3.output 42.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 42.4
@@ -3609,14 +3994,25 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FDB06FB2407
+#1  0x7FDB06FB2A1E
+#2  0x7FDB064CF0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12389 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 42.4.output
 ++ awk '{print $2}'
-+ name=c000001473905827.gin
-+ cat c000001473905827.gin src/oxygen.gin
-+ mv c000001473905827.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 42.4.output 42.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 43.1
@@ -3632,12 +4028,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F2649620407
+#1  0x7F2649620A1E
+#2  0x7F2648B3D0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12406 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 43.1.output
 ++ awk '{print $2}'
-+ name=c000001031977976.gin
-+ cat c000001031977976.gin src/oxygen.gin
-+ mv c000001031977976.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 43.1.output 43.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 43.2
@@ -3653,12 +4060,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FB2F1F1B407
+#1  0x7FB2F1F1BA1E
+#2  0x7FB2F14380DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12422 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 43.2.output
 ++ awk '{print $2}'
-+ name=c000001153098273.gin
-+ cat c000001153098273.gin src/oxygen.gin
-+ mv c000001153098273.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 43.2.output 43.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 43.3
@@ -3667,19 +4085,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F169874A407
+#1  0x7F169874AA1E
+#2  0x7F1697C670DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12443 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 43.3.output
 ++ awk '{print $2}'
-+ name=c000000890126469.gin
-+ cat c000000890126469.gin src/oxygen.gin
-+ mv c000000890126469.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 43.3.output 43.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 43.4
@@ -3695,14 +4124,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F1569403407
+#1  0x7F1569403A1E
+#2  0x7F15689200DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12459 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 43.4.output
 ++ awk '{print $2}'
-+ name=c000000968946356.gin
-+ cat c000000968946356.gin src/oxygen.gin
-+ mv c000000968946356.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 43.4.output 43.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 44.1
@@ -3718,12 +4158,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FE736D92407
+#1  0x7FE736D92A1E
+#2  0x7FE7362AF0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12476 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 44.1.output
 ++ awk '{print $2}'
-+ name=c000001041341632.gin
-+ cat c000001041341632.gin src/oxygen.gin
-+ mv c000001041341632.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 44.1.output 44.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 44.2
@@ -3739,12 +4190,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F45B4636407
+#1  0x7F45B4636A1E
+#2  0x7F45B3B530DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12492 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 44.2.output
 ++ awk '{print $2}'
-+ name=c000001040625088.gin
-+ cat c000001040625088.gin src/oxygen.gin
-+ mv c000001040625088.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 44.2.output 44.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 44.3
@@ -3760,12 +4222,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F20E0F8F407
+#1  0x7F20E0F8FA1E
+#2  0x7F20E04AC0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12508 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 44.3.output
 ++ awk '{print $2}'
-+ name=c000001149515551.gin
-+ cat c000001149515551.gin src/oxygen.gin
-+ mv c000001149515551.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 44.3.output 44.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 44.4
@@ -3781,14 +4254,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FDC6C8A7407
+#1  0x7FDC6C8A7A1E
+#2  0x7FDC6BDC40DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12524 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 44.4.output
 ++ awk '{print $2}'
-+ name=c000000989343582.gin
-+ cat c000000989343582.gin src/oxygen.gin
-+ mv c000000989343582.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 44.4.output 44.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 45.1
@@ -3804,12 +4288,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FF3E603E407
+#1  0x7FF3E603EA1E
+#2  0x7FF3E555B0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12541 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 45.1.output
 ++ awk '{print $2}'
-+ name=c000001097183518.gin
-+ cat c000001097183518.gin src/oxygen.gin
-+ mv c000001097183518.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 45.1.output 45.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 45.2
@@ -3818,19 +4313,30 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F1E76A17407
+#1  0x7F1E76A17A1E
+#2  0x7F1E75F340DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12557 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 45.2.output
 ++ awk '{print $2}'
-+ name=c000001144833723.gin
-+ cat c000001144833723.gin src/oxygen.gin
-+ mv c000001144833723.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 45.2.output 45.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 45.3
@@ -3846,12 +4352,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F1B4B412407
+#1  0x7F1B4B412A1E
+#2  0x7F1B4A92F0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12573 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 45.3.output
 ++ awk '{print $2}'
-+ name=c000000861033551.gin
-+ cat c000000861033551.gin src/oxygen.gin
-+ mv c000000861033551.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 45.3.output 45.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 45.4
@@ -3867,14 +4384,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F5728F28407
+#1  0x7F5728F28A1E
+#2  0x7F57284450DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12589 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 45.4.output
 ++ awk '{print $2}'
-+ name=c000001094651323.gin
-+ cat c000001094651323.gin src/oxygen.gin
-+ mv c000001094651323.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 45.4.output 45.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 46.1
@@ -3890,12 +4418,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F55E0D90407
+#1  0x7F55E0D90A1E
+#2  0x7F55E02AD0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12606 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 46.1.output
 ++ awk '{print $2}'
-+ name=c000001127946350.gin
-+ cat c000001127946350.gin src/oxygen.gin
-+ mv c000001127946350.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 46.1.output 46.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 46.2
@@ -3911,12 +4450,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F9B0D26B407
+#1  0x7F9B0D26BA1E
+#2  0x7F9B0C7880DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12622 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 46.2.output
 ++ awk '{print $2}'
-+ name=c000001143710327.gin
-+ cat c000001143710327.gin src/oxygen.gin
-+ mv c000001143710327.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 46.2.output 46.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 46.3
@@ -3932,12 +4482,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FDDF181A407
+#1  0x7FDDF181AA1E
+#2  0x7FDDF0D370DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12638 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 46.3.output
 ++ awk '{print $2}'
-+ name=c000000864950255.gin
-+ cat c000000864950255.gin src/oxygen.gin
-+ mv c000000864950255.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 46.3.output 46.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 46.4
@@ -3953,14 +4514,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FE1E0490407
+#1  0x7FE1E0490A1E
+#2  0x7FE1DF9AD0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12654 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 46.4.output
 ++ awk '{print $2}'
-+ name=c000001187753520.gin
-+ cat c000001187753520.gin src/oxygen.gin
-+ mv c000001187753520.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 46.4.output 46.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 47.1
@@ -3969,19 +4541,30 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F949994A407
+#1  0x7F949994AA1E
+#2  0x7F9498E670DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12671 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 47.1.output
 ++ awk '{print $2}'
-+ name=c000001130763948.gin
-+ cat c000001130763948.gin src/oxygen.gin
-+ mv c000001130763948.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 47.1.output 47.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 47.2
@@ -3997,12 +4580,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F27373E4407
+#1  0x7F27373E4A1E
+#2  0x7F27369010DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12687 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 47.2.output
 ++ awk '{print $2}'
-+ name=c000001151088306.gin
-+ cat c000001151088306.gin src/oxygen.gin
-+ mv c000001151088306.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 47.2.output 47.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 47.3
@@ -4011,19 +4605,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F18C7F49407
+#1  0x7F18C7F49A1E
+#2  0x7F18C74660DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12703 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 47.3.output
 ++ awk '{print $2}'
-+ name=c000001160688786.gin
-+ cat c000001160688786.gin src/oxygen.gin
-+ mv c000001160688786.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 47.3.output 47.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 47.4
@@ -4032,21 +4637,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F7DE5602407
+#1  0x7F7DE5602A1E
+#2  0x7F7DE4B1F0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12719 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 47.4.output
 ++ awk '{print $2}'
-+ name=c000001119129210.gin
-+ cat c000001119129210.gin src/oxygen.gin
-+ mv c000001119129210.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 47.4.output 47.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 48.1
@@ -4055,19 +4671,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F8190EAB407
+#1  0x7F8190EABA1E
+#2  0x7F81903C80DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12736 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 48.1.output
 ++ awk '{print $2}'
-+ name=c000000957548441.gin
-+ cat c000000957548441.gin src/oxygen.gin
-+ mv c000000957548441.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 48.1.output 48.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 48.2
@@ -4083,12 +4710,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FB57A775407
+#1  0x7FB57A775A1E
+#2  0x7FB579C920DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12752 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 48.2.output
 ++ awk '{print $2}'
-+ name=c000000967197502.gin
-+ cat c000000967197502.gin src/oxygen.gin
-+ mv c000000967197502.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 48.2.output 48.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 48.3
@@ -4104,12 +4742,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FB564820407
+#1  0x7FB564820A1E
+#2  0x7FB563D3D0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12768 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 48.3.output
 ++ awk '{print $2}'
-+ name=c000001104440049.gin
-+ cat c000001104440049.gin src/oxygen.gin
-+ mv c000001104440049.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 48.3.output 48.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 48.4
@@ -4125,14 +4774,25 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F292D4F9407
+#1  0x7F292D4F9A1E
+#2  0x7F292CA160DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12784 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 48.4.output
 ++ awk '{print $2}'
-+ name=c000000931370280.gin
-+ cat c000000931370280.gin src/oxygen.gin
-+ mv c000000931370280.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 48.4.output 48.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 49.1
@@ -4148,12 +4808,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F6C8A234407
+#1  0x7F6C8A234A1E
+#2  0x7F6C897510DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12801 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 49.1.output
 ++ awk '{print $2}'
-+ name=c000001121278843.gin
-+ cat c000001121278843.gin src/oxygen.gin
-+ mv c000001121278843.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 49.1.output 49.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 49.2
@@ -4161,20 +4832,31 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + echo 49
 + go
 ++ ps aux
-++ grep ising
 ++ sed /grep/d
+++ grep ising
 ++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F8A6AB61407
+#1  0x7F8A6AB61A1E
+#2  0x7F8A6A07E0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12817 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 49.2.output
 ++ awk '{print $2}'
-+ name=c000000972571585.gin
-+ cat c000000972571585.gin src/oxygen.gin
-+ mv c000000972571585.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 49.2.output 49.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 49.3
@@ -4190,12 +4872,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FF5408AF407
+#1  0x7FF5408AFA1E
+#2  0x7FF53FDCC0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12833 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 49.3.output
 ++ awk '{print $2}'
-+ name=c000001265875079.gin
-+ cat c000001265875079.gin src/oxygen.gin
-+ mv c000001265875079.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 49.3.output 49.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 49.4
@@ -4204,21 +4897,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F09FCBBF407
+#1  0x7F09FCBBFA1E
+#2  0x7F09FC0DC0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12849 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 49.4.output
 ++ awk '{print $2}'
-+ name=c000001102454371.gin
-+ cat c000001102454371.gin src/oxygen.gin
-+ mv c000001102454371.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 49.4.output 49.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 50.1
@@ -4227,19 +4931,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FFAE1863407
+#1  0x7FFAE1863A1E
+#2  0x7FFAE0D800DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12866 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 50.1.output
 ++ awk '{print $2}'
-+ name=c000001102071809.gin
-+ cat c000001102071809.gin src/oxygen.gin
-+ mv c000001102071809.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 50.1.output 50.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 50.2
@@ -4255,12 +4970,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F2B1C614407
+#1  0x7F2B1C614A1E
+#2  0x7F2B1BB310DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12882 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 50.2.output
 ++ awk '{print $2}'
-+ name=c000001127126574.gin
-+ cat c000001127126574.gin src/oxygen.gin
-+ mv c000001127126574.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 50.2.output 50.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 50.3
@@ -4276,12 +5002,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F72835C2407
+#1  0x7F72835C2A1E
+#2  0x7F7282ADF0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12898 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 50.3.output
 ++ awk '{print $2}'
-+ name=c000001060821925.gin
-+ cat c000001060821925.gin src/oxygen.gin
-+ mv c000001060821925.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 50.3.output 50.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 50.4
@@ -4297,14 +5034,25 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F503710A407
+#1  0x7F503710AA1E
+#2  0x7F50366270DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12914 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 50.4.output
 ++ awk '{print $2}'
-+ name=c000001077994702.gin
-+ cat c000001077994702.gin src/oxygen.gin
-+ mv c000001077994702.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 50.4.output 50.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 51.1
@@ -4320,12 +5068,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FAE62909407
+#1  0x7FAE62909A1E
+#2  0x7FAE61E260DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12932 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 51.1.output
 ++ awk '{print $2}'
-+ name=c000001121940736.gin
-+ cat c000001121940736.gin src/oxygen.gin
-+ mv c000001121940736.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 51.1.output 51.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 51.2
@@ -4341,12 +5100,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FA49EB77407
+#1  0x7FA49EB77A1E
+#2  0x7FA49E0940DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12948 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 51.2.output
 ++ awk '{print $2}'
-+ name=c000001040946926.gin
-+ cat c000001040946926.gin src/oxygen.gin
-+ mv c000001040946926.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 51.2.output 51.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 51.3
@@ -4362,12 +5132,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F4C31362407
+#1  0x7F4C31362A1E
+#2  0x7F4C3087F0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12964 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 51.3.output
 ++ awk '{print $2}'
-+ name=c000001080715141.gin
-+ cat c000001080715141.gin src/oxygen.gin
-+ mv c000001080715141.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 51.3.output 51.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 51.4
@@ -4376,21 +5157,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FD87A6D4407
+#1  0x7FD87A6D4A1E
+#2  0x7FD879BF10DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12980 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 51.4.output
 ++ awk '{print $2}'
-+ name=c000001048063791.gin
-+ cat c000001048063791.gin src/oxygen.gin
-+ mv c000001048063791.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 51.4.output 51.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 52.1
@@ -4406,12 +5198,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FC4F766B407
+#1  0x7FC4F766BA1E
+#2  0x7FC4F6B880DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 12997 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 52.1.output
 ++ awk '{print $2}'
-+ name=c000001185974303.gin
-+ cat c000001185974303.gin src/oxygen.gin
-+ mv c000001185974303.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 52.1.output 52.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 52.2
@@ -4427,12 +5230,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F7C57340407
+#1  0x7F7C57340A1E
+#2  0x7F7C5685D0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13013 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 52.2.output
 ++ awk '{print $2}'
-+ name=c000001058763378.gin
-+ cat c000001058763378.gin src/oxygen.gin
-+ mv c000001058763378.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 52.2.output 52.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 52.3
@@ -4448,12 +5262,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F59AA550407
+#1  0x7F59AA550A1E
+#2  0x7F59A9A6D0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13029 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 52.3.output
 ++ awk '{print $2}'
-+ name=c000001401150166.gin
-+ cat c000001401150166.gin src/oxygen.gin
-+ mv c000001401150166.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 52.3.output 52.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 52.4
@@ -4462,21 +5287,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F3059500407
+#1  0x7F3059500A1E
+#2  0x7F3058A1D0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13045 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 52.4.output
 ++ awk '{print $2}'
-+ name=c000001353141689.gin
-+ cat c000001353141689.gin src/oxygen.gin
-+ mv c000001353141689.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 52.4.output 52.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 53.1
@@ -4492,12 +5328,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7EFF97A40407
+#1  0x7EFF97A40A1E
+#2  0x7EFF96F5D0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13062 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 53.1.output
 ++ awk '{print $2}'
-+ name=c000001275609153.gin
-+ cat c000001275609153.gin src/oxygen.gin
-+ mv c000001275609153.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 53.1.output 53.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 53.2
@@ -4506,19 +5353,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F62C1B33407
+#1  0x7F62C1B33A1E
+#2  0x7F62C10500DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13078 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 53.2.output
 ++ awk '{print $2}'
-+ name=c000001305704019.gin
-+ cat c000001305704019.gin src/oxygen.gin
-+ mv c000001305704019.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 53.2.output 53.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 53.3
@@ -4534,12 +5392,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FAB65EE0407
+#1  0x7FAB65EE0A1E
+#2  0x7FAB653FD0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13094 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 53.3.output
 ++ awk '{print $2}'
-+ name=c000001273076958.gin
-+ cat c000001273076958.gin src/oxygen.gin
-+ mv c000001273076958.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 53.3.output 53.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 53.4
@@ -4548,21 +5417,32 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ sed /grep/d
 ++ wc -l
+++ sed /grep/d
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F529CF57407
+#1  0x7F529CF57A1E
+#2  0x7F529C4740DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13110 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 53.4.output
 ++ awk '{print $2}'
-+ name=c000001427850554.gin
-+ cat c000001427850554.gin src/oxygen.gin
-+ mv c000001427850554.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 53.4.output 53.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 54.1
@@ -4571,19 +5451,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
-++ echo '0 >= 4'
 ++ bc -l
+++ echo '0 >= 4'
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FB22D4D1407
+#1  0x7FB22D4D1A1E
+#2  0x7FB22C9EE0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13127 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 54.1.output
 ++ awk '{print $2}'
-+ name=c000001227552097.gin
-+ cat c000001227552097.gin src/oxygen.gin
-+ mv c000001227552097.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 54.1.output 54.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 54.2
@@ -4591,20 +5482,31 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + echo 54
 + go
 ++ ps aux
-++ grep ising
 ++ sed /grep/d
+++ grep ising
 ++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F89D7AAC407
+#1  0x7F89D7AACA1E
+#2  0x7F89D6FC90DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13144 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 54.2.output
 ++ awk '{print $2}'
-+ name=c000001261205396.gin
-+ cat c000001261205396.gin src/oxygen.gin
-+ mv c000001261205396.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 54.2.output 54.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 54.3
@@ -4613,19 +5515,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FEAD7AC7407
+#1  0x7FEAD7AC7A1E
+#2  0x7FEAD6FE40DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13161 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 54.3.output
 ++ awk '{print $2}'
-+ name=c000001357434883.gin
-+ cat c000001357434883.gin src/oxygen.gin
-+ mv c000001357434883.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 54.3.output 54.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 54.4
@@ -4641,14 +5554,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F692EEE3407
+#1  0x7F692EEE3A1E
+#2  0x7F692E4000DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13177 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 54.4.output
 ++ awk '{print $2}'
-+ name=c000001407951265.gin
-+ cat c000001407951265.gin src/oxygen.gin
-+ mv c000001407951265.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 54.4.output 54.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 55.1
@@ -4657,19 +5581,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F33AFC82407
+#1  0x7F33AFC82A1E
+#2  0x7F33AF19F0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13196 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 55.1.output
 ++ awk '{print $2}'
-+ name=c000001412226242.gin
-+ cat c000001412226242.gin src/oxygen.gin
-+ mv c000001412226242.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 55.1.output 55.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 55.2
@@ -4685,12 +5620,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FAE55FC3407
+#1  0x7FAE55FC3A1E
+#2  0x7FAE554E00DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13212 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 55.2.output
 ++ awk '{print $2}'
-+ name=c000001317642378.gin
-+ cat c000001317642378.gin src/oxygen.gin
-+ mv c000001317642378.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 55.2.output 55.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 55.3
@@ -4706,12 +5652,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F6CE3D4D407
+#1  0x7F6CE3D4DA1E
+#2  0x7F6CE326A0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13228 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 55.3.output
 ++ awk '{print $2}'
-+ name=c000001349146043.gin
-+ cat c000001349146043.gin src/oxygen.gin
-+ mv c000001349146043.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 55.3.output 55.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 55.4
@@ -4720,21 +5677,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FD44B92F407
+#1  0x7FD44B92FA1E
+#2  0x7FD44AE4C0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13244 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 55.4.output
 ++ awk '{print $2}'
-+ name=c000001279975216.gin
-+ cat c000001279975216.gin src/oxygen.gin
-+ mv c000001279975216.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 55.4.output 55.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 56.1
@@ -4743,19 +5711,30 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F141B9E0407
+#1  0x7F141B9E0A1E
+#2  0x7F141AEFD0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13261 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 56.1.output
 ++ awk '{print $2}'
-+ name=c000001474875300.gin
-+ cat c000001474875300.gin src/oxygen.gin
-+ mv c000001474875300.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 56.1.output 56.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 56.2
@@ -4771,12 +5750,23 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F2F10D1D407
+#1  0x7F2F10D1DA1E
+#2  0x7F2F1023A0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13277 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 56.2.output
 ++ awk '{print $2}'
-+ name=c000001494555982.gin
-+ cat c000001494555982.gin src/oxygen.gin
-+ mv c000001494555982.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 56.2.output 56.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 56.3
@@ -4792,12 +5782,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F003AD6B407
+#1  0x7F003AD6BA1E
+#2  0x7F003A2880DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13293 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 56.3.output
 ++ awk '{print $2}'
-+ name=c000001306797053.gin
-+ cat c000001306797053.gin src/oxygen.gin
-+ mv c000001306797053.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 56.3.output 56.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 56.4
@@ -4813,14 +5814,25 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FEA406FC407
+#1  0x7FEA406FCA1E
+#2  0x7FEA3FC190DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13309 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 56.4.output
 ++ awk '{print $2}'
-+ name=c000001543900389.gin
-+ cat c000001543900389.gin src/oxygen.gin
-+ mv c000001543900389.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 56.4.output 56.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 57.1
@@ -4836,12 +5848,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F128350E407
+#1  0x7F128350EA1E
+#2  0x7F1282A2B0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13326 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 57.1.output
 ++ awk '{print $2}'
-+ name=c000001526581875.gin
-+ cat c000001526581875.gin src/oxygen.gin
-+ mv c000001526581875.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 57.1.output 57.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 57.2
@@ -4850,19 +5873,30 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F7C3A1E4407
+#1  0x7F7C3A1E4A1E
+#2  0x7F7C397010DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13342 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 57.2.output
 ++ awk '{print $2}'
-+ name=c000001393638594.gin
-+ cat c000001393638594.gin src/oxygen.gin
-+ mv c000001393638594.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 57.2.output 57.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 57.3
@@ -4878,12 +5912,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F706AA58407
+#1  0x7F706AA58A1E
+#2  0x7F7069F750DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13358 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 57.3.output
 ++ awk '{print $2}'
-+ name=c000001269627829.gin
-+ cat c000001269627829.gin src/oxygen.gin
-+ mv c000001269627829.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 57.3.output 57.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 57.4
@@ -4899,14 +5944,25 @@ Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F535954B407
+#1  0x7F535954BA1E
+#2  0x7F5358A680DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13374 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 57.4.output
 ++ awk '{print $2}'
-+ name=c000001525075917.gin
-+ cat c000001525075917.gin src/oxygen.gin
-+ mv c000001525075917.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 57.4.output 57.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 58.1
@@ -4922,12 +5978,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F9EFEE58407
+#1  0x7F9EFEE58A1E
+#2  0x7F9EFE3750DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13391 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 58.1.output
 ++ awk '{print $2}'
-+ name=c000001167293457.gin
-+ cat c000001167293457.gin src/oxygen.gin
-+ mv c000001167293457.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 58.1.output 58.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 58.2
@@ -4943,12 +6010,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F9AA87F9407
+#1  0x7F9AA87F9A1E
+#2  0x7F9AA7D160DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13407 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 58.2.output
 ++ awk '{print $2}'
-+ name=c000001094181636.gin
-+ cat c000001094181636.gin src/oxygen.gin
-+ mv c000001094181636.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 58.2.output 58.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 58.3
@@ -4964,12 +6042,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FD0FBFEA407
+#1  0x7FD0FBFEAA1E
+#2  0x7FD0FB5070DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13423 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 58.3.output
 ++ awk '{print $2}'
-+ name=c000001066570386.gin
-+ cat c000001066570386.gin src/oxygen.gin
-+ mv c000001066570386.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 58.3.output 58.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 58.4
@@ -4978,21 +6067,32 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 + go
 ++ ps aux
 ++ grep ising
-++ wc -l
 ++ sed /grep/d
+++ wc -l
 + ni=0
 ++ echo '0 >= 4'
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FBC0023C407
+#1  0x7FBC0023CA1E
+#2  0x7FBBFF7590DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13439 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 58.4.output
 ++ awk '{print $2}'
-+ name=c000001271477802.gin
-+ cat c000001271477802.gin src/oxygen.gin
-+ mv c000001271477802.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 58.4.output 58.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
++ for molar_fraction in '$(seq 1 59)'
 ++ seq 1 4
 + for repetition in '$(seq 1 4)'
 + echo 59.1
@@ -5008,12 +6108,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F334E089407
+#1  0x7F334E089A1E
+#2  0x7F334D5A60DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13456 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 59.1.output
 ++ awk '{print $2}'
-+ name=c000001265721157.gin
-+ cat c000001265721157.gin src/oxygen.gin
-+ mv c000001265721157.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 59.1.output 59.1.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 59.2
@@ -5029,12 +6140,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F356EEFF407
+#1  0x7F356EEFFA1E
+#2  0x7F356E41C0DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13473 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 59.2.output
 ++ awk '{print $2}'
-+ name=c000001037046326.gin
-+ cat c000001037046326.gin src/oxygen.gin
-+ mv c000001037046326.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 59.2.output 59.2.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 59.3
@@ -5050,12 +6172,23 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FB58C527407
+#1  0x7FB58C527A1E
+#2  0x7FB58BA440DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13489 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 59.3.output
 ++ awk '{print $2}'
-+ name=c000001162441601.gin
-+ cat c000001162441601.gin src/oxygen.gin
-+ mv c000001162441601.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 59.3.output 59.3.gin CALCS
 + for repetition in '$(seq 1 4)'
 + echo 59.4
@@ -5071,72 +6204,21 @@ Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLA
 ++ bc -l
 + '[' 0 == 1 ']'
 + ./ising_frameworks
-Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F5586116407
+#1  0x7F5586116A1E
+#2  0x7F55856330DF
+#3  0x401082 in choose.2319.constprop.0 at ising_frameworks.f90:?
+#4  0x40286B in MAIN__ at ising_frameworks.f90:?
+./rendimiento.sh: line 2: 13505 Floating point exception./ising_frameworks < input > ${molar_fraction}.${repetition}.output
 ++ grep filename: 59.4.output
 ++ awk '{print $2}'
-+ name=c000001005828064.gin
-+ cat c000001005828064.gin src/oxygen.gin
-+ mv c000001005828064.gin CALCS/.
++ name=
++ cat src/oxygen.gin
++ rm
+rm: missing operand
+Try 'rm --help' for more information.
 + mv 59.4.output 59.4.gin CALCS
-+ for molar_fraction in '$(seq 1 60)'
-++ seq 1 4
-+ for repetition in '$(seq 1 4)'
-+ echo 60.1
-60.1
-+ echo 60
-+ go
-++ ps aux
-++ grep ising
-++ wc -l
-++ sed /grep/d
-+ ni=0
-++ echo '0 >= 4'
-++ bc -l
-+ '[' 0 == 1 ']'
-+ ./ising_frameworks
-./rendimiento.sh: line 2: 20913 Terminated              ./ising_frameworks < input > ${molar_fraction}.${repetition}.output
-++ grep filename: 60.1.output
-++ awk '{print $2}'
-+ name=
-+ cat src/oxygen.gin
-+ mv CALCS/.
-mv: missing destination file operand after ‘CALCS/.’
-Try 'mv --help' for more information.
-+ mv 60.1.output 60.1.gin CALCS
-+ for repetition in '$(seq 1 4)'
-+ echo 60.2
-60.2
-+ echo 60
-+ go
-++ ps aux
-++ grep ising
-++ wc -l
-++ sed /grep/d
-+ ni=0
-++ echo '0 >= 4'
-++ bc -l
-+ '[' 0 == 1 ']'
-+ ./ising_frameworks
-./rendimiento.sh: line 2: 23100 Terminated              ./ising_frameworks < input > ${molar_fraction}.${repetition}.output
-++ grep filename: 60.2.output
-++ awk '{print $2}'
-+ name=
-+ cat src/oxygen.gin
-+ mv CALCS/.
-mv: missing destination file operand after ‘CALCS/.’
-Try 'mv --help' for more information.
-+ mv 60.2.output 60.2.gin CALCS
-+ for repetition in '$(seq 1 4)'
-+ echo 60.3
-60.3
-+ echo 60
-+ go
-++ ps aux
-++ grep ising
-++ wc -l
-++ sed /grep/d
-+ ni=0
-++ echo '0 >= 4'
-++ bc -l
-+ '[' 0 == 1 ']'
-+ ./ising_frameworks

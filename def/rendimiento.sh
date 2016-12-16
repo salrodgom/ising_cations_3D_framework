@@ -16,7 +16,7 @@ for molar_fraction in $(seq 1 59) ; do
   go
   name=$(grep 'filename:' ${molar_fraction}.${repetition}.output | awk '{print $2}')
   cat ${name} src/oxygen.gin > ${molar_fraction}.${repetition}.gin
-  mv ${name} CALCS/.
+  rm ${name}
   mv ${molar_fraction}.${repetition}.output ${molar_fraction}.${repetition}.gin CALCS
  done
 done

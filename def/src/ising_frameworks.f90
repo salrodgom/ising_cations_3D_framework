@@ -6,22 +6,18 @@ program main
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
  integer                    :: n_Ge = 0
- integer,parameter          :: MC_steps = 200
+ integer,parameter          :: MC_steps = 100
  integer,parameter          :: n_configurations = 0
  character(len=120)          :: file_name,line
- real,parameter             :: temperature = 10000.0
+ real,parameter             :: temperature = 3.0
  integer, parameter         :: NOPMAX=10000
  integer                    :: k_max_1,k_max_2,k_max_3,k_max_4
  real                       :: ener_0 = -7745.86721305,epsilon_,energy_123
  !
  real                       :: ener_1(n_atoms) = 0.0
- !real                       :: deg_1(n_atoms) = 0.0
  real                       :: ener_2(n_atoms,n_atoms) = 0.0
- !real                       :: deg_2(n_atoms,n_atoms) = 0.0
  real                       :: ener_3(n_atoms,n_atoms,n_atoms) = 0.0
- !real                       :: deg_3(n_atoms,n_atoms,n_atoms) = 0.0
  real                       :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
- !real                       :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
  real                       :: minener_4(1:4)
  real                       :: cell_0(1:6)
  logical                    :: MC_flag = .true.,no_presente=.true.
@@ -29,14 +25,14 @@ program main
  real,dimension(NOPMAX,3)   :: vgroup1
  real,dimension(0:n_configurations,n_atoms,3)             :: cryst_coor
  character(len=4),dimension(0:n_configurations,n_atoms,2) :: label
- read(5,*) n_Ge
-!
+ read(5,*)  n_Ge
+ write(6,*) '# substitutions Si/Ge: ', n_Ge
  do ii=0,n_configurations
   !write(6,'(i4.4)') ii
-  write (file_name, '( "src/c", I4.4, ".gin" )' ) 0
+  write (file_name, '( "src/c", I4.4, ".gin" )' )0
   !gulp-1-subs/c0000.gin
-  !write(6,*)'Configuration',ii, file_name
-  !write(6,*)'==============='
+  write(6,*)'Configuration',ii, file_name
+  write(6,*)'==============='
   open(unit=configuration_file,file=file_name,status='old',iostat=err_apertura)
   if(err_apertura/=0) stop "[ERROR] reading file // file_name // "
   reading_file: do
@@ -44,33 +40,31 @@ program main
    IF( err_apertura /= 0 ) exit reading_file
    !write(6,'(a)') line
    if(line(1:5)=='cell ') then
-    !write(6,*)'Cell parameters'
+    write(6,*)'Cell parameters'
     read(configuration_file,'(A)',iostat=err_apertura) line
     if ( err_apertura /= 0 ) exit reading_file
     read(line,*) ( cell_0(j),j=1,6 )
-    !write(6,*) ( cell_0(j),j=1,6 )
+    write(6,*) ( cell_0(j),j=1,6 )
    end if
    if(line(1:5)==' frac') then
-    !write(6,*)'Atom coordinates'
+    write(6,*)'Atom coordinates'
     do i=1,n_atoms
      !Si   core    0.0298000    0.8771000    0.4669700
      read (configuration_file,'(A)',iostat=err_apertura) line
      if ( err_apertura /= 0 ) exit reading_file
-     !if ( line(6:9)=='core') then
      if(line(1:7)=='species') exit reading_file
-      read(line,*)(label(ii,i,j),j=1,2),(cryst_coor(ii,i,j),j=1,3)
-      !write(6,'(a4,1x,a4)') (label(ii,i,j),j=1,2)
-      !write(6,*) (cryst_coor(ii,i,j),j=1,3)
-     !end if
+     read(line,*)(label(ii,i,j),j=1,2),(cryst_coor(ii,i,j),j=1,3)
+     write(6,'(a4,1x,a4)') (label(ii,i,j),j=1,2)
+     write(6,*) (cryst_coor(ii,i,j),j=1,3)
     end do
    end if
   end do reading_file
   close(configuration_file)
  end do 
 !
- !write(6,*)'Read relation between unique and dependent configurations'
+ write(6,*)'Read relation between unique and dependent configurations'
 ! {{{ 
- !write(6,*)'One substitution:'
+ write(6,*)'One substitution:'
  k_max_1 = 0
  open(unit=111,file='gulp-1-subs/OUTSOD',status='old',iostat=err_apertura)
  open(unit=112,file='gulp-1-subs/OUTSOD_modified',status='old',iostat=err_apertura)
@@ -84,9 +78,9 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_1 !<-N.configuraciones totales
  ener_1(1:n_atoms)  = 0.0
- !deg_1(1:n_atoms)   = 0.0
  if( err_apertura /=0 ) stop
 !
+ if(n_Ge>=1)then
  read_matrix_1: do
   read(111,'(a)',iostat=err_apertura) line
   IF( err_apertura /= 0 ) exit read_matrix_1
@@ -94,22 +88,21 @@ program main
   read(113,*,iostat=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_1
   ener_1(k)=epsilon_-ener_0
-  !deg_1(k) =deg
-  !write(6,*)k,ener_1(k)
+  write(6,*)k,ener_1(k) !/real(deg)
   do j=2,deg
    READ (112,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_1
    read(line,*)l,m,i,n
    ener_1(i)=ener_1(k)
-   !deg_1(i) =deg_1(k)
-   !write(6,*)k,ener_1(i)
+   write(6,*)k,i,ener_1(i) !/real(deg)
   end do
  end do read_matrix_1
+ end if
  close(111)
  close(112)
  close(113)
 ! }}}
- !write(6,*)'Two substitutions:'
+ write(6,*)'Two substitutions:'
  k_max_2 = 0
  open(unit=121,file='gulp-2-subs/OUTSOD',status='old',iostat=err_apertura)
  open(unit=122,file='gulp-2-subs/OUTSOD_modified',status='old',iostat=err_apertura)
@@ -123,22 +116,18 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_2 !<-N.configuraciones totales
  ener_2(1:n_atoms,1:n_atoms)  = 0.0
- !deg_2(1:n_atoms,1:n_atoms)   = 0.0
  if( err_apertura /=0 ) stop
- ii=0
+ if(n_Ge>=2)then
  read_matrix_2: do
   read(121,'(A)',IOSTAT=err_apertura) line
   IF( err_apertura /= 0 ) exit read_matrix_2
   read(line,*)k,deg,i,j
   READ(123,*,IOSTAT=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_2
-  ii=ii+1
-  epsilon_ =   epsilon_-ener_0-ener_1(i)-ener_1(j)
+  epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(j))/real(choose(n_Ge,2))
   ener_2(i,j)= epsilon_
   ener_2(j,i)= ener_2(i,j)
-  !deg_2(i,j) = deg
-  !deg_2(j,i) = deg_2(i,j)
-  !write(6,*)i,j,ener_2(i,j)
+  write(6,*)i,j,ener_2(i,j)
   do k=2,deg
    read(122,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_2
@@ -146,13 +135,15 @@ program main
    read(line,*)jj,kk,l,m,n
    ener_2(l,m) = epsilon_
    ener_2(m,l) = epsilon_
-   !deg_2(l,m) = deg
-   !deg_2(m,l) = deg
-   !write(6,*)i,j,ener_2(l,m)
+   write(6,*)i,j,ener_2(l,m)
   end do
  end do read_matrix_2
+ end if
+ close(121)
+ close(122)
+ close(123)
 !!!
- !write(6,*)'3 substitutions:'
+ write(6,*)'3 substitutions:'
  k_max_3 = 0
  open(unit=131,file='gulp-3-subs/OUTSOD',status='old',iostat=err_apertura)
  open(unit=132,file='gulp-3-subs/OUTSOD_modified',status='old',iostat=err_apertura)
@@ -165,15 +156,16 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_3 !<-N.configuraciones totales
  ener_3(1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
- !deg_3 (1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
  if( err_apertura /=0 ) stop 
+ if( n_Ge>=3)then
  read_matrix_3: do
   read(131,'(A)',IOSTAT=err_apertura) line
   IF( err_apertura /= 0 ) exit read_matrix_3
   read(line,*)ijk,deg,i,j,k
   read(133,*,IOSTAT=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_3
-  epsilon_ = epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_2(i,j)-ener_2(j,k)-ener_2(i,k)
+  epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_2(i,j)-&
+   ener_2(j,k)-ener_2(i,k))/real(choose(n_Ge,3))
   ener_3(i,j,k) = epsilon_
   ener_3(j,i,k) = epsilon_
   ener_3(i,k,j) = epsilon_
@@ -186,7 +178,7 @@ program main
   !deg_3(k,j,i) = deg
   !deg_3(k,i,j) = deg
   !deg_3(j,k,i) = deg
-  !write(6,*)i,j,k,ener_3(i,j,k)
+  write(6,*)i,j,k,ener_3(i,j,k)
   do k=2,deg
    READ (132,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_3
@@ -203,13 +195,14 @@ program main
    !deg_3(n,m,l) = deg
    !deg_3(m,n,l) = deg
    !deg_3(n,l,m) = deg
-   !write(6,*)i,j,k,ener_3(l,m,n)
+   write(6,*)i,j,k,ener_3(l,m,n)
   end do
  end do read_matrix_3
+ end if
  close(131)
  close(132)
  close(133)
- !write(6,*)'4 substitutions:'
+ write(6,*)'4 substitutions:'
  k_max_4 = 0
  open(unit=141,file='gulp-4-subs/OUTSOD',status='old',iostat=err_apertura)
  open(unit=142,file='gulp-4-subs/OUTSOD_modified',status='old',iostat=err_apertura)
@@ -222,8 +215,8 @@ program main
  if( err_apertura /=0 ) stop
  read(line,*) k_max_4 !<-N.configuraciones totales
  ener_4(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
- !deg_4(1:n_atoms,1:n_atoms,1:n_atoms,1:n_atoms)  = 0.0
- if( err_apertura /=0 ) stop
+ if( err_apertura /=0 ) stop 
+ if (n_Ge>=4)then
  read_matrix_4: do
   read(141,'(A)',IOSTAT=err_apertura) line
   if( err_apertura /= 0 ) exit read_matrix_4
@@ -236,19 +229,17 @@ program main
     no_presente=.true.
     exit check_energy_4
    end if
-   ! jj  = 
-   ! ijk = 
    if(jj==ijk)then
     no_presente = .false.
-    epsilon_ = epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_1(l)-ener_2(i,j)-ener_2(j,k)-&
+    epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_1(l)-ener_2(i,j)-ener_2(j,k)-&
      ener_2(i,k)-ener_2(i,l)-ener_2(j,l)-ener_2(k,l)-&
      ener_3(i,j,k)-ener_3(i,k,j)-ener_3(j,i,k)-ener_3(j,k,i)-ener_3(k,i,j)-ener_3(k,j,i)-&
      ener_3(i,j,l)-ener_3(i,l,j)-ener_3(j,i,l)-ener_3(j,l,i)-ener_3(l,i,j)-ener_3(l,j,i)-&
      ener_3(i,l,k)-ener_3(i,k,l)-ener_3(l,i,k)-ener_3(l,k,i)-ener_3(l,k,i)-ener_3(k,i,l)-&
      ener_3(k,l,i)-ener_3(l,j,k)-ener_3(l,k,j)-ener_3(j,l,k)-ener_3(j,k,l)-ener_3(k,l,j)-&
-     ener_3(j,l,k)
+     ener_3(j,l,k))/real(choose(n_Ge,4))
     rewind(143)
-    !write(6,*)i,j,k,l,epsilon_
+    write(6,*)i,j,k,l,epsilon_
     exit check_energy_4
    end if
   end do check_energy_4 
@@ -309,7 +300,7 @@ program main
   !deg_4(l,j,k,i) = deg
   !deg_4(l,k,i,j) = deg
   !deg_4(l,k,j,i) = deg
-  !!write(6,*)i,j,k,l,i,j,k,l,ener_4(i,j,k,l),deg_4(i,j,k,l),no_presente
+  !write(6,*)i,j,k,l,ener_4(i,j,k,l)
   ll=l
   do kk=2,deg
    READ (142,'(A)',IOSTAT=err_apertura) line
@@ -363,30 +354,49 @@ program main
     !deg_4(o,m,n,l) = deg
     !deg_4(o,n,l,m) = deg
     !deg_4(o,n,m,l) = deg
-    !!write(6,*)i,j,k,ll,l,m,n,o,ener_4(l,m,n,o),deg_4(l,m,n,o),no_presente
+    !write(6,*)i,j,k,ll,ener_4(l,m,n,o)
   end do
-  !if (no_presente.eqv..false.) stop
  end do read_matrix_4
-! final 
+ end if
  close(141)
  close(142)
  close(143)
 ! {{{
  if(MC_flag)then
-    !write(6,*)'Colocamos Ge'
-    !call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
-    ! ener_2,ener_3,ener_4,deg_1,deg_2,deg_3,deg_4,cell_0,cryst_coor,&
-    ! n_configurations,label,MC_steps,temperature)
     call farthrest_nodes_subtitutions(n_atoms,n_T_atoms,n_Ge,ener_0,ener_1,&
      ener_2,ener_3,ener_4,cell_0,cryst_coor,&
      n_configurations,label,MC_steps,temperature,0)
  else
   do ii=1,n_configurations
-   !call geometrical_properties(n_atoms,n_T_atoms,n_Ge,cell_0,cryst_coor,n_configurations,&
-   !    label,deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
    call geometrical_properties(n_atoms,n_T_atoms,n_Ge,cell_0,cryst_coor,n_configurations,&
        label,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
   end do
  end if
  stop
+contains
+!  integer function factorial (n)
+!    implicit none
+!    integer, intent (in) :: n
+!    integer :: i
+!    factorial = product ((/(i, i = 1, n)/))
+!    return
+!  end function factorial 
+  integer function choose (n, k)
+    implicit none
+    integer, intent (in) :: n
+    integer, intent (in) :: k
+    choose = factorial (n) / (factorial (k) * factorial (n - k))
+    if (choose<1) choose=1
+    return
+  end function choose
+
+  integer RECURSIVE FUNCTION factorial(n)  RESULT(Fact)
+  IMPLICIT NONE
+  INTEGER, INTENT(IN) :: n
+  IF(n<=0)THEN
+   Fact=1
+  ELSE
+   Fact=n*Factorial(n-1)
+  END IF
+  END FUNCTION Factorial 
 end program main

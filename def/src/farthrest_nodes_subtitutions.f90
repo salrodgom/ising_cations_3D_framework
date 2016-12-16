@@ -1,8 +1,10 @@
 subroutine geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
+                                  !deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
                                   ener_0,ener_1,ener_2,ener_3,ener_4,ii)
  implicit none
  integer,intent(in) :: n_atoms,n_T,n_Al,ii
  integer,intent(in) :: n_configurations
+! real,intent(in)    :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms),deg_4(n_atoms)
  real,intent(in)    :: ener_0, ener_1(n_atoms),ener_2(n_atoms,n_atoms)
  real,intent(in)    :: ener_3(n_atoms,n_atoms,n_atoms)
  real,intent(in)    :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms)
@@ -66,7 +68,7 @@ subroutine geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configura
    endif
  end do
  WRITE(6,*)'D_min:',r/real(m),sqrt(q/real(m)-(r*r)/real(m*m))
- write(6,*)'energia:',energy(n_atoms,n_T,lab,ener_0,ener_1,ener_2,ener_3,ener_4)
+ write(6,*)'energia:', ener
  return
 end subroutine geometrical_properties
 
@@ -131,7 +133,6 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  CHARACTER (LEN=80) :: line,string
  CHARACTER (LEN=4)  :: mol
  LOGICAL            :: FLAG      = .false.
- !write(6,*)'inside subroutne'
 ! {{
  do i=1,n_atoms
   label(i)=labels(ii,i,1)
@@ -175,8 +176,8 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
      ENDDO
      xcryst(0,i)=k
     ENDDO conectivity
-    !WRITE(6,'(A)')'[loops] Connectivity between nodes [Degree]:'
-    !WRITE(6,'(1000(I1))')(int(xcryst(0,k)),k=1,n_atoms)
+    WRITE(6,'(A)')'[loops] Connectivity between nodes [Degree]:'
+    WRITE(6,'(1000(I1))')(int(xcryst(0,k)),k=1,n_atoms)
  END IF make_graph
 ! make dist_matrix
  call make_dist_matrix(n_atoms,cell_0,rv,vr,xcryst,dist_matrix)
@@ -188,16 +189,16 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  ENDDO
  m = pivots(1)
  label(m)='Ge'
- !write(6,*)m
+ write(6,*)m
  q=3.40
- !WRITE(6,'(a)')'Repulsive substitution with cost-function:'
- !WRITE(6,'(a,f5.2,a)')'cost = 1/(s - p0),  p0 =',q,' 10^-10 m, if s >= p0'
- !WRITE(6,'(a,f14.3,a)')'cost = ',infinite,' if s <  p0'
- !WRITE(6,'(a)')'     Crystalographic positions                  Cost     Label'
- !write(6,'(60a2)')( label(j), j=1,n_atoms )
+ WRITE(6,'(a)')'Repulsive substitution with cost-function:'
+ WRITE(6,'(a,f5.2,a)')'cost = 1/(s - p0),  p0 =',q,' 10^-10 m, if s >= p0'
+ WRITE(6,'(a,f14.3,a)')'cost = ',infinite,' if s <  p0'
+ WRITE(6,'(a)')'     Crystalographic positions                  Cost     Label'
+ write(6,'(60a2)')( label(j), j=1,n_atoms )
  r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)
  !,deg_1,deg_2,deg_3,deg_4)
- !write(6,*)m,label(m),r
+ write(6,*)m,label(m),r
  if(r==0.0) STOP 'energy 0???'
  !WRITE(6,'(3(f14.6,1x),f20.10,1x,i3,1x,a2)')xcryst(1,pivots(1)),xcryst(2,pivots(1)),xcryst(3,pivots(1)),&
  !      0.0,pivots(1),label( pivots(1) )
@@ -243,9 +244,8 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  WRITE(6,'(a)')'MonteCarlo: Metropolis with identity changes'
  WRITE(6,'(a,f10.5)')'Si > Ge, Ge > Si. STOP when occurrence < ',solera
  WRITE(6,'(a)')'=============================================='
- WRITE(6,'(a,5x,a,5x,a)')'Cost_function','Occurrence %','Scan-Cost'
+ WRITE(6,'(a,5x,a,5x,a)')'Cost_function','Occurrence %','Scan-Cost' 
  if(n_Al<n_T)then
- !DO WHILE ( q >= solera .and. k<=MC_cycles )
  DO WHILE ( k<=MC_cycles )
     ! Metropolis:
     call MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,q,&
@@ -257,12 +257,11 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  do i=1,n_atoms
   labels(n_configurations,i,1)=label(i)
  enddo
- call write_gin(cell_0,xcryst,n_atoms,labels)
- !call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels)
- call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
-                             !deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
-                             ener_0,ener_1,ener_2,ener_3,ener_4,0)
- !WRITE(6,*)'STOP',pot_dist,r/real(m),cost
+ call write_gin(cell_0,xcryst,n_atoms,labels,seed)
+ write(6,*)'energia: ', energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)
+ !call geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
+ !      ener_0,ener_1,ener_2,ener_3,ener_4,ii)
+ WRITE(6,*)'STOP',pot_dist,r/real(m),cost
 end subroutine
 !
  REAL FUNCTION repulsive_potential_Lowenstein(r,p0,p1,p2)
@@ -281,8 +280,7 @@ end subroutine
   ener_0,ener_1,ener_2,ener_3,ener_4,coste,temperature)
   !,deg_1,deg_2,deg_3,deg_4,coste,temperature)
   IMPLICIT NONE
-  INTEGER,intent(in) :: n_Al
-  INTEGER,intent(in) :: n_atoms,SEED
+  INTEGER, intent(in) :: n_atoms,n_Al,SEED
   REAL,    intent(in) :: xcryst(0:3,1:n_atoms),dist_matrix(n_atoms,n_atoms)
   REAL,    intent(in) :: cell_0(1:6),rv(1:3,1:3)
   integer,intent(in)  :: n_T
@@ -291,10 +289,9 @@ end subroutine
   real,intent(in)     :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms)
   !real,intent(in)     :: deg_1(n_atoms),deg_2(n_atoms,n_atoms),deg_3(n_atoms,n_atoms,n_atoms)
   !real,intent(in)     :: deg_4(n_atoms,n_atoms,n_atoms,n_atoms)
-  real                :: R4_UNIFORM,energy
-  integer             :: max_ident_numer = 0
-  CHARACTER (LEN=4)   :: label(1:n_atoms)
-  character (len=4),allocatable :: cation_distribution(:,:)
+  real                :: R4_UNIFORM,energy,r
+  integer,parameter   :: max_ident_numer=10
+  CHARACTER (LEN=4)   :: label(1:n_atoms),cation_distribution(0:max_ident_numer,n_T)
   INTEGER             :: i,j,k,l,m,iii,jjj
   REAL                :: energia(0:2) = 0.0
   REAL                :: eta = 0.0
@@ -303,8 +300,6 @@ end subroutine
   REAL                :: delta = 0.0
   REAL,    PARAMETER  :: infinite = 9999999.999999
   REAL,    intent(out):: exito,coste
-  max_ident_numer = n_Al
-  allocate( cation_distribution(0:max_ident_numer,1:n_T) )
   exito = 0.0
   MC_step: DO k=0,n_T-1
     if(k==0)then
@@ -344,13 +339,13 @@ end subroutine
     END IF
     !write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
   END DO MC_step
-  write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
+  r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)
+  write(6,'(f20.10,1x,60a2)')r,(label(j)(1:2),j=1,n_atoms)
   exito   = exito/REAL(n_atoms*n_atoms)
   coste = energia(1)
   eta = coste - eta
 ! coste, ocurrencia, exito
   !write(6,*) coste,exito,eta
-  deallocate( cation_distribution )
   RETURN
  END SUBROUTINE MonteCarlo
 !
@@ -381,7 +376,6 @@ end subroutine
   CHARACTER (LEN=4),intent(in)   :: lab(1:n)
   INTEGER             :: i,j,k,l
   real,intent(in)     :: ener_0,ener_1(n),ener_2(n,n),ener_3(n,n,n),ener_4(n,n,n,n)
-  !real,intent(in)     :: deg_1(n),deg_2(n,n),deg_3(n,n,n),deg_4(n,n,n,n)
   integer             :: spin(n),ss
   ss = 0
   spin(1:n) = 0
@@ -397,15 +391,21 @@ end subroutine
 !
   do1subs: do i=1,n
    energy = energy + ener_1(i)*spin(i)
+   !if (ss>1) then
    do2subs: do j=i+1,n
     energy = energy + ener_2(i,j)*spin(i)*spin(j)
+    !if (ss>2) then
     do3subs: do k=j+1,n
      energy = energy + ener_3(i,j,k)*spin(i)*spin(j)*spin(k)
+     !if (ss>3) then
      do4subs: do l=k+1,n
       energy = energy + ener_4(i,j,k,l)*spin(i)*spin(j)*spin(k)*spin(l)
      end do do4subs
+     !end if
     end do do3subs
+    !end if
    end do do2subs
+   !end if
   end do do1subs
   return
  END FUNCTION energy
@@ -724,19 +724,18 @@ end subroutine
   RETURN
  END SUBROUTINE
 !
- SUBROUTINE write_gin(cell_0,xcryst,n_atoms,labels)
+ SUBROUTINE write_gin(cell_0,xcryst,n_atoms,labels,seed)
   ! Catlow potential
   IMPLICIT NONE
-  INTEGER,          intent(in) :: n_atoms
+  INTEGER,          intent(in) :: n_atoms,seed
   character (len=4),intent(in) :: labels(0:0,n_atoms,2)
   REAL,             intent(in) :: xcryst(0:3,1:n_atoms),cell_0(1:6)
-  integer                      :: i,j,seed
-  character(len=25)            :: file_name
-  call get_seed(SEED)
-  write (file_name, '( "c", I15.15, ".gin" )' ) seed
-  write(6,'(a,1x,a)')'filename:', file_name
-  OPEN(999,file=file_name)
-  WRITE(999,'(A)')'single conv qok'
+  integer                      :: i,j
+  character (len=15)           :: file_name
+  write (file_name, '("c", I10.10, ".gin" )' ) seed
+  write (6,'(a,1x,a)')'filename:', file_name
+  open(999,file=file_name)
+  WRITE(999,'(A)')'single conv nosym qok'
   WRITE(999,'(A)')'cell'
   WRITE(999,'(6(f9.5,1x))') (cell_0(j) , j=1,6)
   WRITE(999,'(A)')'fractional'

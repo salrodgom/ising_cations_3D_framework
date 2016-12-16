@@ -1,5 +1,4 @@
 subroutine geometrical_properties(n_atoms,n_T,n_Al,cell_0,cryst_coor,n_configurations,labels,&
-                                  !deg_1,deg_2,deg_3,deg_4,ener_0,ener_1,ener_2,ener_3,ener_4,ii)
                                   ener_0,ener_1,ener_2,ener_3,ener_4,ii)
  implicit none
  integer,intent(in) :: n_atoms,n_T,n_Al,ii

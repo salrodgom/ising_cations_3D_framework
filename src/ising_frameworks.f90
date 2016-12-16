@@ -5,11 +5,11 @@ program main
  integer                    :: err_apertura,nop1
  integer,parameter          :: n_atoms =   60 ! 60 T + 120 Os + 120 Oc + 12 F
  integer,parameter          :: n_T_atoms = 60
- integer,parameter          :: n_Ge = 60
- integer,parameter          :: MC_steps = 0
+ integer,parameter          :: n_Ge = 30
+ integer,parameter          :: MC_steps = 500
  integer,parameter          :: n_configurations = 0
  character(len=120)          :: file_name,line
- real,parameter             :: temperature = 5000.0
+ real,parameter             :: temperature = 1000.0
  integer, parameter         :: NOPMAX=10000
  integer                    :: k_max_1,k_max_2,k_max_3,k_max_4
  real                       :: ener_0 = -7745.86721305,epsilon_,energy_123
@@ -132,7 +132,7 @@ program main
   READ(123,*,IOSTAT=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_2
   ii=ii+1
-  epsilon_ =   epsilon_-ener_0-ener_1(i)-ener_1(j)
+  epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(j))/real(n_Ge-1)
   ener_2(i,j)= epsilon_
   ener_2(j,i)= ener_2(i,j)
   !deg_2(i,j) = deg
@@ -172,7 +172,8 @@ program main
   read(line,*)ijk,deg,i,j,k
   read(133,*,IOSTAT=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_3
-  epsilon_ = epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_2(i,j)-ener_2(j,k)-ener_2(i,k)
+  epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_2(i,j)-&
+              ener_2(j,k)-ener_2(i,k))/real(0.5*(n_Ge-2)*(n_Ge-3))
   ener_3(i,j,k) = epsilon_
   ener_3(j,i,k) = epsilon_
   ener_3(i,k,j) = epsilon_
@@ -239,13 +240,13 @@ program main
    ! ijk = 
    if(jj==ijk)then
     no_presente = .false.
-    epsilon_ = epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_1(l)-ener_2(i,j)-ener_2(j,k)-&
+    epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_1(l)-ener_2(i,j)-ener_2(j,k)-&
      ener_2(i,k)-ener_2(i,l)-ener_2(j,l)-ener_2(k,l)-&
      ener_3(i,j,k)-ener_3(i,k,j)-ener_3(j,i,k)-ener_3(j,k,i)-ener_3(k,i,j)-ener_3(k,j,i)-&
      ener_3(i,j,l)-ener_3(i,l,j)-ener_3(j,i,l)-ener_3(j,l,i)-ener_3(l,i,j)-ener_3(l,j,i)-&
      ener_3(i,l,k)-ener_3(i,k,l)-ener_3(l,i,k)-ener_3(l,k,i)-ener_3(l,k,i)-ener_3(k,i,l)-&
      ener_3(k,l,i)-ener_3(l,j,k)-ener_3(l,k,j)-ener_3(j,l,k)-ener_3(j,k,l)-ener_3(k,l,j)-&
-     ener_3(j,l,k)
+     ener_3(j,l,k))/real(0.5*(n_Ge-3)*(n_Ge-4))
     rewind(143)
     write(6,*)'four Ge detection',i,j,k,l,epsilon_,ijk
     exit check_energy_4
