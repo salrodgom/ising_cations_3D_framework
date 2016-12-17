@@ -1,0 +1,9 @@
+#!/usr/bin/gnuplot -persist
+set term postscript color eps enhanced blacktext 'Helvetica,24'
+set out 'internal_energy.eps'
+set ylabel "Internal energy difference (with respect quartz) / eV" 
+set xlabel "Ge molar fraction / a.u."
+e_quartz_si=-10432.72150366
+e_quartz_ge=-9866.77608526
+plot 'energies' u ($1/60):($2-(60-$1)*(e_quartz_si/81.0)-$1*(e_quartz_ge/81.0)) w p pt 6 ps 2 lc rgb 'red' notitle
+#    EOF
