@@ -523,8 +523,9 @@
         ientropyguess=-1*npos*kB*(xs*log(xs)+(1-xs)*log(1-xs))
 !              that was using Stirling's formula,
 !              real ientropy= factorial(npos)/(factorial(npos-nsubs)*factorial(nsubs))	
-        ntcmax=exp(ientropyguess/kB)
+        ntcmax=abs(exp(ientropyguess/kB))
         WRITE(*,*) "       Maximum entropy for this composition:              ", ientropyguess, " eV/K"
+        write(*,*) ntcmax
         WRITE(*,*) " " 
         
 
@@ -541,6 +542,7 @@
 	    
 	count=1
 	   call ksubset(npos,nsubs,as,mores)
+           nsubs=abs(nsubs)
 	   conf(1,1:nsubs)=as(1:nsubs)
 	do while(mores)
 	   call ksubset(npos,nsubs,as,mores)
