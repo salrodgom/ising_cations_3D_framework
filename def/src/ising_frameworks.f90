@@ -18,7 +18,7 @@ program main
  real                       :: ener_2(n_atoms,n_atoms) = 0.0
  real                       :: ener_3(n_atoms,n_atoms,n_atoms) = 0.0
  real                       :: ener_4(n_atoms,n_atoms,n_atoms,n_atoms) = 0.0
- real                       :: minener_4(1:4)
+ real                       :: minener_4(1:4),choose_one
  real                       :: cell_0(1:6)
  logical                    :: MC_flag = .true.,no_presente=.true.
  real,dimension(NOPMAX,3,3) :: mgroup1
@@ -38,7 +38,6 @@ program main
   reading_file: do
    READ (configuration_file,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit reading_file
-   !write(6,'(a)') line
    if(line(1:5)=='cell ') then
     write(6,*)'Cell parameters'
     read(configuration_file,'(A)',iostat=err_apertura) line
@@ -124,12 +123,18 @@ program main
   read(line,*)k,deg,i,j
   READ(123,*,IOSTAT=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_2
-  epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(j))/real(choose(n_Ge,2))
+  if(n_Ge<=2)then
+   choose_one = 1.0
+  else
+   choose_one = real(n_Ge-1)
+  end if
+  epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(j))/choose_one
+   !real(choose(n_Ge,2))
   ener_2(i,j)= epsilon_
   ener_2(j,i)= ener_2(i,j)
   write(6,*)i,j,ener_2(i,j)
   do k=2,deg
-   read(122,'(A)',IOSTAT=err_apertura) line
+   read(122,'(A)',iostat=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_2
    ii=ii+1
    read(line,*)jj,kk,l,m,n
@@ -164,8 +169,14 @@ program main
   read(line,*)ijk,deg,i,j,k
   read(133,*,IOSTAT=err_apertura) epsilon_
   IF( err_apertura /= 0 ) exit read_matrix_3
+  if(n_Ge<=3)then
+   choose_one=1.0
+  else
+   choose_one=(n_Ge-2)*(n_Ge-3)/2.0
+  end if
   epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_2(i,j)-&
-   ener_2(j,k)-ener_2(i,k))/real(choose(n_Ge,3))
+   ener_2(j,k)-ener_2(i,k))/choose_one
+  !real(choose(n_Ge,3))
   ener_3(i,j,k) = epsilon_
   ener_3(j,i,k) = epsilon_
   ener_3(i,k,j) = epsilon_
@@ -178,7 +189,7 @@ program main
   !deg_3(k,j,i) = deg
   !deg_3(k,i,j) = deg
   !deg_3(j,k,i) = deg
-  write(6,*)i,j,k,ener_3(i,j,k)
+  write(6,*)i,j,k,ener_3(i,j,k),choose_one
   do k=2,deg
    READ (132,'(A)',IOSTAT=err_apertura) line
    IF( err_apertura /= 0 ) exit read_matrix_3
@@ -195,7 +206,7 @@ program main
    !deg_3(n,m,l) = deg
    !deg_3(m,n,l) = deg
    !deg_3(n,l,m) = deg
-   write(6,*)i,j,k,ener_3(l,m,n)
+   write(6,*)i,j,k,ener_3(l,m,n),choose_one
   end do
  end do read_matrix_3
  end if
@@ -231,15 +242,21 @@ program main
    end if
    if(jj==ijk)then
     no_presente = .false.
+    if(n_Ge<=4)then
+     choose_one=1.0
+    else
+     choose_one = (n_Ge-3)*(n_Ge-4)/2.0
+    end if
     epsilon_ = (epsilon_-ener_0-ener_1(i)-ener_1(k)-ener_1(j)-ener_1(l)-ener_2(i,j)-ener_2(j,k)-&
      ener_2(i,k)-ener_2(i,l)-ener_2(j,l)-ener_2(k,l)-&
      ener_3(i,j,k)-ener_3(i,k,j)-ener_3(j,i,k)-ener_3(j,k,i)-ener_3(k,i,j)-ener_3(k,j,i)-&
      ener_3(i,j,l)-ener_3(i,l,j)-ener_3(j,i,l)-ener_3(j,l,i)-ener_3(l,i,j)-ener_3(l,j,i)-&
      ener_3(i,l,k)-ener_3(i,k,l)-ener_3(l,i,k)-ener_3(l,k,i)-ener_3(l,k,i)-ener_3(k,i,l)-&
      ener_3(k,l,i)-ener_3(l,j,k)-ener_3(l,k,j)-ener_3(j,l,k)-ener_3(j,k,l)-ener_3(k,l,j)-&
-     ener_3(j,l,k))/real(choose(n_Ge,4))
+     ener_3(j,l,k))/choose_one
+     !real(choose(n_Ge,4))
     rewind(143)
-    write(6,*)i,j,k,l,epsilon_
+    write(6,*)i,j,k,l,epsilon_,choose_one
     exit check_energy_4
    end if
   end do check_energy_4 
@@ -374,29 +391,25 @@ program main
  end if
  stop
 contains
-!  integer function factorial (n)
-!    implicit none
-!    integer, intent (in) :: n
-!    integer :: i
-!    factorial = product ((/(i, i = 1, n)/))
-!    return
-!  end function factorial 
-  integer function choose (n, k)
+  real (kind=4) function choose (n, k)
     implicit none
-    integer, intent (in) :: n
-    integer, intent (in) :: k
-    choose = factorial (n) / (factorial (k) * factorial (n - k))
+    integer, intent (in) :: n,k
+    choose = factorial(n) / (factorial(k) * factorial(n - k))
     if (choose<1) choose=1
     return
   end function choose
-
-  integer RECURSIVE FUNCTION factorial(n)  RESULT(Fact)
-  IMPLICIT NONE
-  INTEGER, INTENT(IN) :: n
-  IF(n<=0)THEN
-   Fact=1
-  ELSE
-   Fact=n*Factorial(n-1)
-  END IF
-  END FUNCTION Factorial 
+  real (kind=4) function factorial(nn)
+   implicit none
+   integer, intent(in) :: nn
+   integer             :: j
+   factorial = 1
+   if(nn<=0) then
+    factorial = 1
+   else
+    do j=1,nn
+     factorial = factorial*j
+    end do
+   end if
+   return
+  end function factorial
 end program main
