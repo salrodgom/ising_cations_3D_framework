@@ -1,0 +1,30 @@
+SimulationType                   MC
+NumberOfCycles                   2500
+NumberOfInitializationCycles     1000
+NumberOfEquilibrationCycles      0
+PrintEvery                       100
+RestartFile                      no
+Ensemble                         NVT
+
+Forcefield                       local
+RemoveAtomNumberCodeFromLabel yes
+Box 0
+BoxLengths 30 30 30
+ExternalTemperature           600.0
+Movies                        yes
+WriteMoviesEvery              100
+component 0 MoleculeName                   2e134tmi_flexible
+            MoleculeDefinition             Local
+            RandomTranslationProbability   1.0
+            TranslationProbability   1.0
+            RotationProbability      1.0
+            ExtraFrameworkMolecule         yes
+            CreateNumberOfMolecules        6
+
+component 1 MoleculeName                   fluorine
+            MoleculeDefinition             Local
+            RandomTranslationProbability   1.0
+            TranslationProbability   1.0
+            RotationProbability      1.0
+            ExtraFrameworkMolecule         yes
+            CreateNumberOfMolecules        6

@@ -1,0 +1,25 @@
+SimulationType                   MC
+NumberOfCycles                   2500
+NumberOfInitializationCycles     1000
+NumberOfEquilibrationCycles      0
+PrintEvery                       100
+RestartFile                      no
+Ensemble                         NVT
+
+Forcefield                       local
+RemoveAtomNumberCodeFromLabel yes
+Framework                     0
+FrameworkName                 out
+UnitCells                     1 1 1
+ExternalTemperature           30.0
+Movies                        yes
+WriteMoviesEvery              600
+FrameworkDefinitions local
+FlexibleFramework    yes
+component 0 MoleculeName                   2e134tmi
+            MoleculeDefinition             Local
+            RandomTranslationProbability   1.0
+            TranslationProbability   1.0
+            RotationProbability      1.0
+            ExtraFrameworkMolecule         yes
+            CreateNumberOfMolecules        6

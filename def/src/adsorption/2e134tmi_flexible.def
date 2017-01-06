@@ -1,0 +1,102 @@
+# critical constants: Temperature [T], Pressure [Pa], and Acentric factor [-]
+0.0
+0000.0
+0.000
+# Number Of Atoms
+25
+# Number of Groups
+2
+# TRP_rigid
+rigid
+# number of atoms
+5
+# atomic positions
+0  C6   1.253325165   -1.347439874    1.915197503
+1  N1   1.284708227   -2.424857743    2.726011264
+2  C4   2.472456861   -2.363139469    3.376460647
+3  N2   3.197796792   -1.279278711    2.996001012
+4  C5   2.429433649   -0.645329630    2.081394323
+# ramas
+flexible
+#
+20
+#
+5  C2   
+6  C3   
+7  H1   
+8  H1   
+9  H1   
+10 H1   
+11 C3   
+12 H1   
+13 H1   
+14 H6   
+15 C3   
+16 H1   
+17 H1   
+18 C3   
+19 H1   
+20 H1   
+21 H1   
+22 H1   
+23 H1   
+24 H1   
+# Chiral centers Bond  BondDipoles Bend  UrayBradley InvBend  Torsion Imp.Torsion Bond/Bond Stretch/Bend Bend/Bend Stretch/Torsion Bend/Torsion IntraVDW IntraCoulomb
+               0   25            0    30        0          0      0       0         0            0         0              0            0         0        0
+# Bond stretch: atom n1-n2, type, parameters
+6  7   RIGID_BOND
+6  9   RIGID_BOND
+6  8   RIGID_BOND
+6  1   RIGID_BOND
+1  2   RIGID_BOND
+2  3   RIGID_BOND
+2  5   RIGID_BOND
+5  18  RIGID_BOND
+5  17  RIGID_BOND
+5  16  RIGID_BOND
+18 20  RIGID_BOND
+18 19  RIGID_BOND
+18 21  RIGID_BOND
+3  11  RIGID_BOND
+11 13  RIGID_BOND
+11 12  RIGID_BOND
+11 10  RIGID_BOND
+3  4   RIGID_BOND
+4  15  RIGID_BOND
+15 24  RIGID_BOND
+15 23  RIGID_BOND
+15 22  RIGID_BOND
+4  0   RIGID_BOND
+0  14  RIGID_BOND
+0  1   RIGID_BOND
+#
+1 0 4        RIGID_BEND         
+14 0 4       RIGID_BEND
+0  4 3       RIGID_BEND
+4 3 2        RIGID_BEND
+3 2 1        RIGID_BEND
+2 1 6        RIGID_BEND
+1 6 9        RIGID_BEND
+1 6 8        RIGID_BEND
+1 6 7        RIGID_BEND
+9 6 7        RIGID_BEND
+9 6 8        RIGID_BEND
+7 6 8        RIGID_BEND
+2 5 18       RIGID_BEND
+2 5 17       RIGID_BEND
+2 5 16       RIGID_BEND
+5 18 19      RIGID_BEND
+5 18 20      RIGID_BEND
+5 18 21      RIGID_BEND
+16 5 17      RIGID_BEND
+19 18 21     RIGID_BEND
+19 18 20     RIGID_BEND
+20 18 21     RIGID_BEND
+3 11 10      RIGID_BEND
+10 11 12     RIGID_BEND
+10 11 13     RIGID_BEND
+12 11 13   RIGID_BEND
+4 15 22    RIGID_BEND
+22 15 23   RIGID_BEND
+22 15 24   RIGID_BEND
+24 14 23   RIGID_BEND

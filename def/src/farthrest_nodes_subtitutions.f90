@@ -114,6 +114,7 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  real               :: r4_uniform
  real               :: xcryst(0:3,1:n_atoms)
  character(len=4)   :: label(n_atoms), id(1:n_atoms)
+ character(len=1)   :: label_char(n_atoms)
  character(len=1)   :: adj_char(1:n_atoms,1:n_atoms)
  integer            :: pivots(1:n_Al), adj(n_atoms,n_atoms)
 !
@@ -239,18 +240,20 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
   write(6,*)pivots(k),label(pivots(k)),r
  END DO choose_Al                       ! }}i
  q=infinite
- k=0
  WRITE(6,'(a)')'=============================================='
  WRITE(6,'(a)')'MonteCarlo: Metropolis with identity changes'
  WRITE(6,'(a,f10.5)')'Si > Ge, Ge > Si. STOP when occurrence < ',solera
  WRITE(6,'(a)')'=============================================='
  WRITE(6,'(a,5x,a,5x,a)')'Cost_function','Occurrence %','Scan-Cost' 
  if(n_Al<n_T)then
+ k=0
  DO WHILE ( k<=MC_cycles )
     ! Metropolis:
     call MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,q,&
          ener_0,ener_1,ener_2,ener_3,ener_4,cost,T)
          !,deg_1,deg_2,deg_3,deg_4,cost,T)
+    call translate(n_atoms,label,label_char)
+    write(6,'(f20.10,1x,60a1,1x,i6)')cost,(label_char(j),j=1,n_atoms),k
     k=k+1
  END DO
  end if
@@ -264,16 +267,29 @@ subroutine farthrest_nodes_subtitutions(n_atoms,n_T,n_Al,ener_0,ener_1,&
  WRITE(6,*)'STOP',pot_dist,r/real(m),cost
 end subroutine
 !
- REAL FUNCTION repulsive_potential_Lowenstein(r,p0,p1,p2)
-  IMPLICIT NONE
-  REAL              :: r,p0,p1
-  CHARACTER (LEN=6) :: p2
-  if(p2/='coulom'.and.p2/='london') p2='zerooo'
-  IF (r <  p0) repulsive_potential_Lowenstein = p1
-  if (r >= p0.and.p2=='coulom') repulsive_potential_Lowenstein = (r-p0)**(-1)
-  if (r >= p0.and.p2=='london') repulsive_potential_Lowenstein = (r-p0)**(-6)
-  if (r >= p0.and.p2=='zerooo') repulsive_potential_Lowenstein = 0.00
- END FUNCTION repulsive_potential_Lowenstein
+subroutine translate(n,label,label_char)
+ implicit none
+ integer                       :: i
+ integer,intent(in)            :: n
+ character(len=4),intent(in)   :: label(1:n)
+ character(len=1),intent(out)  :: label_char(1:n)
+ do i=1,n
+  if (label(i)(1:2)=="Si") label_char(i)="."
+  if (label(i)(1:2)=="Ge") label_char(i)="#"
+  if (label(i)(1:2)/="Si".and.label(i)(1:2)/="Ge") label_char(i)="X"
+ end do
+ return
+end subroutine translate
+real function repulsive_potential_Lowenstein(r,p0,p1,p2)
+ IMPLICIT NONE
+ REAL              :: r,p0,p1
+ CHARACTER (LEN=6) :: p2
+ if(p2/='coulom'.and.p2/='london') p2='zerooo'
+ IF (r <  p0) repulsive_potential_Lowenstein = p1
+ if (r >= p0.and.p2=='coulom') repulsive_potential_Lowenstein = (r-p0)**(-1)
+ if (r >= p0.and.p2=='london') repulsive_potential_Lowenstein = (r-p0)**(-6)
+ if (r >= p0.and.p2=='zerooo') repulsive_potential_Lowenstein = 0.00
+END FUNCTION repulsive_potential_Lowenstein
 !
 
  SUBROUTINE MonteCarlo(n_atoms,n_T,dist_matrix,n_Al,SEED,xcryst,label,cell_0,rv,exito,&
@@ -301,7 +317,7 @@ end subroutine
   REAL,    PARAMETER  :: infinite = 9999999.999999
   REAL,    intent(out):: exito,coste
   exito = 0.0
-  MC_step: DO k=0,n_T-1
+  MC_step: do k=0,n_T-1
     if(k==0)then
       energia(1) = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)!,deg_1,deg_2,deg_3,deg_4)
       eta = energia(1)
@@ -340,9 +356,9 @@ end subroutine
     !write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
   END DO MC_step
   r = energy(n_atoms,n_T,label,ener_0,ener_1,ener_2,ener_3,ener_4)
-  write(6,'(f20.10,1x,60a2)')r,(label(j)(1:2),j=1,n_atoms)
+  !write(6,'(f20.10,1x,60a2)')energia(1),(label(j)(1:2),j=1,n_atoms)
   exito   = exito/REAL(n_atoms*n_atoms)
-  coste = energia(1)
+  coste = r !energia(1)
   eta = coste - eta
 ! coste, ocurrencia, exito
   !write(6,*) coste,exito,eta
